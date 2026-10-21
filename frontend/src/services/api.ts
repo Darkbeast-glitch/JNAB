@@ -3,13 +3,23 @@
  * Connects frontend to the Django REST Framework backend.
  */
 
-const envApiUrl = (import.meta as any).env?.VITE_API_URL;
+const rawEnvUrl = (import.meta as any).env?.VITE_API_URL;
 
-export const API_BASE_URL = 
-  envApiUrl || 
-  (typeof window !== 'undefined' && window.location.hostname !== 'localhost'
-    ? `http://${window.location.hostname}:8000/api`
-    : 'http://localhost:8000/api');
+function getNormalizedApiUrl(): string {
+  if (rawEnvUrl && typeof rawEnvUrl === 'string') {
+    let clean = rawEnvUrl.trim().replace(/\/+$/, '');
+    if (!clean.endsWith('/api')) {
+      clean = `${clean}/api`;
+    }
+    return clean;
+  }
+  if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
+    return `http://${window.location.hostname}:8000/api`;
+  }
+  return 'http://localhost:8000/api';
+}
+
+export const API_BASE_URL = getNormalizedApiUrl();
 
 export interface JobPosition {
   id: number;

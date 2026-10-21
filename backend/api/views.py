@@ -1,4 +1,4 @@
-from rest_framework import generics, status, views
+from rest_framework import generics, status, views, permissions
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from django.db.models import Q
@@ -24,6 +24,8 @@ class ApiRootView(views.APIView):
     """
     Overview of all available JNAB Innovations API endpoints.
     """
+    permission_classes = [permissions.AllowAny]
+
     def get(self, request):
         return Response({
             "service": "JNAB Innovations Backend API",
@@ -52,6 +54,7 @@ class JobPositionListView(generics.ListAPIView):
     Supports filtering by ?department=engineering|design|talent|operations
     """
     serializer_class = JobPositionSerializer
+    permission_classes = [permissions.AllowAny]
 
     def get_queryset(self):
         queryset = JobPosition.objects.filter(is_active=True)
@@ -76,6 +79,7 @@ class JobPositionDetailView(generics.RetrieveAPIView):
     Retrieves full details for a specific career opening.
     """
     serializer_class = JobPositionSerializer
+    permission_classes = [permissions.AllowAny]
     lookup_field = 'slug'
 
     def get_object(self):
@@ -92,6 +96,7 @@ class JobApplicationCreateView(generics.CreateAPIView):
     Accepts Multipart form data (with file upload for resume) or JSON.
     """
     serializer_class = JobApplicationSerializer
+    permission_classes = [permissions.AllowAny]
     parser_classes = [MultiPartParser, FormParser, JSONParser]
 
     def create(self, request, *args, **kwargs):
@@ -115,6 +120,7 @@ class ProductBuildInquiryCreateView(generics.CreateAPIView):
     Submits a new Full-Cycle Product Build, UI/UX Design, or Software Engineering request.
     """
     serializer_class = ProductBuildInquirySerializer
+    permission_classes = [permissions.AllowAny]
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -133,6 +139,7 @@ class HireTalentInquiryCreateView(generics.CreateAPIView):
     Submits a request to embed senior African developers or deploy an autonomous tech pod.
     """
     serializer_class = HireTalentInquirySerializer
+    permission_classes = [permissions.AllowAny]
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -151,6 +158,7 @@ class AcademyApplicationCreateView(generics.CreateAPIView):
     Submits an application for JNAB Academy fellowships or enterprise technical upskilling.
     """
     serializer_class = AcademyApplicationSerializer
+    permission_classes = [permissions.AllowAny]
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -169,6 +177,7 @@ class ContactInquiryCreateView(generics.CreateAPIView):
     General contact form or instant consultation trigger from website banners and footer.
     """
     serializer_class = ContactInquirySerializer
+    permission_classes = [permissions.AllowAny]
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)

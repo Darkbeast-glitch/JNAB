@@ -60,14 +60,26 @@ else:
 
 
 # ---------------------------------------------------------------------------
-# CORS — only allow your actual frontend domain(s)
+# CORS — allow production domains and Vercel
 # ---------------------------------------------------------------------------
 CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOWED_ORIGINS = [
+
+_default_cors_origins = [
+    "https://www.jnab.tech",
+    "https://jnab.tech",
+]
+
+_env_cors_origins = [
     origin.strip()
     for origin in os.environ.get("CORS_ALLOWED_ORIGINS", "").split(",")
     if origin.strip()
+]
+
+CORS_ALLOWED_ORIGINS = list(set(_default_cors_origins + _env_cors_origins))
+
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https:\/\/.*\.vercel\.app$",
 ]
 
 
