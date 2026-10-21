@@ -71,12 +71,12 @@ export const TrustedBrands: React.FC = () => {
         <div className="pointer-events-none absolute inset-y-0 left-0 w-20 sm:w-36 bg-gradient-to-r from-[#001F37] to-transparent z-10" />
         <div className="pointer-events-none absolute inset-y-0 right-0 w-20 sm:w-36 bg-gradient-to-l from-[#001F37] to-transparent z-10" />
 
-        <div className="animate-marquee-ltr">
-          {/* Track 1 */}
+        <div className="animate-marquee-ltr-slow">
+          {/* Track 1 — repeated to span over 4,800px preventing gaps on ultra-wide screens */}
           <div className="flex items-center shrink-0">
-            {brands.map((b) => (
+            {[...brands, ...brands].map((b, idx) => (
               <div
-                key={`b1-${b.name}`}
+                key={`b1-${b.name}-${idx}`}
                 className="mx-3 w-[280px] sm:w-[320px] bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 hover:border-[#02AA69]/50 rounded-2xl sm:rounded-3xl p-6 sm:p-7 flex flex-col items-center justify-between transition-all duration-300 group text-center shrink-0 shadow-lg min-h-[220px]"
               >
                 <div className="flex items-center justify-center h-20 sm:h-24 w-full mb-3">
@@ -103,9 +103,9 @@ export const TrustedBrands: React.FC = () => {
 
           {/* Track 2 (Identical duplicate for seamless continuous loop) */}
           <div className="flex items-center shrink-0" aria-hidden="true">
-            {brands.map((b) => (
+            {[...brands, ...brands].map((b, idx) => (
               <div
-                key={`b2-${b.name}`}
+                key={`b2-${b.name}-${idx}`}
                 className="mx-3 w-[280px] sm:w-[320px] bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 hover:border-[#02AA69]/50 rounded-2xl sm:rounded-3xl p-6 sm:p-7 flex flex-col items-center justify-between transition-all duration-300 group text-center shrink-0 shadow-lg min-h-[220px]"
               >
                 <div className="flex items-center justify-center h-20 sm:h-24 w-full mb-3">

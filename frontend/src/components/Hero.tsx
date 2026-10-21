@@ -87,7 +87,7 @@ export const Hero: React.FC<HeroProps> = ({ onRequestQuote, onExploreTraining })
           <div className="pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-28 bg-gradient-to-l from-[#070B11] via-[#070B11]/90 to-transparent z-10" />
 
           <div className="animate-marquee-ltr flex items-center">
-            {/* Set 1 */}
+            {/* Set 1 — repeated to span well over 3,000px so wide screens never hit a gap */}
             <div className="flex items-center shrink-0">
               {[
                 { name: 'Savile Row', logo: '/savilerow.jpeg', imgClass: 'h-10 sm:h-12 md:h-14 w-auto object-contain rounded-lg shadow-sm border border-white/10' },
@@ -97,9 +97,23 @@ export const Hero: React.FC<HeroProps> = ({ onRequestQuote, onExploreTraining })
                 { name: 'Digivibe', logo: '/digivibe-white.png', imgClass: 'h-9 sm:h-11 md:h-12 w-auto object-contain' },
                 { name: 'Linguago', logo: '/lingo-clean.png', imgClass: 'h-10 sm:h-12 md:h-13 w-auto object-contain rounded-lg' },
                 { name: 'Brandlift Africa', logo: '/brandlift-white.png', imgClass: 'h-9 sm:h-11 md:h-12 w-auto object-contain' },
-              ].map((brand) => (
+                { name: 'Savile Row', logo: '/savilerow.jpeg', imgClass: 'h-10 sm:h-12 md:h-14 w-auto object-contain rounded-lg shadow-sm border border-white/10' },
+                { name: 'Cardia', logo: '/cardia-lockup-white.png', imgClass: 'h-9 sm:h-11 md:h-12 w-auto object-contain' },
+                { name: 'ASPPEG', logo: '/asspeg_logo.jpeg', imgClass: 'h-10 sm:h-12 md:h-14 w-auto object-contain rounded-lg bg-white p-1 shadow-sm' },
+                { name: 'SpeakWise', logo: '/speakwise-white.png', imgClass: 'h-10 sm:h-12 md:h-13 w-auto object-contain' },
+                { name: 'Digivibe', logo: '/digivibe-white.png', imgClass: 'h-9 sm:h-11 md:h-12 w-auto object-contain' },
+                { name: 'Linguago', logo: '/lingo-clean.png', imgClass: 'h-10 sm:h-12 md:h-13 w-auto object-contain rounded-lg' },
+                { name: 'Brandlift Africa', logo: '/brandlift-white.png', imgClass: 'h-9 sm:h-11 md:h-12 w-auto object-contain' },
+                { name: 'Savile Row', logo: '/savilerow.jpeg', imgClass: 'h-10 sm:h-12 md:h-14 w-auto object-contain rounded-lg shadow-sm border border-white/10' },
+                { name: 'Cardia', logo: '/cardia-lockup-white.png', imgClass: 'h-9 sm:h-11 md:h-12 w-auto object-contain' },
+                { name: 'ASPPEG', logo: '/asspeg_logo.jpeg', imgClass: 'h-10 sm:h-12 md:h-14 w-auto object-contain rounded-lg bg-white p-1 shadow-sm' },
+                { name: 'SpeakWise', logo: '/speakwise-white.png', imgClass: 'h-10 sm:h-12 md:h-13 w-auto object-contain' },
+                { name: 'Digivibe', logo: '/digivibe-white.png', imgClass: 'h-9 sm:h-11 md:h-12 w-auto object-contain' },
+                { name: 'Linguago', logo: '/lingo-clean.png', imgClass: 'h-10 sm:h-12 md:h-13 w-auto object-contain rounded-lg' },
+                { name: 'Brandlift Africa', logo: '/brandlift-white.png', imgClass: 'h-9 sm:h-11 md:h-12 w-auto object-contain' },
+              ].map((brand, idx) => (
                 <div
-                  key={`hero-1-${brand.name}`}
+                  key={`hero-1-${brand.name}-${idx}`}
                   className="mx-6 sm:mx-10 flex items-center shrink-0 opacity-85 hover:opacity-100 hover:scale-105 transition-all duration-200"
                 >
                   <img
@@ -114,6 +128,20 @@ export const Hero: React.FC<HeroProps> = ({ onRequestQuote, onExploreTraining })
             {/* Set 2 (Identical duplicate for seamless continuous loop) */}
             <div className="flex items-center shrink-0" aria-hidden="true">
               {[
+                { name: 'Savile Row', logo: '/savilerow.jpeg', imgClass: 'h-10 sm:h-12 md:h-14 w-auto object-contain rounded-lg shadow-sm border border-white/10' },
+                { name: 'Cardia', logo: '/cardia-lockup-white.png', imgClass: 'h-9 sm:h-11 md:h-12 w-auto object-contain' },
+                { name: 'ASPPEG', logo: '/asspeg_logo.jpeg', imgClass: 'h-10 sm:h-12 md:h-14 w-auto object-contain rounded-lg bg-white p-1 shadow-sm' },
+                { name: 'SpeakWise', logo: '/speakwise-white.png', imgClass: 'h-10 sm:h-12 md:h-13 w-auto object-contain' },
+                { name: 'Digivibe', logo: '/digivibe-white.png', imgClass: 'h-9 sm:h-11 md:h-12 w-auto object-contain' },
+                { name: 'Linguago', logo: '/lingo-clean.png', imgClass: 'h-10 sm:h-12 md:h-13 w-auto object-contain rounded-lg' },
+                { name: 'Brandlift Africa', logo: '/brandlift-white.png', imgClass: 'h-9 sm:h-11 md:h-12 w-auto object-contain' },
+                { name: 'Savile Row', logo: '/savilerow.jpeg', imgClass: 'h-10 sm:h-12 md:h-14 w-auto object-contain rounded-lg shadow-sm border border-white/10' },
+                { name: 'Cardia', logo: '/cardia-lockup-white.png', imgClass: 'h-9 sm:h-11 md:h-12 w-auto object-contain' },
+                { name: 'ASPPEG', logo: '/asspeg_logo.jpeg', imgClass: 'h-10 sm:h-12 md:h-14 w-auto object-contain rounded-lg bg-white p-1 shadow-sm' },
+                { name: 'SpeakWise', logo: '/speakwise-white.png', imgClass: 'h-10 sm:h-12 md:h-13 w-auto object-contain' },
+                { name: 'Digivibe', logo: '/digivibe-white.png', imgClass: 'h-9 sm:h-11 md:h-12 w-auto object-contain' },
+                { name: 'Linguago', logo: '/lingo-clean.png', imgClass: 'h-10 sm:h-12 md:h-13 w-auto object-contain rounded-lg' },
+                { name: 'Brandlift Africa', logo: '/brandlift-white.png', imgClass: 'h-9 sm:h-11 md:h-12 w-auto object-contain' },
                 { name: 'Savile Row', logo: '/savilerow.jpeg', imgClass: 'h-10 sm:h-12 md:h-14 w-auto object-contain rounded-lg shadow-sm border border-white/10' },
                 { name: 'Cardia', logo: '/cardia-lockup-white.png', imgClass: 'h-9 sm:h-11 md:h-12 w-auto object-contain' },
                 { name: 'ASPPEG', logo: '/asspeg_logo.jpeg', imgClass: 'h-10 sm:h-12 md:h-14 w-auto object-contain rounded-lg bg-white p-1 shadow-sm' },
