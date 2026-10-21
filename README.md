@@ -1,7 +1,7 @@
-# JNAB Innovations
+# JNAB Innovations · Full-Stack Monorepo
 
 <p align="center">
-  <img src="public/logo-stacked.png" alt="JNAB Innovations Logo" width="220" />
+  <img src="frontend/public/logo-stacked.png" alt="JNAB Innovations Logo" width="220" />
 </p>
 
 <p align="center">
@@ -9,166 +9,126 @@
 </p>
 
 <p align="center">
+  <img src="https://img.shields.io/badge/Django-6.1-092E20?logo=django&logoColor=white&style=flat-square" alt="Django" />
+  <img src="https://img.shields.io/badge/Django_REST-3.18-red?logo=django&logoColor=white&style=flat-square" alt="DRF" />
   <img src="https://img.shields.io/badge/React-18.x-61DAFB?logo=react&logoColor=black&style=flat-square" alt="React" />
   <img src="https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white&style=flat-square" alt="TypeScript" />
-  <img src="https://img.shields.io/badge/Tailwind_CSS-3.x-06B6D4?logo=tailwind-css&logoColor=white&style=flat-square" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-3.x-06B6D4?logo=tailwind-css&logoColor=white&style=flat-square" alt="Tailwind" />
   <img src="https://img.shields.io/badge/Vite-6.x-646CFF?logo=vite&logoColor=white&style=flat-square" alt="Vite" />
-  <img src="https://img.shields.io/badge/License-Proprietary-02AA69?style=flat-square" alt="License" />
 </p>
 
 ---
 
-## 📌 Overview
+## 🏗️ Repository Architecture
 
-**JNAB Innovations** is an end-to-end digital product design, software engineering, and technical training company based in Accra, Ghana. We partner with ambitious global startups, scale-ups, and enterprises to build mission-critical digital systems and cultivate world-class software engineering talent.
-
-This repository powers the official **JNAB Innovations Web Platform**, engineered for high conversion, rapid load performance, and seamless responsiveness across desktop, tablet, and mobile devices.
-
----
-
-## ✨ Key Highlights
-
-- **Editorial, High-Trust Tech Aesthetic**: Built without generic AI gradients or SaaS tropes—grounded in deep obsidian (`#06090e`), crisp typography, and an emerald innovation green (`#02AA69`).
-- **Original Nomenclature & Copyright-Safe Copy**: Custom delivery models (*Full-Cycle Product Builds*, *Embedded Senior Talent*, *Autonomous Tech Pods*) and proprietary service blueprints.
-- **Interactive Project & Academy Estimator**: An integrated modal allowing prospective clients to estimate budgets, define project timelines, or apply for technical fellowships.
-- **Mobile-First Responsiveness**: Tailored mobile navigation drawer, proportional touch buttons, and horizontal swipe-friendly client and case study showcases.
-- **Pure Image-Based Brand Identity**: Standardized vector and raster assets in `public/` (`logo.png`, `logo.svg`, `logo-mark.png`, `logo-stacked.png`), completely decoupled from TSX components.
-
----
-
-## 🛠️ Tech Stack
-
-| Layer | Technology |
-| :--- | :--- |
-| **Framework** | [React 18](https://react.dev/) + [Vite](https://vitejs.dev/) |
-| **Language** | [TypeScript](https://www.typescriptlang.org/) (Strict Mode) |
-| **Styling** | [Tailwind CSS](https://tailwindcss.com/) with custom typography & palettes |
-| **Icons** | [Lucide React](https://lucide.dev/) |
-| **Typography** | Plus Jakarta Sans & Space Grotesk |
-
----
-
-## 📁 Project Structure
+This repository contains the complete full-stack web platform for **JNAB Innovations** (operating brand of **JNAB Tech Solutions**):
 
 ```text
 JNAB/
-├── public/                       # Static public assets (served at root)
-│   ├── favicon.svg               # Browser tab vector icon
-│   ├── logo-mark.png             # Standalone geometric brand mark
-│   ├── logo-stacked.png          # Vertical/stacked brand lockup
-│   ├── logo-horizontal.png       # Horizontal lockup (Mark + Text)
-│   ├── logo.png                  # Primary navbar/header logo
-│   ├── logo.svg                  # Scalable vector logo
-│   └── logo-original.jpg         # High-resolution original master
+├── backend/                  # Django REST Framework Backend
+│   ├── env/                  # Python Virtual Environment
+│   ├── jnab_backend/         # Core project settings & root URLs
+│   │   ├── settings.py       # Configured with DRF, CORS, Media & Static roots
+│   │   └── urls.py           # Root routing with API include
+│   ├── api/                  # Business Logic App
+│   │   ├── models.py         # JobPosition, JobApplication, Inquiries
+│   │   ├── serializers.py    # DRF serializers with data validation
+│   │   ├── views.py          # API endpoints (GET, POST multipart/json)
+│   │   ├── urls.py           # REST routing (/api/careers/, /api/inquiries/)
+│   │   ├── admin.py          # Django Admin with filters & resume inspection
+│   │   └── management/       # Commands (python manage.py seed_careers)
+│   ├── manage.py
+│   └── requirements.txt
 │
-├── src/
-│   ├── components/
-│   │   ├── Navbar.tsx            # Sticky header with mobile drawer & quote CTA
-│   │   ├── Hero.tsx              # Value proposition, trust bar & impact metrics
-│   │   ├── WhoWeAre.tsx          # Company foundation & strategic pillars
-│   │   ├── HowWeDoIt.tsx         # Delivery models (Builds, Talent, Pods)
-│   │   ├── CoreServices.tsx      # Interactive capability showcase with Dexwin-style hover
-│   │   ├── AcademySection.tsx    # Technical training tracks (Design, Full-Stack, Upskilling)
-│   │   ├── NotableProjects.tsx   # Flagship deliveries slider & metric badges
-│   │   ├── Partnerships.tsx      # Strategic alliances & enterprise partners
-│   │   ├── JoinUsCareers.tsx     # Open career positions & department filter
-│   │   ├── CtaBanner.tsx         # Conversion-focused bottom banner
-│   │   ├── Footer.tsx            # Corporate directory, legal links & contact details
-│   │   └── QuoteEstimatorModal.tsx # Interactive multi-step consultation & quote modal
-│   │
-│   ├── App.tsx                   # Main layout container
-│   ├── main.tsx                  # Application bootstrap
-│   └── index.css                 # Tailwind directives & global utility styling
-│
-├── index.html                    # HTML entry point with SEO metadata
-├── tailwind.config.js            # Tailwind theme extensions & design tokens
-├── vite.config.ts                # Vite config (configured with --host for LAN preview)
-├── tsconfig.json                 # TypeScript compiler options
-└── package.json                  # Dependencies & execution scripts
+└── frontend/                 # React 18 + TypeScript + Vite Frontend
+    ├── src/
+    │   ├── components/       # UI Components & Specialized Modals
+    │   │   ├── JobApplicationModal.tsx  # Dedicated Career Application Form
+    │   │   ├── QuoteEstimatorModal.tsx  # Product Build, Talent Pod & Academy Form
+    │   │   ├── JoinUsCareers.tsx        # Live synced career opportunities
+    │   │   ├── Navbar.tsx, Hero.tsx, CoreServices.tsx, etc.
+    │   ├── services/
+    │   │   └── api.ts        # Type-safe API client connecting to Django backend
+    │   ├── App.tsx
+    │   └── main.tsx
+    ├── public/               # Logos, Brand Assets & Favicon
+    ├── package.json
+    └── vite.config.ts
 ```
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Quick Start Guide
 
-### Prerequisites
-
-Ensure you have [Node.js](https://nodejs.org/) (v18.0.0 or higher) and `npm` installed:
+### 1. Start the Django Backend
 
 ```bash
-node -v
-npm -v
+cd backend
+source env/bin/activate
+python manage.py runserver 0.0.0.0:8000
 ```
 
-### 1. Clone & Install Dependencies
+* **API Root**: `http://localhost:8000/api/`
+* **Django Admin Portal**: `http://localhost:8000/admin/`
+  * **Username**: `admin`
+  * **Password**: `admin1234`
+
+### 2. Start the React Frontend
+
+Open a new terminal window:
 
 ```bash
-cd JNAB
+cd frontend
 npm install
-```
-
-### 2. Start the Development Server
-
-The development server is pre-configured with `--host` so you can test on your local machine and on mobile devices connected to the same Wi-Fi network:
-
-```bash
 npm run dev
 ```
 
-Terminal output will display both the local and network URLs:
-```text
-  ➜  Local:   http://localhost:5173/
-  ➜  Network: http://192.168.1.xxx:5173/
-```
-
-### 3. Production Build & Verification
-
-To compile TypeScript and create an optimized production bundle:
-
-```bash
-npm run build
-```
-
-The production assets will be output to the `dist/` folder.
-
-### 4. Preview the Production Build Locally
-
-```bash
-npm run preview
-```
+* **Frontend Web App**: `http://localhost:5173/`
+* **Local Network (Mobile Testing)**: `http://192.168.1.187:5173/`
 
 ---
 
-## 🎨 Brand Identity & Logo Assets
+## 📡 REST API Reference
 
-All logo files are stored as standalone image files in [`public/`](public/) for cross-platform portability:
-
-| Asset | Format | Recommended Usage |
-| :--- | :--- | :--- |
-| `public/logo.png` | PNG (Transparent) | Web navigation headers, mobile menus, and dark footers |
-| `public/logo.svg` | SVG (Vector) | High-DPI screens, vector exports, and digital documents |
-| `public/logo-stacked.png` | PNG (Transparent) | Presentations, social media profiles, and marketing collateral |
-| `public/logo-mark.png` | PNG (Transparent) | App icons, browser favicons, and avatars |
+| Method | Endpoint | Description | Payload Type |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/api/careers/` | List all active career openings (supports `?department=`) | JSON Response |
+| `GET` | `/api/careers/<slug>/` | Retrieve complete details of a specific job role | JSON Response |
+| `POST` | `/api/careers/apply/` | **Dedicated Job Application Form** (Resume upload/link, GitHub, LinkedIn) | Multipart / JSON |
+| `POST` | `/api/inquiries/product-build/` | **Product Build Form** (Type, budget, timeline, scope, Figma link) | JSON |
+| `POST` | `/api/inquiries/hire-talent/` | **Hire Talent / Tech Pod Form** (Model, roles, seniority, duration) | JSON |
+| `POST` | `/api/inquiries/academy/` | **JNAB Academy Form** (Track, experience, mode, scholarship) | JSON |
+| `POST` | `/api/inquiries/contact/` | General website inquiry or quick consultation trigger | JSON |
 
 ---
 
-## 🚢 Deployment
+## 🛡️ Form Distinction Overview
 
-### Deploy to Vercel
-1. Push this repository to GitHub / GitLab / Bitbucket.
-2. Import the project into [Vercel](https://vercel.com).
-3. Framework Preset: **Vite**.
-4. Build Command: `npm run build`
-5. Output Directory: `dist`
+As requested, forms are strictly separated to reflect distinct user intents:
 
-### Deploy to Netlify
-1. Connect repository in [Netlify](https://www.netlify.com).
-2. Build command: `npm run build`
-3. Publish directory: `dist`
+1. **Career Applicants**:
+   * **Target Audience**: Software Engineers, UI/UX Designers, DevOps Specialists.
+   * **Fields**: Target Position, Full Name, Email, Phone, Location, Years of Experience, Portfolio Link, GitHub Profile, LinkedIn URL, Resume Upload (PDF/DOCX), Cover Note.
+   * **Endpoint**: `/api/careers/apply/`
+
+2. **Product Build Inquiries**:
+   * **Target Audience**: Founders, Enterprises, Venture Studios.
+   * **Fields**: Full Name, Company, Work Email, Phone, Project Type, Budget Range, Timeline, Scope / Problem Statement, Spec/Figma link.
+   * **Endpoint**: `/api/inquiries/product-build/`
+
+3. **Hire Talent & Dedicated Pods**:
+   * **Target Audience**: CTOs, Engineering Leaders needing talent augmentation.
+   * **Fields**: Company, Work Email, Engagement Model (Embedded vs. Pod), Roles Needed, Seniority Level, Headcount, Duration.
+   * **Endpoint**: `/api/inquiries/hire-talent/`
+
+4. **JNAB Academy Fellowships**:
+   * **Target Audience**: Early-to-mid career developers & aspiring designers.
+   * **Fields**: Full Name, Email, Phone, Track (Product Design vs. Full-Stack), Skill Level, Learning Mode, Motivation Statement, Scholarship Request.
+   * **Endpoint**: `/api/inquiries/academy/`
 
 ---
 
 ## 📄 License & Ownership
 
-Copyright © 2026 **JNAB Innovations**. All rights reserved.  
+Copyright © 2026 **JNAB Tech Solutions** (operating as **JNAB Innovations**). All rights reserved.  
 Accra Innovation Quarter · Ghana & Global Remote.
