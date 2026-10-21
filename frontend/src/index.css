@@ -48,3 +48,20 @@ body {
 .rounded-dexwin-tr {
   border-top-right-radius: 64px;
 }
+
+/* Unstoppable left-to-right smooth marquee ticker */
+@keyframes marquee-ltr {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0%, 0, 0);
+  }
+}
+
+.animate-marquee-ltr {
+  display: flex;
+  width: max-content;
+  animation: marquee-ltr 45s linear infinite;
+  will-change: transform;
+}

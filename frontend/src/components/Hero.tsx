@@ -80,52 +80,60 @@ export const Hero: React.FC<HeroProps> = ({ onRequestQuote, onExploreTraining })
           <div className="h-[1px] bg-white/20 flex-1 max-w-[40px] sm:max-w-[80px]"></div>
         </div>
 
-        {/* Logos Bar (Authentic Partner Logos, Gray & Smooth Scroll on Mobile, Hover color) */}
-        <div className="flex items-center justify-start sm:justify-center gap-8 sm:gap-14 opacity-80 grayscale hover:grayscale-0 transition-all duration-300 overflow-x-auto no-scrollbar py-3 px-4">
-          {/* Digivibe */}
-          <div className="flex items-center shrink-0">
-            <img 
-              src="/digivibe-white.png" 
-              alt="Digivibe" 
-              className="h-6 sm:h-7 md:h-8 w-auto object-contain hover:scale-105 transition-transform"
-            />
-          </div>
+        {/* Logos Bar (Enlarged Authentic Partner Logos, Unstoppable Smooth Left-to-Right Marquee) */}
+        <div className="relative w-full overflow-hidden py-4">
+          {/* Edge gradient fade masks */}
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-16 sm:w-28 bg-gradient-to-r from-[#070B11] via-[#070B11]/90 to-transparent z-10" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-28 bg-gradient-to-l from-[#070B11] via-[#070B11]/90 to-transparent z-10" />
 
-          {/* Cardia */}
-          <div className="flex items-center shrink-0">
-            <img 
-              src="/cardia-lockup-white.png" 
-              alt="Cardia" 
-              className="h-6 sm:h-7 md:h-8 w-auto object-contain hover:scale-105 transition-transform"
-            />
-          </div>
+          <div className="animate-marquee-ltr flex items-center">
+            {/* Set 1 */}
+            <div className="flex items-center shrink-0">
+              {[
+                { name: 'Savile Row', logo: '/savilerow.jpeg', imgClass: 'h-10 sm:h-12 md:h-14 w-auto object-contain rounded-lg shadow-sm border border-white/10' },
+                { name: 'Cardia', logo: '/cardia-lockup-white.png', imgClass: 'h-9 sm:h-11 md:h-12 w-auto object-contain' },
+                { name: 'ASPPEG', logo: '/asspeg_logo.jpeg', imgClass: 'h-10 sm:h-12 md:h-14 w-auto object-contain rounded-lg bg-white p-1 shadow-sm' },
+                { name: 'SpeakWise', logo: '/speakwise-white.png', imgClass: 'h-10 sm:h-12 md:h-13 w-auto object-contain' },
+                { name: 'Digivibe', logo: '/digivibe-white.png', imgClass: 'h-9 sm:h-11 md:h-12 w-auto object-contain' },
+                { name: 'Linguago', logo: '/lingo-clean.png', imgClass: 'h-10 sm:h-12 md:h-13 w-auto object-contain rounded-lg' },
+                { name: 'Brandlift Africa', logo: '/brandlift-white.png', imgClass: 'h-9 sm:h-11 md:h-12 w-auto object-contain' },
+              ].map((brand) => (
+                <div
+                  key={`hero-1-${brand.name}`}
+                  className="mx-6 sm:mx-10 flex items-center shrink-0 opacity-85 hover:opacity-100 hover:scale-105 transition-all duration-200"
+                >
+                  <img
+                    src={brand.logo}
+                    alt={brand.name}
+                    className={brand.imgClass}
+                  />
+                </div>
+              ))}
+            </div>
 
-          {/* SpeakWise */}
-          <div className="flex items-center shrink-0">
-            <img 
-              src="/speakwise-white.png" 
-              alt="SpeakWise" 
-              className="h-7 sm:h-8 md:h-9 w-auto object-contain hover:scale-105 transition-transform"
-            />
-          </div>
-
-          {/* Linguago */}
-          <div className="flex items-center gap-2.5 shrink-0">
-            <img 
-              src="/lingo-clean.png" 
-              alt="Linguago" 
-              className="h-7 sm:h-8 md:h-9 w-auto rounded-lg object-contain hover:scale-105 transition-transform"
-            />
-            <span className="text-sm sm:text-base font-bold tracking-tight text-white hidden sm:inline">Linguago</span>
-          </div>
-
-          {/* Brandlift Africa */}
-          <div className="flex items-center shrink-0">
-            <img 
-              src="/brandlift-white.png" 
-              alt="Brandlift Africa" 
-              className="h-6 sm:h-7 md:h-8 w-auto object-contain hover:scale-105 transition-transform"
-            />
+            {/* Set 2 (Identical duplicate for seamless continuous loop) */}
+            <div className="flex items-center shrink-0" aria-hidden="true">
+              {[
+                { name: 'Savile Row', logo: '/savilerow.jpeg', imgClass: 'h-10 sm:h-12 md:h-14 w-auto object-contain rounded-lg shadow-sm border border-white/10' },
+                { name: 'Cardia', logo: '/cardia-lockup-white.png', imgClass: 'h-9 sm:h-11 md:h-12 w-auto object-contain' },
+                { name: 'ASPPEG', logo: '/asspeg_logo.jpeg', imgClass: 'h-10 sm:h-12 md:h-14 w-auto object-contain rounded-lg bg-white p-1 shadow-sm' },
+                { name: 'SpeakWise', logo: '/speakwise-white.png', imgClass: 'h-10 sm:h-12 md:h-13 w-auto object-contain' },
+                { name: 'Digivibe', logo: '/digivibe-white.png', imgClass: 'h-9 sm:h-11 md:h-12 w-auto object-contain' },
+                { name: 'Linguago', logo: '/lingo-clean.png', imgClass: 'h-10 sm:h-12 md:h-13 w-auto object-contain rounded-lg' },
+                { name: 'Brandlift Africa', logo: '/brandlift-white.png', imgClass: 'h-9 sm:h-11 md:h-12 w-auto object-contain' },
+              ].map((brand, idx) => (
+                <div
+                  key={`hero-2-${brand.name}-${idx}`}
+                  className="mx-6 sm:mx-10 flex items-center shrink-0 opacity-85 hover:opacity-100 hover:scale-105 transition-all duration-200"
+                >
+                  <img
+                    src={brand.logo}
+                    alt={brand.name}
+                    className={brand.imgClass}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 

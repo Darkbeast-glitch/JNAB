@@ -31,9 +31,10 @@ export const JoinUsCareers: React.FC<JoinUsCareersProps> = ({ onApply }) => {
     fetchRoles();
   }, []);
 
+  const safeRoles = Array.isArray(roles) ? roles : [];
   const filteredRoles = activeDepartment === 'all'
-    ? roles
-    : roles.filter((r) => r.department?.toLowerCase() === activeDepartment.toLowerCase());
+    ? safeRoles
+    : safeRoles.filter((r) => r.department?.toLowerCase() === activeDepartment.toLowerCase());
 
   return (
     <section id="careers" className="bg-white text-black py-20 lg:py-28 px-6 lg:px-8 border-b border-gray-100">

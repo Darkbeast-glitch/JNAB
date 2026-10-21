@@ -86,7 +86,10 @@ export async function getCareers(department?: string): Promise<JobPosition[]> {
       headers: { 'Accept': 'application/json' },
     });
     if (!res.ok) throw new Error(`HTTP error ${res.status}`);
-    return await res.json();
+    const data = await res.json();
+    if (Array.isArray(data)) return data;
+    if (data && Array.isArray(data.results)) return data.results;
+    return [];
   } catch (err) {
     console.warn('[JNAB API] Failed to fetch career openings from backend:', err);
     return [];

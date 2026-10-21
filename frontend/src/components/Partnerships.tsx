@@ -4,9 +4,29 @@ import { ShieldCheck } from 'lucide-react';
 export const Partnerships: React.FC = () => {
   const partners = [
     {
+      name: 'Savile Row',
+      category: 'Luxury Fashion & E-Commerce',
+      logo: '/savilerow.jpeg',
+      logoContainerClass: 'bg-[#16171d] border border-gray-800',
+      imgClass: 'h-10 sm:h-12 w-auto object-contain rounded-md',
+      description: 'Collaborating on bespoke luxury e-commerce architecture, seamless digital storefront workflows, and high-touch customer experience platforms.',
+      highlight: 'Luxury Retail'
+    },
+    {
+      name: 'ASPPEG',
+      category: 'Energy & Supply Chain Distribution',
+      logo: '/asspeg_logo.jpeg',
+      logoContainerClass: 'bg-white border border-gray-200/70',
+      imgClass: 'h-10 sm:h-12 w-auto object-contain rounded-md',
+      description: 'Engineering resilient supply chain visibility, automated regulatory compliance logging, and digital transaction flows across commodities distribution.',
+      highlight: 'Enterprise Alliances'
+    },
+    {
       name: 'Digivibe',
       category: 'Workforce Inclusion & Talent',
       logo: '/digivibe-logo-pink-uyqcBIAf.png',
+      logoContainerClass: 'bg-white border border-gray-200/70',
+      imgClass: 'h-9 sm:h-11 w-auto object-contain',
       description: 'Collaborating to train, mentor, and prepare high-potential female engineers for the modern digital workforce through intensive technical programs.',
       highlight: 'Women In Tech'
     },
@@ -14,6 +34,8 @@ export const Partnerships: React.FC = () => {
       name: 'Brandlift Africa',
       category: 'Brand Strategy & Growth',
       logo: '/brandlift-dark.png',
+      logoContainerClass: 'bg-white border border-gray-200/70',
+      imgClass: 'h-8 sm:h-10 w-auto object-contain',
       description: 'Strategic branding and product venture partner aligning digital software engineering with high-velocity market positioning across Africa.',
       highlight: 'Venture Studio'
     },
@@ -21,6 +43,8 @@ export const Partnerships: React.FC = () => {
       name: 'Cardia',
       category: 'FinTech & Payments',
       logo: '/cardia-lockup-dark.png',
+      logoContainerClass: 'bg-white border border-gray-200/70',
+      imgClass: 'h-9 sm:h-11 w-auto object-contain',
       description: 'Architecting next-generation digital transaction platforms, secure transaction engines, and intuitive user payment flows.',
       highlight: 'FinTech Scale'
     },
@@ -28,6 +52,8 @@ export const Partnerships: React.FC = () => {
       name: 'SpeakWise',
       category: 'Conversational AI & Audio Tech',
       logo: '/speakwise-clean.png',
+      logoContainerClass: 'bg-white border border-gray-200/70',
+      imgClass: 'h-9 sm:h-11 w-auto object-contain',
       description: 'Collaborative development on real-time voice architectures, intelligent conversational feedback systems, and automated communication tools.',
       highlight: 'Speech AI'
     }
@@ -67,11 +93,11 @@ export const Partnerships: React.FC = () => {
                       {partner.name}
                     </h3>
                   </div>
-                  <div className="h-12 w-auto max-w-[140px] px-3 py-1.5 rounded-xl bg-white shadow-xs border border-gray-200/60 flex items-center justify-center shrink-0">
+                  <div className={`h-16 w-auto max-w-[160px] px-3.5 py-2 rounded-2xl shadow-xs flex items-center justify-center shrink-0 ${partner.logoContainerClass || 'bg-white border border-gray-200/60'}`}>
                     <img 
                       src={partner.logo} 
                       alt={partner.name} 
-                      className="h-full w-auto max-h-8 object-contain"
+                      className={`${partner.imgClass || 'h-full w-auto max-h-12 object-contain'}`}
                     />
                   </div>
                 </div>
