@@ -13,8 +13,6 @@ Required env vars:
 
 import os
 from .base import *  # noqa: F401, F403
-# pyrefly: ignore[missing-import]
-import dj_database_url 
 # ---------------------------------------------------------------------------
 # Core — never expose secrets in code
 # ---------------------------------------------------------------------------
@@ -42,7 +40,9 @@ if _pythonanywhere_host and _pythonanywhere_host not in ALLOWED_HOSTS:
 _database_url = os.environ.get("DATABASE_URL", "")
 
 if _database_url:
-     # pip install dj-database-url psycopg2-binary
+    # Requires: pip install dj-database-url psycopg2-binary
+    import dj_database_url
+
     DATABASES = {
         "default": dj_database_url.config(
             default=_database_url,
