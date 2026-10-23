@@ -18,6 +18,13 @@ from .serializers import (
     AcademyApplicationSerializer,
     ContactInquirySerializer
 )
+from .emails import (
+    send_product_build_notification,
+    send_hire_talent_notification,
+    send_academy_notification,
+    send_contact_notification,
+    send_career_application_notification,
+)
 
 
 class ApiRootView(views.APIView):
@@ -103,6 +110,7 @@ class JobApplicationCreateView(generics.CreateAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         application = serializer.save()
+        send_career_application_notification(application, request=request)
         return Response({
             "success": True,
             "message": "Thank you for applying to JNAB Innovations. Our talent engineering team will review your profile.",
@@ -126,6 +134,7 @@ class ProductBuildInquiryCreateView(generics.CreateAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         inquiry = serializer.save()
+        send_product_build_notification(inquiry, request=request)
         return Response({
             "success": True,
             "message": "Your product build inquiry has been received. A JNAB solution architect will contact you within 24 hours.",
@@ -145,6 +154,7 @@ class HireTalentInquiryCreateView(generics.CreateAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         inquiry = serializer.save()
+        send_hire_talent_notification(inquiry, request=request)
         return Response({
             "success": True,
             "message": "Your talent inquiry has been logged. We will prepare pre-vetted senior candidate profiles tailored to your stack.",
@@ -164,6 +174,7 @@ class AcademyApplicationCreateView(generics.CreateAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         application = serializer.save()
+        send_academy_notification(application, request=request)
         return Response({
             "success": True,
             "message": "Your JNAB Academy application has been submitted. Check your email for next steps regarding the technical review.",
@@ -183,6 +194,7 @@ class ContactInquiryCreateView(generics.CreateAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         contact = serializer.save()
+        send_contact_notification(contact, request=request)
         return Response({
             "success": True,
             "message": "Thank you for reaching out to JNAB. Our team will get back to you promptly.",

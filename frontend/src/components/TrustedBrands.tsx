@@ -11,9 +11,9 @@ export const TrustedBrands: React.FC = () => {
     },
     {
       name: 'Cardia',
-      category: 'FinTech & Digital Payments',
+      category: 'Smart NFC & Digital Business Cards',
       logo: '/cardia-lockup-white.png',
-      tag: 'FinTech Platform',
+      tag: 'NFC Identity Tech',
       imgClass: 'h-12 sm:h-14 w-auto object-contain'
     },
     {

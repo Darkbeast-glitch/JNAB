@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck } from 'lucide-react';
+import { ShieldCheck, ArrowUpRight } from 'lucide-react';
 
 export const Partnerships: React.FC = () => {
   const partners = [
@@ -41,12 +41,13 @@ export const Partnerships: React.FC = () => {
     },
     {
       name: 'Cardia',
-      category: 'FinTech & Payments',
+      category: 'Smart NFC & Digital Identity',
       logo: '/cardia-lockup-dark.png',
       logoContainerClass: 'bg-white border border-gray-200/70',
       imgClass: 'h-9 sm:h-11 w-auto object-contain',
-      description: 'Architecting next-generation digital transaction platforms, secure transaction engines, and intuitive user payment flows.',
-      highlight: 'FinTech Scale'
+      description: 'Engineering the next-generation NFC-powered digital identity ecosystem, instant contactless profile sharing, and enterprise networking hardware.',
+      highlight: 'NFC Identity',
+      link: 'https://www.cardia.me'
     },
     {
       name: 'SpeakWise',
@@ -89,8 +90,19 @@ export const Partnerships: React.FC = () => {
                     <span className="text-xs font-bold uppercase tracking-wider text-[#02AA69] mb-1 block">
                       {partner.category}
                     </span>
-                    <h3 className="text-2xl sm:text-3xl font-extrabold text-gray-950">
+                    <h3 className="text-2xl sm:text-3xl font-extrabold text-gray-950 flex items-center gap-2">
                       {partner.name}
+                      {partner.link && (
+                        <a
+                          href={partner.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex text-gray-400 hover:text-[#02AA69] transition-colors p-1"
+                          title={`Visit ${partner.name} (${partner.link})`}
+                        >
+                          <ArrowUpRight className="w-5 h-5 stroke-[2.5]" />
+                        </a>
+                      )}
                     </h3>
                   </div>
                   <div className={`h-16 w-auto max-w-[160px] px-3.5 py-2 rounded-2xl shadow-xs flex items-center justify-center shrink-0 ${partner.logoContainerClass || 'bg-white border border-gray-200/60'}`}>

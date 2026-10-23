@@ -3,9 +3,15 @@ import { Menu, X, ArrowUpRight } from 'lucide-react';
 
 interface NavbarProps {
   onRequestQuote: () => void;
+  currentView?: 'home' | 'contact';
+  onNavigate?: (view: 'home' | 'contact', targetHash?: string) => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onRequestQuote }) => {
+export const Navbar: React.FC<NavbarProps> = ({ 
+  onRequestQuote, 
+  currentView = 'home',
+  onNavigate 
+}) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -25,7 +31,41 @@ export const Navbar: React.FC<NavbarProps> = ({ onRequestQuote }) => {
     { label: 'Case Studies', href: '#case-studies' },
     { label: 'Alliances', href: '#alliances' },
     { label: 'Careers', href: '#careers' },
+    { label: 'Contact Us', href: '/contact', isContact: true },
   ];
+
+  const handleLinkClick = (e: React.MouseEvent, link: typeof navLinks[0]) => {
+    if (link.isContact) {
+      e.preventDefault();
+      setMobileMenuOpen(false);
+      if (onNavigate) {
+        onNavigate('contact');
+      } else {
+        window.history.pushState({}, '', '/contact');
+      }
+      return;
+    }
+
+    if (currentView === 'contact') {
+      e.preventDefault();
+      setMobileMenuOpen(false);
+      if (onNavigate) {
+        onNavigate('home', link.href);
+      }
+    } else {
+      setMobileMenuOpen(false);
+    }
+  };
+
+  const handleLogoClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setMobileMenuOpen(false);
+    if (onNavigate) {
+      onNavigate('home');
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -37,7 +77,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onRequestQuote }) => {
         <nav className="flex items-center justify-between gap-4">
           
           {/* Logo as an image file */}
-          <a href="#" className="shrink-0 flex items-center">
+          <a 
+            href="/" 
+            onClick={handleLogoClick}
+            className="shrink-0 flex items-center cursor-pointer"
+          >
             <img
               src="/logo.png"
               alt="JNAB Innovations"
@@ -45,23 +89,31 @@ export const Navbar: React.FC<NavbarProps> = ({ onRequestQuote }) => {
             />
           </a>
 
-          {/* Desktop Navigation Links (Only on lg screens and above, so it never collides with buttons) */}
-          <div className="hidden lg:flex items-center gap-5 xl:gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="text-xs xl:text-sm font-semibold text-gray-300 hover:text-white transition-colors relative py-1 flex items-center gap-1.5 group whitespace-nowrap"
-              >
-                {link.label}
-                {link.badge && (
-                  <span className="text-[9px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded-full bg-[#02AA69]/20 text-[#02AA69] border border-[#02AA69]/30">
-                    {link.badge}
-                  </span>
-                )}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#02AA69] transition-all duration-200 group-hover:w-full"></span>
-              </a>
-            ))}
+          {/* Desktop Navigation Links */}
+          <div className="hidden lg:flex items-center gap-4 xl:gap-7">
+            {navLinks.map((link) => {
+              const isContactActive = link.isContact && currentView === 'contact';
+              return (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  onClick={(e) => handleLinkClick(e, link)}
+                  className={`text-xs xl:text-sm font-semibold transition-colors relative py-1 flex items-center gap-1.5 group whitespace-nowrap cursor-pointer ${
+                    isContactActive ? 'text-[#02AA69]' : 'text-gray-300 hover:text-white'
+                  }`}
+                >
+                  {link.label}
+                  {link.badge && (
+                    <span className="text-[9px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded-full bg-[#02AA69]/20 text-[#02AA69] border border-[#02AA69]/30">
+                      {link.badge}
+                    </span>
+                  )}
+                  <span className={`absolute bottom-0 left-0 h-0.5 bg-[#02AA69] transition-all duration-200 ${
+                    isContactActive ? 'w-full' : 'w-0 group-hover:w-full'
+                  }`}></span>
+                </a>
+              );
+            })}
           </div>
 
           {/* Action CTA & Mobile Trigger */}
@@ -96,21 +148,26 @@ export const Navbar: React.FC<NavbarProps> = ({ onRequestQuote }) => {
             <span className="text-[11px] font-bold uppercase tracking-wider text-gray-500 mb-1">
               Navigation
             </span>
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-base font-semibold text-gray-200 hover:text-[#02AA69] py-2.5 flex items-center justify-between border-b border-white/5 active:bg-white/5 rounded-lg px-2"
-              >
-                <span>{link.label}</span>
-                {link.badge && (
-                  <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-[#02AA69]/20 text-[#02AA69] border border-[#02AA69]/30">
-                    {link.badge}
-                  </span>
-                )}
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              const isContactActive = link.isContact && currentView === 'contact';
+              return (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  onClick={(e) => handleLinkClick(e, link)}
+                  className={`text-base font-semibold py-2.5 flex items-center justify-between border-b border-white/5 active:bg-white/5 rounded-lg px-2 cursor-pointer ${
+                    isContactActive ? 'text-[#02AA69]' : 'text-gray-200 hover:text-[#02AA69]'
+                  }`}
+                >
+                  <span>{link.label}</span>
+                  {link.badge && (
+                    <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-[#02AA69]/20 text-[#02AA69] border border-[#02AA69]/30">
+                      {link.badge}
+                    </span>
+                  )}
+                </a>
+              );
+            })}
             
             <div className="pt-4 mt-2">
               <button

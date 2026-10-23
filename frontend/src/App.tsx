@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { WhoWeAre } from './components/WhoWeAre';
@@ -13,10 +13,29 @@ import { CtaBanner } from './components/CtaBanner';
 import { Footer } from './components/Footer';
 import { QuoteEstimatorModal } from './components/QuoteEstimatorModal';
 import { JobApplicationModal } from './components/JobApplicationModal';
+import { ContactUsPage } from './components/ContactUsPage';
 
 export function App() {
+  // View Router State ('home' | 'contact')
+  const [currentView, setCurrentView] = useState<'home' | 'contact'>(() => {
+    if (typeof window !== 'undefined') {
+      const path = window.location.pathname;
+      const hash = window.location.hash;
+      if (path.startsWith('/contact') || hash === '#contact') {
+        return 'contact';
+      }
+    }
+    return 'home';
+  });
+
   // Client Inquiry Modal State (Product Build, Hire Talent, Academy)
-  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
+  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('quote') === 'true' || window.location.hash === '#quote';
+    }
+    return false;
+  });
   const [modalTab, setModalTab] = useState<'project' | 'talent' | 'academy'>('project');
   const [modalService, setModalService] = useState('Full-Cycle Product Build');
 
@@ -24,6 +43,40 @@ export function App() {
   const [isJobModalOpen, setIsJobModalOpen] = useState(false);
   const [selectedRoleTitle, setSelectedRoleTitle] = useState('Senior Full-Stack Engineer');
   const [selectedRoleId, setSelectedRoleId] = useState<number | null>(null);
+
+  // Sync browser back/forward buttons (popstate)
+  useEffect(() => {
+    const handlePopState = () => {
+      const path = window.location.pathname;
+      const hash = window.location.hash;
+      if (path.startsWith('/contact') || hash === '#contact') {
+        setCurrentView('contact');
+      } else {
+        setCurrentView('home');
+      }
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  const handleNavigate = (view: 'home' | 'contact', targetHash?: string) => {
+    setCurrentView(view);
+    if (view === 'contact') {
+      window.history.pushState({}, '', '/contact');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      const url = targetHash || '/';
+      window.history.pushState({}, '', url);
+      if (targetHash) {
+        setTimeout(() => {
+          const el = document.querySelector(targetHash);
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }, 50);
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+  };
 
   const handleOpenQuoteModal = (tab: 'project' | 'talent' | 'academy' = 'project', serviceName?: string) => {
     setModalTab(tab);
@@ -49,55 +102,71 @@ export function App() {
   };
 
   const scrollToAcademy = () => {
-    const el = document.getElementById('academy');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+    if (currentView === 'contact') {
+      handleNavigate('home', '#academy');
+    } else {
+      const el = document.getElementById('academy');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
   return (
     <div className="min-h-screen bg-black text-white font-sans antialiased selection:bg-[#02AA69] selection:text-white">
       {/* Navigation */}
-      <Navbar onRequestQuote={() => handleOpenQuoteModal('project', 'General Project Consultation')} />
+      <Navbar 
+        currentView={currentView}
+        onNavigate={handleNavigate}
+        onRequestQuote={() => handleOpenQuoteModal('project', 'General Project Consultation')} 
+      />
 
-      {/* Main Content Sections */}
-      <main>
-        {/* Hero Section */}
-        <Hero 
-          onRequestQuote={() => handleOpenQuoteModal('project', 'Full-Cycle Product Build')}
-          onExploreTraining={scrollToAcademy}
+      {/* Main View Router */}
+      {currentView === 'contact' ? (
+        <ContactUsPage 
+          onBackToHome={() => handleNavigate('home')}
+          onRequestQuote={() => handleOpenQuoteModal('project', 'Direct Consultation')}
         />
+      ) : (
+        <main>
+          {/* Hero Section */}
+          <Hero 
+            onRequestQuote={() => handleOpenQuoteModal('project', 'Full-Cycle Product Build')}
+            onExploreTraining={scrollToAcademy}
+          />
 
-        {/* About JNAB */}
-        <WhoWeAre />
+          {/* About JNAB */}
+          <WhoWeAre />
 
-        {/* How We Deliver */}
-        <HowWeDoIt onSelectModel={(tab, model) => handleOpenQuoteModal(tab, model)} />
+          {/* How We Deliver */}
+          <HowWeDoIt onSelectModel={(tab, model) => handleOpenQuoteModal(tab, model)} />
 
-        {/* Client Credentials & Partner Brands */}
-        <TrustedBrands />
+          {/* Client Credentials & Partner Brands */}
+          <TrustedBrands />
 
-        {/* Core Services (Interactive Grid with Inversion on Hover) */}
-        <CoreServices onSelectService={handleSelectService} />
+          {/* Core Services (Interactive Grid with Inversion on Hover) */}
+          <CoreServices onSelectService={handleSelectService} />
 
-        {/* JNAB Academy & Skills Training */}
-        <AcademySection onApplyOrInquire={(track) => handleOpenQuoteModal('academy', track)} />
+          {/* JNAB Academy & Skills Training */}
+          <AcademySection onApplyOrInquire={(track) => handleOpenQuoteModal('academy', track)} />
 
-        {/* Notable Projects */}
-        <NotableProjects />
+          {/* Notable Projects */}
+          <NotableProjects />
 
-        {/* Strategic Alliances */}
-        <Partnerships />
+          {/* Strategic Alliances */}
+          <Partnerships />
 
-        {/* Join Us / Careers (Populated dynamically from backend, dedicated application modal) */}
-        <JoinUsCareers onApply={(roleTitle, roleId) => handleOpenJobModal(roleTitle, roleId)} />
+          {/* Join Us / Careers (Populated dynamically from backend, dedicated application modal) */}
+          <JoinUsCareers onApply={(roleTitle, roleId) => handleOpenJobModal(roleTitle, roleId)} />
 
-        {/* Split CTA Banner */}
-        <CtaBanner onRequestQuote={() => handleOpenQuoteModal('project', 'Project Consultation')} />
-      </main>
+          {/* Split CTA Banner */}
+          <CtaBanner 
+            onRequestQuote={() => handleOpenQuoteModal('project', 'Project Consultation')} 
+            onContactUs={() => handleNavigate('contact')}
+          />
+        </main>
+      )}
 
       {/* Footer */}
-      <Footer />
+      <Footer onNavigate={handleNavigate} />
 
       {/* 1. Client & Academy Inquiry Modal (Product Builds, Dedicated Pods, Academy) */}
       <QuoteEstimatorModal

@@ -56,9 +56,10 @@ REST_FRAMEWORK = {
 
 
 # ---------------------------------------------------------------------------
-# Email — print to console in dev
+# Email — Resend if API key is set, otherwise print to console
 # ---------------------------------------------------------------------------
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+if not RESEND_API_KEY:
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 
 # ---------------------------------------------------------------------------

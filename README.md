@@ -126,6 +126,35 @@ As requested, forms are strictly separated to reflect distinct user intents:
    * **Fields**: Full Name, Email, Phone, Track (Product Design vs. Full-Stack), Skill Level, Learning Mode, Motivation Statement, Scholarship Request.
    * **Endpoint**: `/api/inquiries/academy/`
 
+5. **Contact Us Page Inquiries**:
+   * **Target Audience**: Clients, prospective partners, general inquiries.
+   * **Fields**: Full Name, Work Email, Phone, Company, Inquiry Type / Intent, Subject, Message Brief.
+   * **Endpoint**: `/api/inquiries/contact/`
+
+---
+
+## 📧 Automated Email Notifications (Resend + Anymail)
+
+All five submission endpoints automatically dispatch an instant, high-contrast HTML notification email to the administrator whenever a user submits a form or requests a quote.
+
+### Environment Variables
+To enable Resend in production (PythonAnywhere) or locally, add to your `.env`:
+
+```env
+# Resend API Key (from https://resend.com)
+RESEND_API_KEY=re_your_api_key_here
+
+# Sender Email (use onboarding@resend.dev during testing, or your verified domain e.g. notifications@jnab.tech)
+DEFAULT_FROM_EMAIL=JNAB Innovations <onboarding@resend.dev>
+
+# Where alerts are delivered (supports multiple comma-separated emails)
+ADMIN_NOTIFICATION_EMAIL=hello@jnab.tech
+```
+
+* In **development**: If `RESEND_API_KEY` is not set, emails print directly to the console (`EmailBackend`).
+* In **production**: When `RESEND_API_KEY` is set, emails send via `anymail.backends.resend.EmailBackend`.
+
+
 ---
 
 ## 📄 License & Ownership

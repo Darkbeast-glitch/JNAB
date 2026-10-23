@@ -3,9 +3,10 @@ import { ArrowUpRight } from 'lucide-react';
 
 interface CtaBannerProps {
   onRequestQuote: () => void;
+  onContactUs?: () => void;
 }
 
-export const CtaBanner: React.FC<CtaBannerProps> = ({ onRequestQuote }) => {
+export const CtaBanner: React.FC<CtaBannerProps> = ({ onRequestQuote, onContactUs }) => {
   return (
     <section className="flex flex-col lg:flex-row w-full min-h-[480px] overflow-hidden bg-[#001426] text-white">
       {/* Left Column (Content & Action) */}
@@ -22,8 +23,8 @@ export const CtaBanner: React.FC<CtaBannerProps> = ({ onRequestQuote }) => {
             Whether you are architecting a complex product from scratch, reinforcing your team with senior developers, or upskilling internal talent through our academy — JNAB is ready to deliver.
           </p>
 
-          {/* Compact Button on Mobile (Matching Navbar Button Proportions) */}
-          <div className="flex justify-start">
+          {/* Action Buttons */}
+          <div className="flex flex-wrap items-center gap-3">
             <button
               onClick={onRequestQuote}
               className="bg-[#02AA69] hover:bg-[#018552] text-white cursor-pointer rounded-full font-semibold text-xs sm:text-sm md:text-base inline-flex items-center gap-3 pl-4 sm:pl-5 pr-1.5 py-1.5 transition-all duration-200 group shadow-md hover:shadow-[#02AA69]/30 active:scale-95 whitespace-nowrap w-auto"
@@ -33,6 +34,15 @@ export const CtaBanner: React.FC<CtaBannerProps> = ({ onRequestQuote }) => {
                 <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5]" />
               </div>
             </button>
+
+            {onContactUs && (
+              <button
+                onClick={onContactUs}
+                className="bg-white/10 hover:bg-white/20 text-white cursor-pointer rounded-full font-semibold text-xs sm:text-sm md:text-base inline-flex items-center px-5 py-3 transition-all duration-200 border border-white/15 hover:border-white/30 whitespace-nowrap"
+              >
+                <span>Contact Us</span>
+              </button>
+            )}
           </div>
         </div>
       </div>

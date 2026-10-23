@@ -24,7 +24,7 @@ export const Hero: React.FC<HeroProps> = ({ onRequestQuote, onExploreTraining })
       <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Top Announcement Pill - Responsive & Overflow Safe */}
-        <div className="flex justify-center mb-6 sm:mb-8">
+        {/* <div className="flex justify-center mb-6 sm:mb-8">
           <div className="inline-flex items-center gap-2 sm:gap-2.5 px-3 sm:px-4 py-1.5 rounded-full bg-white/5 border border-white/10 hover:border-[#02AA69]/50 transition-colors cursor-pointer group max-w-full">
             <span className="w-2 h-2 rounded-full bg-[#02AA69] animate-pulse shrink-0"></span>
             <span className="text-[11px] sm:text-xs md:text-sm font-semibold tracking-wide text-gray-300 group-hover:text-white truncate sm:whitespace-nowrap">
@@ -32,7 +32,7 @@ export const Hero: React.FC<HeroProps> = ({ onRequestQuote, onExploreTraining })
             </span>
             <ArrowUpRight className="w-3.5 h-3.5 text-gray-400 group-hover:text-[#02AA69] transition-transform group-hover:translate-x-0.5 shrink-0 hidden sm:block" />
           </div>
-        </div>
+        </div> */}
 
         {/* Hero Title - Perfectly Scaled & Responsive for Mobile and Desktop */}
         <div className="text-center mb-5 sm:mb-6">

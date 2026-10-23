@@ -82,6 +82,15 @@ export interface AcademyPayload {
   scholarship_requested: boolean;
 }
 
+export interface ContactInquiryPayload {
+  name: string;
+  email: string;
+  phone?: string;
+  subject: string;
+  message: string;
+  source?: string;
+}
+
 // -------------------------------------------------------------
 // API CALLS
 // -------------------------------------------------------------
@@ -155,6 +164,19 @@ export async function submitAcademyApplication(payload: AcademyPayload) {
   if (!res.ok) {
     const errorData = await res.json().catch(() => ({}));
     throw new Error(errorData.detail || 'Failed to submit academy application');
+  }
+  return await res.json();
+}
+
+export async function submitContactInquiry(payload: ContactInquiryPayload) {
+  const res = await fetch(`${API_BASE_URL}/inquiries/contact/`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({}));
+    throw new Error(errorData.detail || errorData.message || 'Failed to submit contact message');
   }
   return await res.json();
 }

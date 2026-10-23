@@ -21,19 +21,20 @@ export const NotableProjects: React.FC = () => {
       image: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=800&q=80'
     },
     {
-      id: 'cardia-pay',
-      title: 'Cardia Digital Payment Engine',
-      category: 'FinTech & Payment Infrastructure',
+      id: 'cardia-me',
+      title: 'Cardia — Premium NFC Digital Identity',
+      category: 'Smart Hardware & Digital Networking',
       logo: 'CA',
       logoBg: 'bg-emerald-600',
-      description: 'Engineered high-throughput digital transaction platforms, automated ledger management, and intuitive user payment interfaces for rapid business scale.',
+      description: 'Engineered the contactless NFC-powered digital business card platform enabling professionals and African enterprises to share identity, contact credentials, and portfolios with a single tap.',
+      link: 'https://www.cardia.me',
       metrics: [
-        { label: 'Active Users', value: '450K+' },
-        { label: 'Transaction Speed', value: '<220ms' },
-        { label: 'Uptime Reliability', value: '99.99%' },
+        { label: 'Instant Tap Speed', value: '<100ms' },
+        { label: 'Network Sharing', value: 'One-Tap NFC' },
+        { label: 'Profile Sync', value: 'Real-Time Cloud' },
       ],
-      tags: ['FinTech APIs', 'Mobile Payments', 'React Dashboard', 'PCI-DSS Compliance'],
-      image: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=800&q=80'
+      tags: ['NFC Hardware Integration', 'Dynamic QR Profiles', 'Next.js Platform', 'Cloud Contact Sync'],
+      image: 'https://images.unsplash.com/photo-1556742049-0a67c5574f73?auto=format&fit=crop&w=800&q=80'
     },
     {
       id: 'pulsehealth',
@@ -99,9 +100,21 @@ export const NotableProjects: React.FC = () => {
         <div className="bg-[#f5f6f8] rounded-3xl p-8 lg:p-14 relative overflow-hidden border border-gray-200/80 shadow-sm transition-all duration-300">
           
           {/* Dexwin Round Top-Right Link Arrow */}
-          <div className="hidden md:flex absolute top-8 right-10 w-16 h-16 bg-white rounded-full items-center justify-center shadow-md text-gray-800 hover:text-[#02AA69] hover:scale-105 transition-all cursor-pointer">
-            <ArrowUpRight className="w-6 h-6 stroke-[2.5]" />
-          </div>
+          {current.link ? (
+            <a
+              href={current.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              title={`Visit ${current.title}`}
+              className="hidden md:flex absolute top-8 right-10 w-16 h-16 bg-white rounded-full items-center justify-center shadow-md text-gray-800 hover:text-[#02AA69] hover:scale-105 transition-all cursor-pointer group"
+            >
+              <ArrowUpRight className="w-6 h-6 stroke-[2.5] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </a>
+          ) : (
+            <div className="hidden md:flex absolute top-8 right-10 w-16 h-16 bg-white rounded-full items-center justify-center shadow-md text-gray-800 hover:text-[#02AA69] hover:scale-105 transition-all cursor-pointer">
+              <ArrowUpRight className="w-6 h-6 stroke-[2.5]" />
+            </div>
+          )}
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             
@@ -161,6 +174,17 @@ export const NotableProjects: React.FC = () => {
                     {tag}
                   </span>
                 ))}
+                {current.link && (
+                  <a
+                    href={current.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-gray-950 bg-white hover:bg-gray-50 border border-[#02AA69]/40 hover:border-[#02AA69] px-3.5 py-1 rounded-full shadow-2xs transition-all hover:text-[#02AA69]"
+                  >
+                    <span>cardia.me</span>
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  </a>
+                )}
               </div>
 
             </div>

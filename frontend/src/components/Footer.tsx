@@ -1,7 +1,20 @@
 import React from 'react';
 import { Mail, MapPin, Globe } from 'lucide-react';
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  onNavigate?: (view: 'home' | 'contact', targetHash?: string) => void;
+}
+
+export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
+  const handleNav = (e: React.MouseEvent, view: 'home' | 'contact', targetHash?: string) => {
+    e.preventDefault();
+    if (onNavigate) {
+      onNavigate(view, targetHash);
+    } else if (view === 'contact') {
+      window.history.pushState({}, '', '/contact');
+    }
+  };
+
   return (
     <footer className="bg-black text-white pt-20 pb-12 px-6 lg:px-16 border-t border-white/10">
       <div className="max-w-[1240px] mx-auto">
@@ -9,7 +22,7 @@ export const Footer: React.FC = () => {
           
           {/* Brand & Mission (Col 1-2) */}
           <div className="lg:col-span-2">
-            <div className="mb-6">
+            <div className="mb-6 cursor-pointer" onClick={(e) => handleNav(e, 'home')}>
               <img
                 src="/logo.png"
                 alt="JNAB Innovations"
@@ -32,7 +45,13 @@ export const Footer: React.FC = () => {
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-[#02AA69]" />
-                <a href="mailto:hello@jnab.tech" className="hover:text-white transition-colors">hello@jnab.tech</a>
+                <a 
+                  href="/contact" 
+                  onClick={(e) => handleNav(e, 'contact')} 
+                  className="hover:text-white transition-colors cursor-pointer"
+                >
+                  hello@jnab.tech
+                </a>
               </div>
               <div className="flex items-center gap-2">
                 <Globe className="w-4 h-4 text-[#02AA69]" />
@@ -47,12 +66,12 @@ export const Footer: React.FC = () => {
               Solutions
             </h4>
             <ul className="space-y-3 text-sm text-gray-400">
-              <li><a href="#delivery-models" className="hover:text-[#02AA69] transition-colors">Full-Cycle Builds</a></li>
-              <li><a href="#delivery-models" className="hover:text-[#02AA69] transition-colors">Embedded Talent</a></li>
-              <li><a href="#delivery-models" className="hover:text-[#02AA69] transition-colors">Autonomous Pods</a></li>
-              <li><a href="#capabilities" className="hover:text-[#02AA69] transition-colors">UI/UX & Design Systems</a></li>
-              <li><a href="#capabilities" className="hover:text-[#02AA69] transition-colors">Application Engineering</a></li>
-              <li><a href="#capabilities" className="hover:text-[#02AA69] transition-colors">Data Intelligence</a></li>
+              <li><a href="#delivery-models" onClick={(e) => handleNav(e, 'home', '#delivery-models')} className="hover:text-[#02AA69] transition-colors">Full-Cycle Builds</a></li>
+              <li><a href="#delivery-models" onClick={(e) => handleNav(e, 'home', '#delivery-models')} className="hover:text-[#02AA69] transition-colors">Embedded Talent</a></li>
+              <li><a href="#delivery-models" onClick={(e) => handleNav(e, 'home', '#delivery-models')} className="hover:text-[#02AA69] transition-colors">Autonomous Pods</a></li>
+              <li><a href="#capabilities" onClick={(e) => handleNav(e, 'home', '#capabilities')} className="hover:text-[#02AA69] transition-colors">UI/UX & Design Systems</a></li>
+              <li><a href="#capabilities" onClick={(e) => handleNav(e, 'home', '#capabilities')} className="hover:text-[#02AA69] transition-colors">Application Engineering</a></li>
+              <li><a href="#capabilities" onClick={(e) => handleNav(e, 'home', '#capabilities')} className="hover:text-[#02AA69] transition-colors">Data Intelligence</a></li>
             </ul>
           </div>
 
@@ -62,11 +81,11 @@ export const Footer: React.FC = () => {
               Academy & Talent
             </h4>
             <ul className="space-y-3 text-sm text-gray-400">
-              <li><a href="#academy" className="hover:text-[#02AA69] transition-colors">Product Design Track</a></li>
-              <li><a href="#academy" className="hover:text-[#02AA69] transition-colors">Software Engineering Track</a></li>
-              <li><a href="#academy" className="hover:text-[#02AA69] transition-colors">Corporate Team Training</a></li>
-              <li><a href="#careers" className="hover:text-[#02AA69] transition-colors">Hire JNAB Fellows</a></li>
-              <li><a href="#careers" className="hover:text-[#02AA69] transition-colors">Careers / Join Us</a></li>
+              <li><a href="#academy" onClick={(e) => handleNav(e, 'home', '#academy')} className="hover:text-[#02AA69] transition-colors">Product Design Track</a></li>
+              <li><a href="#academy" onClick={(e) => handleNav(e, 'home', '#academy')} className="hover:text-[#02AA69] transition-colors">Software Engineering Track</a></li>
+              <li><a href="#academy" onClick={(e) => handleNav(e, 'home', '#academy')} className="hover:text-[#02AA69] transition-colors">Corporate Team Training</a></li>
+              <li><a href="#careers" onClick={(e) => handleNav(e, 'home', '#careers')} className="hover:text-[#02AA69] transition-colors">Hire JNAB Fellows</a></li>
+              <li><a href="#careers" onClick={(e) => handleNav(e, 'home', '#careers')} className="hover:text-[#02AA69] transition-colors">Careers / Join Us</a></li>
             </ul>
           </div>
 
@@ -76,12 +95,12 @@ export const Footer: React.FC = () => {
               Company
             </h4>
             <ul className="space-y-3 text-sm text-gray-400">
-              <li><a href="#about" className="hover:text-[#02AA69] transition-colors">Who We Are</a></li>
-              <li><a href="#projects" className="hover:text-[#02AA69] transition-colors">Case Studies</a></li>
-              <li><a href="#partnerships" className="hover:text-[#02AA69] transition-colors">Partnerships</a></li>
+              <li><a href="#about" onClick={(e) => handleNav(e, 'home', '#about')} className="hover:text-[#02AA69] transition-colors">Who We Are</a></li>
+              <li><a href="#case-studies" onClick={(e) => handleNav(e, 'home', '#case-studies')} className="hover:text-[#02AA69] transition-colors">Case Studies</a></li>
+              <li><a href="#alliances" onClick={(e) => handleNav(e, 'home', '#alliances')} className="hover:text-[#02AA69] transition-colors">Alliances</a></li>
+              <li><a href="/contact" onClick={(e) => handleNav(e, 'contact')} className="hover:text-[#02AA69] transition-colors font-semibold text-white">Contact Us</a></li>
               <li><a href="#" className="hover:text-[#02AA69] transition-colors">Privacy Policy</a></li>
               <li><a href="#" className="hover:text-[#02AA69] transition-colors">Terms of Service</a></li>
-              <li><a href="#" className="hover:text-[#02AA69] transition-colors">Security & Compliance</a></li>
             </ul>
           </div>
 
@@ -95,10 +114,9 @@ export const Footer: React.FC = () => {
               <span className="w-2 h-2 rounded-full bg-[#02AA69]"></span>
               Systems Operational (99.98% SLA)
             </span>
-            <span>Accra · London · Global</span>
+            <span>Accra · Global</span>
           </div>
         </div>
-
       </div>
     </footer>
   );

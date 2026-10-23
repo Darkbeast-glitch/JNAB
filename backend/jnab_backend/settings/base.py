@@ -27,6 +27,7 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     "rest_framework",
     "corsheaders",
+    "anymail",
 ]
 
 LOCAL_APPS = [
@@ -148,3 +149,33 @@ REST_FRAMEWORK = {
 ADMIN_SITE_HEADER = "JNAB Innovations · Command Center"
 ADMIN_SITE_TITLE = "JNAB Admin Portal"
 ADMIN_INDEX_TITLE = "Lead Management, Recruitment & Academy Admissions"
+
+
+# ---------------------------------------------------------------------------
+# Transactional Email & Resend Integration (via Anymail)
+# ---------------------------------------------------------------------------
+RESEND_API_KEY = os.environ.get("RESEND_API_KEY", "").strip()
+
+ANYMAIL = {
+    "RESEND_API_KEY": RESEND_API_KEY,
+}
+
+# The address shown as the sender (use a verified domain or onboarding@resend.dev during testing)
+DEFAULT_FROM_EMAIL = os.environ.get(
+    "DEFAULT_FROM_EMAIL",
+    "JNAB Innovations <jnabtechsolutions@gmail.com>"
+)
+SERVER_EMAIL = DEFAULT_FROM_EMAIL
+
+# Where instant lead notifications are sent to (supports comma-separated emails)
+ADMIN_NOTIFICATION_EMAIL = os.environ.get(
+    "ADMIN_NOTIFICATION_EMAIL",
+    "jnabtechsolutions@gmail.com,hello@jnab.tech"
+)
+
+# In base, default to Resend backend if key is provided, otherwise console backend
+if RESEND_API_KEY:
+    EMAIL_BACKEND = "anymail.backends.resend.EmailBackend"
+else:
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+

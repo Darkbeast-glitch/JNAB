@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, ArrowUpRight, CheckCircle2, Building, Send, Sparkles, Users, GraduationCap, Code2, AlertCircle } from 'lucide-react';
+import { X, CheckCircle2, Code2, Users, GraduationCap, AlertCircle, Send } from 'lucide-react';
 import { submitProductBuild, submitHireTalent, submitAcademyApplication } from '../services/api';
 
 interface QuoteEstimatorModalProps {
@@ -113,39 +113,40 @@ export const QuoteEstimatorModal: React.FC<QuoteEstimatorModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200 overflow-y-auto">
       <div 
-        className="bg-[#0D131F] text-white border border-white/10 rounded-3xl w-full max-w-2xl max-h-[92vh] overflow-y-auto shadow-2xl relative"
+        className="bg-[#0D131F] text-white border border-white/10 rounded-2xl sm:rounded-3xl w-[90%] sm:w-full max-w-lg md:max-w-xl max-h-[90vh] overflow-y-auto shadow-2xl relative my-auto box-border"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="sticky top-0 z-10 flex items-center justify-between p-6 sm:p-8 border-b border-white/10 bg-[#0A0E17]/95 backdrop-blur-md">
-          <div>
-            <div className="flex items-center gap-2 mb-1">
-              <span className="w-2 h-2 rounded-full bg-[#02AA69]"></span>
-              <span className="text-xs font-bold uppercase tracking-wider text-[#02AA69]">
-                JNAB Client & Academy Gateway
+        <div className="sticky top-0 z-10 flex items-center justify-between px-4 py-3 sm:px-6 sm:py-4 border-b border-white/10 bg-[#0A0E17]/95 backdrop-blur-md">
+          <div className="min-w-0">
+            <div className="flex items-center gap-2 mb-0.5">
+              <span className="w-2 h-2 rounded-full bg-[#02AA69] shrink-0"></span>
+              <span className="text-[11px] sm:text-xs font-semibold text-[#02AA69] truncate">
+                Client & Academy Gateway
               </span>
             </div>
-            <h3 className="text-xl sm:text-2xl font-black tracking-tight">
-              {submitted ? 'Inquiry Received' : 'Partner with JNAB'}
+            <h3 className="text-base sm:text-xl font-bold tracking-tight truncate">
+              {submitted ? 'Inquiry received' : 'Partner with JNAB'}
             </h3>
           </div>
           <button
             onClick={onClose}
-            className="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white flex items-center justify-center transition-colors cursor-pointer shrink-0"
+            className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white flex items-center justify-center transition-colors cursor-pointer shrink-0 ml-3"
+            aria-label="Close modal"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
         </div>
 
         {submitted ? (
-          <div className="p-8 sm:p-12 text-center">
-            <div className="w-16 h-16 rounded-full bg-[#02AA69]/20 text-[#02AA69] flex items-center justify-center mx-auto mb-6">
-              <CheckCircle2 className="w-10 h-10 stroke-[2.5]" />
+          <div className="p-6 sm:p-10 text-center">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#02AA69]/20 text-[#02AA69] flex items-center justify-center mx-auto mb-5">
+              <CheckCircle2 className="w-8 h-8 sm:w-10 sm:h-10 stroke-[2.5]" />
             </div>
-            <h4 className="text-2xl font-bold mb-3">Thank You, {fullName || 'Partner'}!</h4>
-            <p className="text-gray-300 text-base max-w-md mx-auto mb-8 leading-relaxed">
+            <h4 className="text-xl sm:text-2xl font-bold mb-2">Thank you, {fullName || 'Partner'}!</h4>
+            <p className="text-gray-300 text-sm sm:text-base max-w-md mx-auto mb-6 leading-relaxed">
               {successMessage}
             </p>
             <button
@@ -153,72 +154,72 @@ export const QuoteEstimatorModal: React.FC<QuoteEstimatorModalProps> = ({
                 setSubmitted(false);
                 onClose();
               }}
-              className="bg-[#02AA69] hover:bg-[#018552] text-white font-bold py-3.5 px-8 rounded-full transition-all cursor-pointer shadow-lg shadow-[#02AA69]/25"
+              className="bg-[#02AA69] hover:bg-[#018552] text-white font-semibold py-3 px-8 rounded-full transition-all cursor-pointer shadow-lg shadow-[#02AA69]/25 text-sm"
             >
               Done
             </button>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="p-6 sm:p-8 space-y-6">
+          <form onSubmit={handleSubmit} className="p-4 sm:p-6 md:p-7 space-y-3.5 sm:space-y-4">
             {error && (
-              <div className="bg-red-500/10 border border-red-500/30 rounded-2xl p-4 flex items-center gap-3 text-red-300 text-sm">
-                <AlertCircle className="w-5 h-5 shrink-0 text-red-400" />
+              <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-3 sm:p-4 flex items-center gap-3 text-red-300 text-xs sm:text-sm">
+                <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 shrink-0 text-red-400" />
                 <span>{error}</span>
               </div>
             )}
 
             {/* Purpose Switcher (3 Distinct Models) */}
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2.5">
-                Select Engagement Track
+              <label className="block text-xs font-medium text-gray-300 mb-1.5">
+                Select engagement track
               </label>
-              <div className="grid grid-cols-3 gap-2 p-1.5 bg-white/5 border border-white/10 rounded-2xl">
+              <div className="grid grid-cols-3 gap-1 sm:gap-2 p-1 bg-white/5 border border-white/10 rounded-xl">
                 <button
                   type="button"
                   onClick={() => setActiveType('project')}
-                  className={`py-3 px-2 rounded-xl text-xs sm:text-sm font-bold flex flex-col sm:flex-row items-center justify-center gap-1.5 transition-all cursor-pointer ${
+                  className={`py-2 px-1 sm:py-2.5 sm:px-2 rounded-lg sm:rounded-xl text-[11px] sm:text-xs md:text-sm font-semibold flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-1.5 transition-all cursor-pointer min-w-0 ${
                     activeType === 'project'
                       ? 'bg-[#02AA69] text-white shadow-md'
                       : 'text-gray-400 hover:text-white hover:bg-white/5'
                   }`}
                 >
-                  <Code2 className="w-4 h-4" />
-                  <span>Product Build</span>
+                  <Code2 className="w-3.5 h-3.5 shrink-0" />
+                  <span className="truncate">Product Build</span>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => setActiveType('talent')}
-                  className={`py-3 px-2 rounded-xl text-xs sm:text-sm font-bold flex flex-col sm:flex-row items-center justify-center gap-1.5 transition-all cursor-pointer ${
+                  className={`py-2 px-1 sm:py-2.5 sm:px-2 rounded-lg sm:rounded-xl text-[11px] sm:text-xs md:text-sm font-semibold flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-1.5 transition-all cursor-pointer min-w-0 ${
                     activeType === 'talent'
                       ? 'bg-[#02AA69] text-white shadow-md'
                       : 'text-gray-400 hover:text-white hover:bg-white/5'
                   }`}
                 >
-                  <Users className="w-4 h-4" />
-                  <span>Hire Talent Pod</span>
+                  <Users className="w-3.5 h-3.5 shrink-0" />
+                  <span className="truncate">Hire Talent Pod</span>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => setActiveType('academy')}
-                  className={`py-3 px-2 rounded-xl text-xs sm:text-sm font-bold flex flex-col sm:flex-row items-center justify-center gap-1.5 transition-all cursor-pointer ${
+                  className={`py-2 px-1 sm:py-2.5 sm:px-2 rounded-lg sm:rounded-xl text-[11px] sm:text-xs md:text-sm font-semibold flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-1.5 transition-all cursor-pointer min-w-0 ${
                     activeType === 'academy'
                       ? 'bg-[#02AA69] text-white shadow-md'
                       : 'text-gray-400 hover:text-white hover:bg-white/5'
                   }`}
                 >
-                  <GraduationCap className="w-4 h-4" />
-                  <span>JNAB Academy</span>
+                  <GraduationCap className="w-3.5 h-3.5 shrink-0" />
+                  <span className="truncate">JNAB Academy</span>
                 </button>
               </div>
             </div>
 
             {/* Contact Details */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1.5">
-                  Full Name *
+                <label className="block text-xs font-medium text-gray-300 mb-1.5">
+                  Full name <span className="text-[#02AA69]">*</span>
                 </label>
                 <input
                   type="text"
@@ -226,13 +227,13 @@ export const QuoteEstimatorModal: React.FC<QuoteEstimatorModalProps> = ({
                   placeholder="e.g. Sarah Mensah"
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 focus:border-[#02AA69] rounded-xl px-4 py-3 text-white text-sm outline-none"
+                  className="w-full bg-white/5 border border-white/10 focus:border-[#02AA69] rounded-xl px-3.5 py-2.5 sm:px-4 sm:py-3 text-white text-xs sm:text-sm outline-none transition-colors placeholder:text-gray-500"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1.5">
-                  Work Email *
+                <label className="block text-xs font-medium text-gray-300 mb-1.5">
+                  Work email <span className="text-[#02AA69]">*</span>
                 </label>
                 <input
                   type="email"
@@ -240,15 +241,15 @@ export const QuoteEstimatorModal: React.FC<QuoteEstimatorModalProps> = ({
                   placeholder="sarah@company.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 focus:border-[#02AA69] rounded-xl px-4 py-3 text-white text-sm outline-none"
+                  className="w-full bg-white/5 border border-white/10 focus:border-[#02AA69] rounded-xl px-3.5 py-2.5 sm:px-4 sm:py-3 text-white text-xs sm:text-sm outline-none transition-colors placeholder:text-gray-500"
                 />
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1.5">
-                  Phone / WhatsApp *
+                <label className="block text-xs font-medium text-gray-300 mb-1.5">
+                  Phone / WhatsApp <span className="text-[#02AA69]">*</span>
                 </label>
                 <input
                   type="tel"
@@ -256,36 +257,36 @@ export const QuoteEstimatorModal: React.FC<QuoteEstimatorModalProps> = ({
                   placeholder="+233 24 000 0000"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 focus:border-[#02AA69] rounded-xl px-4 py-3 text-white text-sm outline-none"
+                  className="w-full bg-white/5 border border-white/10 focus:border-[#02AA69] rounded-xl px-3.5 py-2.5 sm:px-4 sm:py-3 text-white text-xs sm:text-sm outline-none transition-colors placeholder:text-gray-500"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1.5">
-                  {activeType === 'academy' ? 'Current Organization / School' : 'Company / Venture Name'}
+                <label className="block text-xs font-medium text-gray-300 mb-1.5">
+                  {activeType === 'academy' ? 'Current organization / school' : 'Company or venture name'}
                 </label>
                 <input
                   type="text"
                   placeholder={activeType === 'academy' ? 'Self / University / Company' : 'e.g. PayAfrik Technologies'}
                   value={company}
                   onChange={(e) => setCompany(e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 focus:border-[#02AA69] rounded-xl px-4 py-3 text-white text-sm outline-none"
+                  className="w-full bg-white/5 border border-white/10 focus:border-[#02AA69] rounded-xl px-3.5 py-2.5 sm:px-4 sm:py-3 text-white text-xs sm:text-sm outline-none transition-colors placeholder:text-gray-500"
                 />
               </div>
             </div>
 
             {/* TAB 1: PRODUCT BUILD SPECIFICS */}
             {activeType === 'project' && (
-              <div className="space-y-4 pt-2 border-t border-white/10">
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="space-y-3 sm:space-y-4 pt-2 border-t border-white/10">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1.5">
-                      Project Type
+                    <label className="block text-xs font-medium text-gray-300 mb-1.5">
+                      Project type
                     </label>
                     <select
                       value={projectType}
                       onChange={(e) => setProjectType(e.target.value)}
-                      className="w-full bg-[#161D2B] border border-white/10 focus:border-[#02AA69] rounded-xl px-3 py-3 text-white text-sm outline-none"
+                      className="w-full bg-[#161D2B] border border-white/10 focus:border-[#02AA69] rounded-xl px-3 py-2.5 sm:py-3 text-white text-xs sm:text-sm outline-none cursor-pointer"
                     >
                       <option value="full_cycle">End-to-End Build (Design + Code)</option>
                       <option value="mobile_app">Mobile App (Flutter / iOS / Android)</option>
@@ -296,13 +297,13 @@ export const QuoteEstimatorModal: React.FC<QuoteEstimatorModalProps> = ({
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1.5">
-                      Target Budget
+                    <label className="block text-xs font-medium text-gray-300 mb-1.5">
+                      Target budget
                     </label>
                     <select
                       value={budget}
                       onChange={(e) => setBudget(e.target.value)}
-                      className="w-full bg-[#161D2B] border border-white/10 focus:border-[#02AA69] rounded-xl px-3 py-3 text-white text-sm outline-none"
+                      className="w-full bg-[#161D2B] border border-white/10 focus:border-[#02AA69] rounded-xl px-3 py-2.5 sm:py-3 text-white text-xs sm:text-sm outline-none cursor-pointer"
                     >
                       <option value="tier_1">$5,000 – $15,000</option>
                       <option value="tier_2">$15,000 – $30,000</option>
@@ -313,13 +314,13 @@ export const QuoteEstimatorModal: React.FC<QuoteEstimatorModalProps> = ({
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1.5">
-                      Target Timeline
+                    <label className="block text-xs font-medium text-gray-300 mb-1.5">
+                      Target timeline
                     </label>
                     <select
                       value={timeline}
                       onChange={(e) => setTimeline(e.target.value)}
-                      className="w-full bg-[#161D2B] border border-white/10 focus:border-[#02AA69] rounded-xl px-3 py-3 text-white text-sm outline-none"
+                      className="w-full bg-[#161D2B] border border-white/10 focus:border-[#02AA69] rounded-xl px-3 py-2.5 sm:py-3 text-white text-xs sm:text-sm outline-none cursor-pointer"
                     >
                       <option value="immediate">Immediate (&lt; 1 month)</option>
                       <option value="standard">1 – 3 Months (MVP)</option>
@@ -330,8 +331,8 @@ export const QuoteEstimatorModal: React.FC<QuoteEstimatorModalProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1.5">
-                    Project Scope & Key Features *
+                  <label className="block text-xs font-medium text-gray-300 mb-1.5">
+                    Project scope & key features <span className="text-[#02AA69]">*</span>
                   </label>
                   <textarea
                     required
@@ -339,20 +340,20 @@ export const QuoteEstimatorModal: React.FC<QuoteEstimatorModalProps> = ({
                     placeholder="Describe your vision, core user flows, technical integrations required, or specific problem to solve..."
                     value={projectDescription}
                     onChange={(e) => setProjectDescription(e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 focus:border-[#02AA69] rounded-xl px-4 py-3 text-white text-sm outline-none resize-none"
+                    className="w-full bg-white/5 border border-white/10 focus:border-[#02AA69] rounded-xl px-3.5 py-2.5 sm:px-4 sm:py-3 text-white text-xs sm:text-sm outline-none resize-none placeholder:text-gray-500 leading-relaxed"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1.5">
-                    Figma / PRD / Notion Specification Link (Optional)
+                  <label className="block text-xs font-medium text-gray-300 mb-1.5">
+                    Figma, Notion, or specification link (optional)
                   </label>
                   <input
                     type="url"
-                    placeholder="https://figma.com/file/... or Notion spec"
+                    placeholder="https://figma.com/file/... or Notion PRD"
                     value={specUrl}
                     onChange={(e) => setSpecUrl(e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 focus:border-[#02AA69] rounded-xl px-4 py-3 text-white text-sm outline-none"
+                    className="w-full bg-white/5 border border-white/10 focus:border-[#02AA69] rounded-xl px-3.5 py-2.5 sm:px-4 sm:py-3 text-white text-xs sm:text-sm outline-none placeholder:text-gray-500"
                   />
                 </div>
               </div>
@@ -360,16 +361,16 @@ export const QuoteEstimatorModal: React.FC<QuoteEstimatorModalProps> = ({
 
             {/* TAB 2: HIRE TALENT SPECIFICS */}
             {activeType === 'talent' && (
-              <div className="space-y-4 pt-2 border-t border-white/10">
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="space-y-3 sm:space-y-4 pt-2 border-t border-white/10">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1.5">
-                      Engagement Model
+                    <label className="block text-xs font-medium text-gray-300 mb-1.5">
+                      Engagement model
                     </label>
                     <select
                       value={engagementModel}
                       onChange={(e) => setEngagementModel(e.target.value)}
-                      className="w-full bg-[#161D2B] border border-white/10 focus:border-[#02AA69] rounded-xl px-3 py-3 text-white text-sm outline-none"
+                      className="w-full bg-[#161D2B] border border-white/10 focus:border-[#02AA69] rounded-xl px-3 py-2.5 sm:py-3 text-white text-xs sm:text-sm outline-none cursor-pointer"
                     >
                       <option value="embedded_talent">Embedded Senior Devs</option>
                       <option value="dedicated_pod">Autonomous Tech Pod</option>
@@ -379,13 +380,13 @@ export const QuoteEstimatorModal: React.FC<QuoteEstimatorModalProps> = ({
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1.5">
-                      Seniority Level
+                    <label className="block text-xs font-medium text-gray-300 mb-1.5">
+                      Seniority level
                     </label>
                     <select
                       value={seniority}
                       onChange={(e) => setSeniority(e.target.value)}
-                      className="w-full bg-[#161D2B] border border-white/10 focus:border-[#02AA69] rounded-xl px-3 py-3 text-white text-sm outline-none"
+                      className="w-full bg-[#161D2B] border border-white/10 focus:border-[#02AA69] rounded-xl px-3 py-2.5 sm:py-3 text-white text-xs sm:text-sm outline-none cursor-pointer"
                     >
                       <option value="senior">Senior (4–7+ yrs)</option>
                       <option value="mid">Mid-Level (2–4 yrs)</option>
@@ -395,13 +396,13 @@ export const QuoteEstimatorModal: React.FC<QuoteEstimatorModalProps> = ({
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1.5">
-                      Engagement Duration
+                    <label className="block text-xs font-medium text-gray-300 mb-1.5">
+                      Engagement duration
                     </label>
                     <select
                       value={duration}
                       onChange={(e) => setDuration(e.target.value)}
-                      className="w-full bg-[#161D2B] border border-white/10 focus:border-[#02AA69] rounded-xl px-3 py-3 text-white text-sm outline-none"
+                      className="w-full bg-[#161D2B] border border-white/10 focus:border-[#02AA69] rounded-xl px-3 py-2.5 sm:py-3 text-white text-xs sm:text-sm outline-none cursor-pointer"
                     >
                       <option value="3_months">3 Months (Sprint)</option>
                       <option value="6_months">6 Months</option>
@@ -410,23 +411,23 @@ export const QuoteEstimatorModal: React.FC<QuoteEstimatorModalProps> = ({
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1.5">
-                      Roles Needed *
+                    <label className="block text-xs font-medium text-gray-300 mb-1.5">
+                      Roles needed <span className="text-[#02AA69]">*</span>
                     </label>
                     <input
                       type="text"
                       required
-                      placeholder="e.g. 2x React Devs, 1x Python/Django, 1x UI/UX"
+                      placeholder="e.g. 2x React Devs, 1x Python/Django"
                       value={rolesNeeded}
                       onChange={(e) => setRolesNeeded(e.target.value)}
-                      className="w-full bg-white/5 border border-white/10 focus:border-[#02AA69] rounded-xl px-4 py-3 text-white text-sm outline-none"
+                      className="w-full bg-white/5 border border-white/10 focus:border-[#02AA69] rounded-xl px-3.5 py-2.5 sm:px-4 sm:py-3 text-white text-xs sm:text-sm outline-none placeholder:text-gray-500"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1.5">
+                    <label className="block text-xs font-medium text-gray-300 mb-1.5">
                       Headcount
                     </label>
                     <input
@@ -434,21 +435,21 @@ export const QuoteEstimatorModal: React.FC<QuoteEstimatorModalProps> = ({
                       placeholder="e.g. 1 Engineer, or Squad of 3"
                       value={headcount}
                       onChange={(e) => setHeadcount(e.target.value)}
-                      className="w-full bg-white/5 border border-white/10 focus:border-[#02AA69] rounded-xl px-4 py-3 text-white text-sm outline-none"
+                      className="w-full bg-white/5 border border-white/10 focus:border-[#02AA69] rounded-xl px-3.5 py-2.5 sm:px-4 sm:py-3 text-white text-xs sm:text-sm outline-none placeholder:text-gray-500"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1.5">
-                    Technical Stack & Workflow Requirements
+                  <label className="block text-xs font-medium text-gray-300 mb-1.5">
+                    Technical stack & workflow requirements
                   </label>
                   <textarea
                     rows={2}
                     placeholder="List required languages, cloud tools, timezone overlap requirements, or sprint cadences..."
                     value={technicalReqs}
                     onChange={(e) => setTechnicalReqs(e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 focus:border-[#02AA69] rounded-xl px-4 py-3 text-white text-sm outline-none resize-none"
+                    className="w-full bg-white/5 border border-white/10 focus:border-[#02AA69] rounded-xl px-3.5 py-2.5 sm:px-4 sm:py-3 text-white text-xs sm:text-sm outline-none resize-none placeholder:text-gray-500 leading-relaxed"
                   />
                 </div>
               </div>
@@ -456,16 +457,16 @@ export const QuoteEstimatorModal: React.FC<QuoteEstimatorModalProps> = ({
 
             {/* TAB 3: ACADEMY APPLICATION SPECIFICS */}
             {activeType === 'academy' && (
-              <div className="space-y-4 pt-2 border-t border-white/10">
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="space-y-3 sm:space-y-4 pt-2 border-t border-white/10">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1.5">
-                      Selected Track
+                    <label className="block text-xs font-medium text-gray-300 mb-1.5">
+                      Selected track
                     </label>
                     <select
                       value={track}
                       onChange={(e) => setTrack(e.target.value)}
-                      className="w-full bg-[#161D2B] border border-white/10 focus:border-[#02AA69] rounded-xl px-3 py-3 text-white text-sm outline-none"
+                      className="w-full bg-[#161D2B] border border-white/10 focus:border-[#02AA69] rounded-xl px-3 py-2.5 sm:py-3 text-white text-xs sm:text-sm outline-none cursor-pointer"
                     >
                       <option value="full_stack">Track 02: Full-Stack Engineering</option>
                       <option value="product_design">Track 01: Product Design & UI/UX</option>
@@ -474,13 +475,13 @@ export const QuoteEstimatorModal: React.FC<QuoteEstimatorModalProps> = ({
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1.5">
-                      Current Experience
+                    <label className="block text-xs font-medium text-gray-300 mb-1.5">
+                      Current experience
                     </label>
                     <select
                       value={experienceLevel}
                       onChange={(e) => setExperienceLevel(e.target.value)}
-                      className="w-full bg-[#161D2B] border border-white/10 focus:border-[#02AA69] rounded-xl px-3 py-3 text-white text-sm outline-none"
+                      className="w-full bg-[#161D2B] border border-white/10 focus:border-[#02AA69] rounded-xl px-3 py-2.5 sm:py-3 text-white text-xs sm:text-sm outline-none cursor-pointer"
                     >
                       <option value="intermediate">Intermediate (1–2 yrs coding)</option>
                       <option value="beginner">Beginner (Foundational)</option>
@@ -489,13 +490,13 @@ export const QuoteEstimatorModal: React.FC<QuoteEstimatorModalProps> = ({
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1.5">
-                      Learning Format
+                    <label className="block text-xs font-medium text-gray-300 mb-1.5">
+                      Learning format
                     </label>
                     <select
                       value={learningMode}
                       onChange={(e) => setLearningMode(e.target.value)}
-                      className="w-full bg-[#161D2B] border border-white/10 focus:border-[#02AA69] rounded-xl px-3 py-3 text-white text-sm outline-none"
+                      className="w-full bg-[#161D2B] border border-white/10 focus:border-[#02AA69] rounded-xl px-3 py-2.5 sm:py-3 text-white text-xs sm:text-sm outline-none cursor-pointer"
                     >
                       <option value="bootcamp">Full-Time Intensive Fellowship</option>
                       <option value="part_time">Part-Time / Evening & Weekend</option>
@@ -505,8 +506,8 @@ export const QuoteEstimatorModal: React.FC<QuoteEstimatorModalProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1.5">
-                    Motivation & Goals *
+                  <label className="block text-xs font-medium text-gray-300 mb-1.5">
+                    Motivation & goals <span className="text-[#02AA69]">*</span>
                   </label>
                   <textarea
                     required
@@ -514,7 +515,7 @@ export const QuoteEstimatorModal: React.FC<QuoteEstimatorModalProps> = ({
                     placeholder="Tell us what you want to achieve with JNAB Academy, and what kind of high-impact systems you want to build..."
                     value={motivation}
                     onChange={(e) => setMotivation(e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 focus:border-[#02AA69] rounded-xl px-4 py-3 text-white text-sm outline-none resize-none"
+                    className="w-full bg-white/5 border border-white/10 focus:border-[#02AA69] rounded-xl px-3.5 py-2.5 sm:px-4 sm:py-3 text-white text-xs sm:text-sm outline-none resize-none placeholder:text-gray-500 leading-relaxed"
                   />
                 </div>
 
@@ -538,14 +539,14 @@ export const QuoteEstimatorModal: React.FC<QuoteEstimatorModalProps> = ({
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-[#02AA69] hover:bg-[#018552] disabled:opacity-50 text-white font-bold py-4 rounded-full flex items-center justify-center gap-2 shadow-lg shadow-[#02AA69]/25 transition-all cursor-pointer"
+                className="w-full bg-[#02AA69] hover:bg-[#018552] disabled:opacity-50 text-white font-semibold py-3 sm:py-3.5 rounded-full flex items-center justify-center gap-2 shadow-lg shadow-[#02AA69]/25 transition-all cursor-pointer text-xs sm:text-sm"
               >
                 {loading ? (
-                  <span>Transmitting Brief...</span>
+                  <span>Transmitting brief...</span>
                 ) : (
                   <>
-                    <span>Submit Inquiry</span>
-                    <Send className="w-4 h-4 stroke-[2.5]" />
+                    <span>Submit inquiry</span>
+                    <Send className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5]" />
                   </>
                 )}
               </button>
