@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, CheckCircle2, Code2, Users, GraduationCap, AlertCircle, Send } from 'lucide-react';
 import { submitProductBuild, submitHireTalent, submitAcademyApplication } from '../services/api';
+import { Analytics } from '../utils/analytics';
 
 interface QuoteEstimatorModalProps {
   isOpen: boolean;
@@ -104,6 +105,10 @@ export const QuoteEstimatorModal: React.FC<QuoteEstimatorModalProps> = ({
         });
         setSuccessMessage(res.message || 'Your JNAB Academy application has been submitted.');
       }
+      Analytics.quoteSubmitted(activeType, {
+        service: initialService,
+        budget: activeType === 'project' ? budget : undefined,
+      });
       setSubmitted(true);
     } catch (err: any) {
       setError(err.message || 'Failed to submit. Please check your network or try again.');

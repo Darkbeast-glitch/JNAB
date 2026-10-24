@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { X, CheckCircle2, Upload, Send, AlertCircle } from 'lucide-react';
 import { submitJobApplication } from '../services/api';
+import { Analytics } from '../utils/analytics';
 
 interface JobApplicationModalProps {
   isOpen: boolean;
@@ -64,6 +65,7 @@ export const JobApplicationModal: React.FC<JobApplicationModalProps> = ({
       formData.append('cover_note', coverNote);
 
       await submitJobApplication(formData);
+      Analytics.careerApplicationSubmitted(roleTitle, email);
       setSubmitted(true);
     } catch (err: any) {
       setError(err.message || 'Failed to submit application. Please verify all fields.');

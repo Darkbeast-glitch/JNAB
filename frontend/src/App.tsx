@@ -14,6 +14,7 @@ import { Footer } from './components/Footer';
 import { QuoteEstimatorModal } from './components/QuoteEstimatorModal';
 import { JobApplicationModal } from './components/JobApplicationModal';
 import { ContactUsPage } from './components/ContactUsPage';
+import { Analytics } from './utils/analytics';
 
 export function App() {
   // View Router State ('home' | 'contact')
@@ -82,6 +83,7 @@ export function App() {
     setModalTab(tab);
     if (serviceName) setModalService(serviceName);
     setIsQuoteModalOpen(true);
+    Analytics.quoteModalOpened(serviceName ? `service_${serviceName}` : 'direct_cta', tab);
   };
 
   const handleSelectService = (serviceName: string) => {
@@ -99,6 +101,7 @@ export function App() {
     setSelectedRoleTitle(roleTitle);
     setSelectedRoleId(roleId || null);
     setIsJobModalOpen(true);
+    Analytics.careerModalOpened(roleTitle);
   };
 
   const scrollToAcademy = () => {

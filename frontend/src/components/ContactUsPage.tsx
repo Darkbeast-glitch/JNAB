@@ -20,6 +20,7 @@ import {
   MessageSquare
 } from 'lucide-react';
 import { submitContactInquiry, ContactInquiryPayload } from '../services/api';
+import { Analytics } from '../utils/analytics';
 
 interface ContactUsPageProps {
   onBackToHome: () => void;
@@ -90,6 +91,7 @@ export const ContactUsPage: React.FC<ContactUsPageProps> = ({ onBackToHome, onRe
       };
 
       await submitContactInquiry(payload);
+      Analytics.contactFormSubmitted(selectedType.id);
       setIsSubmitted(true);
     } catch (err: any) {
       setErrorMessage(err.message || 'Something went wrong while sending your inquiry. Please try again or email us directly.');
