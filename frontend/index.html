@@ -583,13 +583,17 @@
   #start .start__window { position: relative; overflow: hidden; height: min(86vh, 50rem); min-height: 34rem; background: var(--color-8); clip-path: inset(0% 0% 0% 0% round var(--radius-2)); }
   #start .start__window img { width: 100%; height: 100%; object-fit: cover; object-position: 62% 30%; }
   #start .start__window::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, color-mix(in srgb, var(--color-1) 72%, transparent), color-mix(in srgb, var(--color-1) 20%, transparent) 55%, transparent 75%); }
-  #start .start__copy { position: relative; z-index: 2; align-self: end; display: grid; gap: 1.5rem; justify-items: start; max-width: 34rem; padding: clamp(1.75rem, 4.5vw, 4rem); }
-  #start .start__copy .m-text-4 { max-width: 26rem; }
+  #start .start__copy { position: relative; z-index: 2; align-self: end; display: grid; gap: 1.5rem; justify-items: start; max-width: 38rem; padding: clamp(1.75rem, 4.5vw, 4rem); }
+  #start .start__copy #start-title { hyphens: none; -webkit-hyphens: none; word-break: normal; }
+  #start .start__copy .m-text-4 { max-width: 28rem; }
   #start .start__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.75rem; }
+  #start .start__actions .m-link { display: inline-flex; align-items: center; min-height: 3.25rem; font-size: 1rem; }
   @media (max-width: 47.99rem) {
     #start .start__window { height: min(88vh, 42rem); }
     #start .start__window img { object-position: 68% 30%; }
     #start .start__window::after { background: linear-gradient(0deg, color-mix(in srgb, var(--color-1) 85%, transparent), color-mix(in srgb, var(--color-1) 30%, transparent) 60%, transparent); }
+    #start .start__actions { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+    #start .start__actions .m-link { min-height: auto; }
   }
 }
 </style>
@@ -762,7 +766,7 @@
 <!-- hero: first screen: headline over a full-bleed photo, lead, proof line, button; caption chips ride curved lines across the photo (animation: scene:hero) -->
 <section class="hero on-dark" id="hero" data-8b-section="hero" aria-labelledby="hero-title">
   <div class="hero__media">
-    <img srcset="https://images.unsplash.com/photo-1719492172750-4ca0809345b8?ixid=M3w0Mzc5fDB8MXxzZWFyY2h8Mnx8cGVyc29uJTIwcmVhZGluZyUyMG1lc3NhZ2UlMjBvbiUyMHBob25lJTIwc21pbGluZyUyMHNreXxlbnwxfDB8fHwxNzkxMjA5NTExfDA&amp;ixlib=rb-4.1.0&amp;auto=format&amp;fit=crop&amp;w=400&amp;q=80 400w, https://images.unsplash.com/photo-1719492172750-4ca0809345b8?ixid=M3w0Mzc5fDB8MXxzZWFyY2h8Mnx8cGVyc29uJTIwcmVhZGluZyUyMG1lc3NhZ2UlMjBvbiUyMHBob25lJTIwc21pbGluZyUyMHNreXxlbnwxfDB8fHwxNzkxMjA5NTExfDA&amp;ixlib=rb-4.1.0&amp;auto=format&amp;fit=crop&amp;w=640&amp;q=80 640w, https://images.unsplash.com/photo-1719492172750-4ca0809345b8?ixid=M3w0Mzc5fDB8MXxzZWFyY2h8Mnx8cGVyc29uJTIwcmVhZGluZyUyMG1lc3NhZ2UlMjBvbiUyMHBob25lJTIwc21pbGluZyUyMHNreXxlbnwxfDB8fHwxNzkxMjA5NTExfDA&amp;ixlib=rb-4.1.0&amp;auto=format&amp;fit=crop&amp;w=960&amp;q=80 960w, https://images.unsplash.com/photo-1719492172750-4ca0809345b8?ixid=M3w0Mzc5fDB8MXxzZWFyY2h8Mnx8cGVyc29uJTIwcmVhZGluZyUyMG1lc3NhZ2UlMjBvbiUyMHBob25lJTIwc21pbGluZyUyMHNreXxlbnwxfDB8fHwxNzkxMjA5NTExfDA&amp;ixlib=rb-4.1.0&amp;auto=format&amp;fit=crop&amp;w=1160&amp;q=80 1160w, https://images.unsplash.com/photo-1719492172750-4ca0809345b8?ixid=M3w0Mzc5fDB8MXxzZWFyY2h8Mnx8cGVyc29uJTIwcmVhZGluZyUyMG1lc3NhZ2UlMjBvbiUyMHBob25lJTIwc21pbGluZyUyMHNreXxlbnwxfDB8fHwxNzkxMjA5NTExfDA&amp;ixlib=rb-4.1.0&amp;auto=format&amp;fit=crop&amp;w=1280&amp;q=80 1280w, https://images.unsplash.com/photo-1719492172750-4ca0809345b8?ixid=M3w0Mzc5fDB8MXxzZWFyY2h8Mnx8cGVyc29uJTIwcmVhZGluZyUyMG1lc3NhZ2UlMjBvbiUyMHBob25lJTIwc21pbGluZyUyMHNreXxlbnwxfDB8fHwxNzkxMjA5NTExfDA&amp;ixlib=rb-4.1.0&amp;auto=format&amp;fit=crop&amp;w=1600&amp;q=80 1600w" sizes="(max-width: 767px) 167vw, 90vw" style="background:#59c0f3 url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wCEAAYHBwkLCQwNDQwQERAREBgWFBQWGCMZGxkbGSM1ISchISchNS85LysvOS9UQjs7QlRhUk5SYXZpaXaUjZTBwf8BBgcHCQsJDA0NDBAREBEQGBYUFBYYIxkbGRsZIzUhJyEhJyE1LzkvKy85L1RCOztCVGFSTlJhdmlpdpSNlMHB///AABEIABgAIAMBIgACEQEDEQH/xABuAAACAwEBAAAAAAAAAAAAAAAABwMFBgIEEAACAgEEAQMFAAAAAAAAAAABAgMEAAUREiEGMUFhEyI0cZEBAQADAAAAAAAAAAAAAAAAAAUEBgcRAQACAgMBAQEAAAAAAAAAAAECEQADBAUSIROB/9oADAMBAAIRAxEAPwDsU/jI3pgAkjNgaoVSzdADcnINOlr24/q125BXK+mxDKfcHLu7w+CXXwzNZcZfqPmwXFDY1utBYMViKSH7SQWGXwrB0V12KsNwRlD59BIk6SSIFdy4D77s/wAnNh4lXSXRKrD147Nu3LsdYX1XY79jKO0LMZ7rqONpjCehaf6VWM9NV0oj8qL+4l7PkUWlX78dNkZ5Q7ks3Q9k2wwwrksrhL02ONcLy/pFiIhni0XWI7NK3DdnSWWRzxMhBPQxYWb70b7PTmCEN0Yz1+jhhkKJTKQtqLiN2kEPMRAz/9k=) 50% 28% / cover no-repeat" src="https://images.unsplash.com/photo-1719492172750-4ca0809345b8?ixid=M3w0Mzc5fDB8MXxzZWFyY2h8Mnx8cGVyc29uJTIwcmVhZGluZyUyMG1lc3NhZ2UlMjBvbiUyMHBob25lJTIwc21pbGluZyUyMHNreXxlbnwxfDB8fHwxNzkxMjA5NTExfDA&amp;ixlib=rb-4.1.0&amp;auto=format&amp;fit=crop&amp;w=1600&amp;q=80" width="1600" height="1200" alt="A woman smiles as she reads a message on her phone under a clear blue sky" fetchpriority="high" decoding="async">
+    <img srcset="https://images.unsplash.com/photo-1719492172750-4ca0809345b8?auto=format&amp;fit=crop&amp;w=400&amp;q=80 400w, https://images.unsplash.com/photo-1719492172750-4ca0809345b8?auto=format&amp;fit=crop&amp;w=640&amp;q=80 640w, https://images.unsplash.com/photo-1719492172750-4ca0809345b8?auto=format&amp;fit=crop&amp;w=960&amp;q=80 960w, https://images.unsplash.com/photo-1719492172750-4ca0809345b8?auto=format&amp;fit=crop&amp;w=1160&amp;q=80 1160w, https://images.unsplash.com/photo-1719492172750-4ca0809345b8?auto=format&amp;fit=crop&amp;w=1280&amp;q=80 1280w, https://images.unsplash.com/photo-1719492172750-4ca0809345b8?auto=format&amp;fit=crop&amp;w=1600&amp;q=80 1600w" sizes="(max-width: 767px) 167vw, 90vw" style="background:#59c0f3 50% 28% / cover no-repeat" src="https://images.unsplash.com/photo-1719492172750-4ca0809345b8?auto=format&amp;fit=crop&amp;w=1600&amp;q=80" width="1600" height="1200" alt="A young Black woman smiles as she reads a message on her phone under a clear blue sky" fetchpriority="high" decoding="async">
   </div>
   <div class="hero__shade" aria-hidden="true"></div>
   <div class="hero__talk" aria-hidden="true">
@@ -780,7 +784,7 @@
   </div>
   <div class="hero__copy l-wrap">
     <div class="hero__intro">
-      <h1 class="m-text-2 hero__title" id="hero-title">Architecting <span style="white-space: nowrap;">High-Performance</span> Products Powered by <span style="color:var(--color-4)">Next-Gen African Talent.</span></h1>
+      <h1 class="m-text-2 hero__title" id="hero-title">Architecting <span style="white-space: nowrap;">High-Performance</span> Products Powered by <span style="color:var(--color-4)">Next Gen African Talent.</span></h1>
       <div class="hero__lower">
         <p class="m-text-4 hero__lead">We craft intuitive interfaces, engineer resilient software, and cultivate world-class tech talent for ambitious global teams from Accra to the world.</p>
         <ul class="hero__proof m-text-6">
@@ -802,7 +806,7 @@
   <div class="listen__sheet m-band" aria-hidden="true"></div>
   <div class="listen__head l-wrap">
     <h2 class="m-text-3 listen__title" id="listen-title">Nothing lost between product vision and deployed code.</h2>
-    <p class="m-text-4 listen__lead" data-8b-motion="readAlong">No disconnect between engineering and design. JNAB bridges high-craft product design with resilient backend systems, delivering scalable software on time and within budget.</p>
+    <p class="m-text-4 listen__lead" data-8b-motion="readAlong">No disconnect between engineering and design. JNAB bridges high craft product design with resilient backend systems, delivering scalable software on time and within budget.</p>
   </div>
   <div class="listen__hold">
     <div class="listen__stage l-wrap">
@@ -925,7 +929,7 @@
           <figcaption class="rooms__label m-text-6">Product Design Track</figcaption>
           <div class="rooms__talk">
             <p class="m-caption"><span class="m-caption__wave" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="m-caption__text">User flows &amp; wireframes in Figma?</span></p>
-            <p class="m-caption-2"><span class="m-caption__wave" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="m-caption__text">Validated — design system ready.</span></p>
+            <p class="m-caption-2"><span class="m-caption__wave" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="m-caption__text">Validated - design system ready.</span></p>
           </div>
         </figure>
         <figure class="rooms__place">
@@ -933,7 +937,7 @@
           <figcaption class="rooms__label m-text-6">Software Engineering Track</figcaption>
           <div class="rooms__talk">
             <p class="m-caption"><span class="m-caption__wave" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="m-caption__text">All unit &amp; integration tests passing?</span></p>
-            <p class="m-caption-2"><span class="m-caption__wave" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="m-caption__text">100% green — PR merged to staging.</span></p>
+            <p class="m-caption-2"><span class="m-caption__wave" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="m-caption__text">100% green - PR merged to staging.</span></p>
           </div>
         </figure>
         <figure class="rooms__place">
@@ -1058,10 +1062,10 @@
   <div class="start__sheet m-band-4" aria-hidden="true"></div>
   <div class="start__inner l-wrap">
     <div class="start__window">
-      <img srcset="https://images.unsplash.com/photo-1726047336347-77803fc5f725?ixid=M3w0Mzc5fDB8MXxzZWFyY2h8MXx8d29tYW4lMjBzbWlsaW5nJTIwYXQlMjBwaG9uZSUyMGdyZWVuJTIwbGVhdmVzJTIwYmFja2dyb3VuZHxlbnwxfDB8fHwxNzkxMjA5Njc3fDA&amp;ixlib=rb-4.1.0&amp;auto=format&amp;fit=crop&amp;w=400&amp;q=80 400w, https://images.unsplash.com/photo-1726047336347-77803fc5f725?ixid=M3w0Mzc5fDB8MXxzZWFyY2h8MXx8d29tYW4lMjBzbWlsaW5nJTIwYXQlMjBwaG9uZSUyMGdyZWVuJTIwbGVhdmVzJTIwYmFja2dyb3VuZHxlbnwxfDB8fHwxNzkxMjA5Njc3fDA&amp;ixlib=rb-4.1.0&amp;auto=format&amp;fit=crop&amp;w=640&amp;q=80 640w, https://images.unsplash.com/photo-1726047336347-77803fc5f725?ixid=M3w0Mzc5fDB8MXxzZWFyY2h8MXx8d29tYW4lMjBzbWlsaW5nJTIwYXQlMjBwaG9uZSUyMGdyZWVuJTIwbGVhdmVzJTIwYmFja2dyb3VuZHxlbnwxfDB8fHwxNzkxMjA5Njc3fDA&amp;ixlib=rb-4.1.0&amp;auto=format&amp;fit=crop&amp;w=1010&amp;q=80 1010w, https://images.unsplash.com/photo-1726047336347-77803fc5f725?ixid=M3w0Mzc5fDB8MXxzZWFyY2h8MXx8d29tYW4lMjBzbWlsaW5nJTIwYXQlMjBwaG9uZSUyMGdyZWVuJTIwbGVhdmVzJTIwYmFja2dyb3VuZHxlbnwxfDB8fHwxNzkxMjA5Njc3fDA&amp;ixlib=rb-4.1.0&amp;auto=format&amp;fit=crop&amp;w=1180&amp;q=80 1180w, https://images.unsplash.com/photo-1726047336347-77803fc5f725?ixid=M3w0Mzc5fDB8MXxzZWFyY2h8MXx8d29tYW4lMjBzbWlsaW5nJTIwYXQlMjBwaG9uZSUyMGdyZWVuJTIwbGVhdmVzJTIwYmFja2dyb3VuZHxlbnwxfDB8fHwxNzkxMjA5Njc3fDA&amp;ixlib=rb-4.1.0&amp;auto=format&amp;fit=crop&amp;w=1280&amp;q=80 1280w, https://images.unsplash.com/photo-1726047336347-77803fc5f725?ixid=M3w0Mzc5fDB8MXxzZWFyY2h8MXx8d29tYW4lMjBzbWlsaW5nJTIwYXQlMjBwaG9uZSUyMGdyZWVuJTIwbGVhdmVzJTIwYmFja2dyb3VuZHxlbnwxfDB8fHwxNzkxMjA5Njc3fDA&amp;ixlib=rb-4.1.0&amp;auto=format&amp;fit=crop&amp;w=1600&amp;q=80 1600w" sizes="(max-width: 767px) 269vw, 92vw" style="background:#26260c" src="https://images.unsplash.com/photo-1726047336347-77803fc5f725?ixid=M3w0Mzc5fDB8MXxzZWFyY2h8MXx8d29tYW4lMjBzbWlsaW5nJTIwYXQlMjBwaG9uZSUyMGdyZWVuJTIwbGVhdmVzJTIwYmFja2dyb3VuZHxlbnwxfDB8fHwxNzkxMjA5Njc3fDA&amp;ixlib=rb-4.1.0&amp;auto=format&amp;fit=crop&amp;w=1600&amp;q=80" width="1600" height="1067" alt="A young woman smiles as she talks on the phone in a leafy garden" loading="lazy" decoding="async">
+      <img srcset="https://images.unsplash.com/photo-1767396857504-99375ab21c1a?auto=format&amp;fit=crop&amp;w=400&amp;q=80 400w, https://images.unsplash.com/photo-1767396857504-99375ab21c1a?auto=format&amp;fit=crop&amp;w=640&amp;q=80 640w, https://images.unsplash.com/photo-1767396857504-99375ab21c1a?auto=format&amp;fit=crop&amp;w=1010&amp;q=80 1010w, https://images.unsplash.com/photo-1767396857504-99375ab21c1a?auto=format&amp;fit=crop&amp;w=1180&amp;q=80 1180w, https://images.unsplash.com/photo-1767396857504-99375ab21c1a?auto=format&amp;fit=crop&amp;w=1280&amp;q=80 1280w, https://images.unsplash.com/photo-1767396857504-99375ab21c1a?auto=format&amp;fit=crop&amp;w=1600&amp;q=80 1600w" sizes="(max-width: 767px) 269vw, 92vw" style="background:#26260c" src="https://images.unsplash.com/photo-1767396857504-99375ab21c1a?auto=format&amp;fit=crop&amp;w=1600&amp;q=80" width="1600" height="1067" alt="A smiling young Black woman outdoors under sunlit green trees" loading="lazy" decoding="async">
     </div>
     <div class="start__copy">
-      <h2 class="m-text-3" id="start-title">Ready to architect your next high-performance product?</h2>
+      <h2 class="m-text-3" id="start-title">Ready to<br>architect your<br>next high-<br>performance<br>product?</h2>
       <p class="m-text-4">Partner with a world-class team delivering bespoke software engineering and elite African talent.</p>
       <div class="start__actions">
         <a class="m-btn" href="#contact"><span class="m-btn__label">Request a Project Consultation</span><span class="m-btn__wave" aria-hidden="true"><i></i><i></i><i></i></span></a>
@@ -1077,11 +1081,11 @@
   <div class="contact__inner l-wrap">
     <div class="contact__info">
       <h2 class="m-text-3" id="contact-title" data-8b-motion="captionIn">Let’s build something extraordinary together.</h2>
-      <p class="m-text-4">Our solutions architecture team answers by email, phone, or video consultation — every day from 8 am to 8 pm GMT.</p>
-      <figure class="contact__photo"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&amp;fit=crop&amp;w=800&amp;q=80" width="800" height="533" alt="JNAB engineering architecture team" loading="lazy" decoding="async"></figure>
+      <p class="m-text-4">Our solutions architecture team answers by email, phone, or video consultation every day from 8 am to 8 pm GMT.</p>
+      <figure class="contact__photo"><img src="/contact-consultation.jpg" width="800" height="533" alt="JNAB solutions architecture team on a client consultation call" loading="lazy" decoding="async"></figure>
       <ul class="contact__ways">
-        <li><p class="m-text-6">Email us</p><a class="m-link m-text-5" href="mailto:hello@jnab.tech">hello@jnab.tech</a></li>
-        <li><p class="m-text-6">Phone &amp; WhatsApp</p><a class="m-link m-text-5" href="tel:+233240000000">+233 (0) 24 000 0000</a></li>
+        <li><p class="m-text-6">Email us</p><a class="m-link m-text-5" href="mailto:jnabtechsolutions@gmail.com">hello@jnab.tech</a></li>
+        <li><p class="m-text-6">Phone &amp; WhatsApp</p><a class="m-link m-text-5" href="tel:+233257517262">+233257517262</a></li>
         <li><p class="m-text-6">Headquarters</p><span class="m-text-5">Accra Innovation Quarter, Ghana</span></li>
       </ul>
     </div>
@@ -1165,7 +1169,7 @@
   <div class="footer__inner l-wrap">
     <div class="footer__top">
       <div class="footer__pitch">
-        <h2 class="m-text-5" id="footer-title">Architecting High-Performance Products · Powered by Next-Gen African Talent.</h2>
+        <h2 class="m-text-5" id="footer-title">Architecting High-Performance Products · Powered by Next Gen African Talent.</h2>
         <p class="m-text-4">Crafted with precision. Engineered for sustainable scale from Accra to the world.</p>
         <a class="m-link m-text-6" href="#hero">Back to the top</a>
       </div>
