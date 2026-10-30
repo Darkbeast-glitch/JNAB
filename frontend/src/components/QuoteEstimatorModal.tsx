@@ -272,7 +272,7 @@ export const QuoteEstimatorModal: React.FC<QuoteEstimatorModalProps> = ({
                 </label>
                 <input
                   type="text"
-                  placeholder={activeType === 'academy' ? 'Self / University / Company' : 'e.g. PayAfrik Technologies'}
+                  placeholder={activeType === 'academy' ? 'Self / University / Company' : 'e.g. Cardia, SpeakWise, or Venture Ltd'}
                   value={company}
                   onChange={(e) => setCompany(e.target.value)}
                   className="w-full bg-white/5 border border-white/10 focus:border-[#02AA69] rounded-xl px-3.5 py-2.5 sm:px-4 sm:py-3 text-white text-xs sm:text-sm outline-none transition-colors placeholder:text-gray-500"

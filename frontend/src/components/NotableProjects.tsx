@@ -6,25 +6,27 @@ export const NotableProjects: React.FC = () => {
 
   const projects = [
     {
-      id: 'payafrik',
-      title: 'PayAfrik Mobile Wallet & API',
-      category: 'Fintech & Cross-Border Payments',
-      logo: 'PA',
-      logoBg: 'bg-emerald-600',
-      description: 'Engineered a unified cross-border payment gateway and consumer mobile wallet enabling seamless fiat and mobile money transfers across 6 West African markets.',
+      id: 'linguago',
+      title: 'Linguago - Free Offline Translator',
+      category: 'Offline Translation & Language Tech',
+      logo: 'LG',
+      logoImg: '/lingo-clean.png',
+      logoBg: 'bg-[#1B254B]',
+      description: 'Engineered Linguago, a high-adoption, 100% free offline language translator designed for zero-connectivity environments. Enables seamless instant multilingual translations without requiring mobile data or internet access.',
       metrics: [
-        { label: 'Active Users', value: '1.2M+' },
-        { label: 'Monthly Volume', value: '$42M+' },
-        { label: 'Sub-second API', value: '<280ms' },
+        { label: 'Offline Availability', value: '100%' },
+        { label: 'Access Model', value: 'Free' },
+        { label: 'Translation Speed', value: '<50ms' },
       ],
-      tags: ['Product Design', 'Flutter Mobile', 'Node.js Microservices', 'PCI-DSS'],
-      image: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=800&q=80'
+      tags: ['Offline-First Engine', 'On-Device NLP', 'Mobile Engineering', 'Local Database Storage'],
+      image: 'https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=800&q=80'
     },
     {
       id: 'cardia-me',
-      title: 'Cardia — Premium NFC Digital Identity',
+      title: 'Cardia - Premium NFC Digital Identity',
       category: 'Smart Hardware & Digital Networking',
       logo: 'CA',
+      logoImg: '/cardia_logo.png',
       logoBg: 'bg-emerald-600',
       description: 'Engineered the contactless NFC-powered digital business card platform enabling professionals and African enterprises to share identity, contact credentials, and portfolios with a single tap.',
       link: 'https://www.cardia.me',
@@ -34,37 +36,24 @@ export const NotableProjects: React.FC = () => {
         { label: 'Profile Sync', value: 'Real-Time Cloud' },
       ],
       tags: ['NFC Hardware Integration', 'Dynamic QR Profiles', 'Next.js Platform', 'Cloud Contact Sync'],
-      image: 'https://images.unsplash.com/photo-1556742049-0a67c5574f73?auto=format&fit=crop&w=800&q=80'
+      image: '/cardia-mockup.png'
     },
     {
-      id: 'pulsehealth',
-      title: 'PulseHealth Telemedicine Hub',
-      category: 'Digital Health & Teleconsultation',
-      logo: 'PH',
-      logoBg: 'bg-blue-600',
-      description: 'Designed and deployed a compliant teleconsultation app, digital prescription engine, and doctor schedule dispatch system servicing clinical networks.',
+      id: 'speakwise',
+      title: 'SpeakWise - Speaker Profiles & Feedback',
+      category: 'Event Tech & Speaker Intelligence',
+      logo: 'SW',
+      logoImg: '/speakwise-clean.png',
+      logoBg: 'bg-[#0A0A0F]',
+      description: 'Architected the "GitHub for speakers" platform—enabling conference speakers to curate verified talk portfolios and collect instant anonymous audience feedback via QR codes while empowering event curators with data-backed talent discovery.',
+      link: 'https://speakwise.live',
       metrics: [
-        { label: 'Patient Consults', value: '250K+' },
-        { label: 'Avg Doctor Response', value: '4 Mins' },
-        { label: 'Satisfaction Rate', value: '4.9 / 5' },
+        { label: 'Audience Feedback', value: 'Instant QR' },
+        { label: 'Speaker Rating', value: 'Verified' },
+        { label: 'Talk Showcase', value: 'Portfolio Hub' },
       ],
-      tags: ['Health UI/UX', 'WebRTC Video', 'HIPAA Compliant', 'Mobile App'],
-      image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80'
-    },
-    {
-      id: 'talentflow',
-      title: 'TalentFlow Vetting Engine',
-      category: 'HR Tech & Skill Assessments',
-      logo: 'TF',
-      logoBg: 'bg-indigo-600',
-      description: 'Built an automated code evaluation and portfolio benchmarking platform that JNAB uses to assess, train, and place top 1% African tech engineers.',
-      metrics: [
-        { label: 'Engineers Vetted', value: '14,000+' },
-        { label: 'Assessment Time', value: '-65%' },
-        { label: 'Partner Placements', value: '450+' },
-      ],
-      tags: ['Design Systems', 'TypeScript', 'Automated Sandbox', 'PostgreSQL'],
-      image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80'
+      tags: ['Next.js Platform', 'Real-Time QR Ratings', 'Speaker Analytics', 'Event Management'],
+      image: '/speakwise-intro.png'
     }
   ];
 
@@ -123,8 +112,12 @@ export const NotableProjects: React.FC = () => {
               
               {/* Logo & Category Badge */}
               <div className="flex items-center gap-4 mb-6">
-                <div className={`w-14 h-14 rounded-2xl ${current.logoBg} text-white font-extrabold text-xl flex items-center justify-center shadow-md shrink-0`}>
-                  {current.logo}
+                <div className={`w-14 h-14 rounded-2xl ${current.logoImg ? 'bg-white p-2 border border-gray-200/80' : current.logoBg} text-white font-extrabold text-xl flex items-center justify-center shadow-md shrink-0 overflow-hidden`}>
+                  {current.logoImg ? (
+                    <img src={current.logoImg} alt={current.title} className="w-full h-full object-contain" />
+                  ) : (
+                    current.logo
+                  )}
                 </div>
                 <div className="whitespace-nowrap">
                   <span className="text-xs uppercase tracking-widest font-bold text-[#02AA69] block">
@@ -181,7 +174,7 @@ export const NotableProjects: React.FC = () => {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 text-xs font-bold text-gray-950 bg-white hover:bg-gray-50 border border-[#02AA69]/40 hover:border-[#02AA69] px-3.5 py-1 rounded-full shadow-2xs transition-all hover:text-[#02AA69]"
                   >
-                    <span>cardia.me</span>
+                    <span>{current.link.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}</span>
                     <ArrowUpRight className="w-3.5 h-3.5" />
                   </a>
                 )}

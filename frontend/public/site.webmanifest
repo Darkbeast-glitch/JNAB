@@ -1,0 +1,21 @@
+{
+  "name": "JNAB Innovations",
+  "short_name": "JNAB",
+  "description": "Product Design, Engineering & Talent Development",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#02AA69",
+  "icons": [
+    {
+      "src": "/logo-mark.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo-mark.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

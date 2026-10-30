@@ -3,7 +3,6 @@ import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { WhoWeAre } from './components/WhoWeAre';
 import { HowWeDoIt } from './components/HowWeDoIt';
-import { TrustedBrands } from './components/TrustedBrands';
 import { CoreServices } from './components/CoreServices';
 import { AcademySection } from './components/AcademySection';
 import { NotableProjects } from './components/NotableProjects';
@@ -59,6 +58,19 @@ export function App() {
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
+
+  // Sync document title and canonical link dynamically for SEO
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+    const canonicalLink = document.querySelector<HTMLLinkElement>("link[rel='canonical']");
+    if (currentView === 'contact') {
+      document.title = 'Contact Us | JNAB Innovations';
+      if (canonicalLink) canonicalLink.href = 'https://jnab.tech/contact';
+    } else {
+      document.title = 'JNAB | Product Design, Engineering & Talent Development';
+      if (canonicalLink) canonicalLink.href = 'https://jnab.tech/';
+    }
+  }, [currentView]);
 
   const handleNavigate = (view: 'home' | 'contact', targetHash?: string) => {
     setCurrentView(view);
@@ -141,9 +153,6 @@ export function App() {
 
           {/* How We Deliver */}
           <HowWeDoIt onSelectModel={(tab, model) => handleOpenQuoteModal(tab, model)} />
-
-          {/* Client Credentials & Partner Brands */}
-          <TrustedBrands />
 
           {/* Core Services (Interactive Grid with Inversion on Hover) */}
           <CoreServices onSelectService={handleSelectService} />

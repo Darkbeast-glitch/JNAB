@@ -51,12 +51,13 @@ export const Partnerships: React.FC = () => {
     },
     {
       name: 'SpeakWise',
-      category: 'Conversational AI & Audio Tech',
+      category: 'Event Tech & Speaker Intelligence',
       logo: '/speakwise-clean.png',
       logoContainerClass: 'bg-white border border-gray-200/70',
       imgClass: 'h-9 sm:h-11 w-auto object-contain',
-      description: 'Collaborative development on real-time voice architectures, intelligent conversational feedback systems, and automated communication tools.',
-      highlight: 'Speech AI'
+      description: 'Engineering the reputation and audience feedback infrastructure for speakers and conferences—enabling verifiable talk portfolios, instant QR session ratings, and merit-based talent discovery.',
+      highlight: 'GitHub for Speakers',
+      link: 'https://speakwise.live'
     }
   ];
 
