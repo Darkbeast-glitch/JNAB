@@ -1363,7 +1363,7 @@
     };
 
     // Candidate host endpoints
-    const hostCandidates = ['', 'http://localhost:8000', 'http://localhost:8001', 'http://127.0.0.1:8000', 'http://127.0.0.1:8001'];
+    const hostCandidates = ['', 'https://jnab.pythonanywhere.com', 'http://localhost:8000', 'http://localhost:8001', 'http://127.0.0.1:8000', 'http://127.0.0.1:8001'];
     let succeeded = false;
     let feedbackMsg = 'Thank you for reaching out to JNAB. Our solutions architecture team has received your quote request and will respond within 24 hours.';
 
@@ -1423,7 +1423,7 @@
       setStatus('success', `<strong>Inquiry Received!</strong> ${feedbackMsg}`);
       form.reset();
     } else {
-      setStatus('error', 'We could not reach the API server directly. Please email us at <a href="mailto:hello@jnab.tech" style="text-decoration:underline;color:inherit;font-weight:700;">hello@jnab.tech</a> or call +233 (0) 24 000 0000.');
+      setStatus('error', 'We could not reach the API server directly. Please email us at <a href="mailto:hello@jnab.tech" style="text-decoration:underline;color:inherit;font-weight:700;">hello@jnab.tech</a> or call +233 (0) 25 751 7262.');
     }
   });
 })();

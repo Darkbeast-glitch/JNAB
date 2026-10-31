@@ -4,6 +4,10 @@
   "installCommand": "echo 'skip root install'",
   "rewrites": [
     {
+      "source": "/api/(.*)",
+      "destination": "https://jnab.pythonanywhere.com/api/$1"
+    },
+    {
       "source": "/(.*)",
       "destination": "/"
     }
