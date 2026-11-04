@@ -346,6 +346,27 @@
   @media (prefers-reduced-motion: no-preference) {
     #listen.is-staged .listen__hold { height: 250vh; }
     #listen.is-staged .listen__stage { position: sticky; top: 0; display: flex; flex-direction: column; justify-content: center; height: 100vh; padding-block: 5.5rem 2rem; }
+    @media (max-width: 47.99rem) {
+      #listen.is-staged .listen__hold { height: 160vh; }
+      #listen.is-staged .listen__stage {
+        height: 100svh;
+        height: 100dvh;
+        height: 100vh;
+        padding-block: 4.5rem 1.5rem;
+        will-change: transform;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+      }
+      #listen .listen__panel,
+      #listen .listen__track,
+      #listen .listen__row {
+        will-change: transform;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+      }
+    }
   }
 }
 </style>
@@ -465,8 +486,42 @@
   }
   @media (max-width: 47.99rem) {
     #rooms .rooms__head { grid-template-columns: 1fr; }
-    #rooms .rooms__track { grid-template-columns: 1fr; }
-    #rooms .rooms__place, #rooms .rooms__place:last-child { aspect-ratio: 4 / 3.6; }
+    #rooms .rooms__hold { margin-top: 2rem; padding-bottom: var(--space-2); }
+    #rooms .rooms__stage { overflow: visible; }
+    #rooms .rooms__track {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-x: contain;
+      gap: 1rem;
+      padding-inline: var(--space-1);
+      padding-block: 0.5rem 1.25rem;
+      scrollbar-width: none;
+    }
+    #rooms .rooms__track::-webkit-scrollbar {
+      display: none;
+    }
+    #rooms .rooms__place,
+    #rooms .rooms__place:last-child {
+      flex: 0 0 82vw;
+      width: 82vw;
+      height: min(60vh, 32rem);
+      aspect-ratio: auto;
+      grid-column: auto;
+      scroll-snap-align: center;
+      scroll-snap-stop: normal;
+    }
+    #rooms .rooms__place img {
+      left: 0;
+      width: 100%;
+    }
+    #rooms .rooms__lines {
+      display: none;
+    }
   }
 }
 </style>
@@ -479,9 +534,6 @@
     #rooms.is-track .rooms__place { flex: none; width: clamp(16rem, 34vw, 30rem); height: min(66vh, 40rem); aspect-ratio: auto; }
     #rooms.is-track .rooms__place:last-child { grid-column: auto; }
     #rooms.is-track .rooms__place img { left: -8%; width: 116%; }
-    @media (max-width: 47.99rem) {
-      #rooms.is-track .rooms__place { width: 78vw; height: min(62vh, 34rem); }
-    }
   }
 }
 </style>
@@ -1493,6 +1545,7 @@
 </script>
 <script data-8b-part="page-init">
 gsap.registerPlugin(ScrollTrigger, SplitText);
+ScrollTrigger.config({ ignoreMobileResize: true });
 function refreshScroll() {
   window.measureNav?.();
   ScrollTrigger.sort();
@@ -1598,7 +1651,7 @@ queueMotion(() => {
   gsap.matchMedia().add({ wide: '(min-width: 48rem) and (prefers-reduced-motion: no-preference)', narrow: '(max-width: 47.99rem) and (prefers-reduced-motion: no-preference)' }, context => {
     const { wide } = context.conditions;
     if (adjacent('hero', 'listen')) {
-      gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { id: 'listen:entry', trigger: root, start: 'top bottom', end: 'top 20%', scrub: true, invalidateOnRefresh: true } })
+      gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { id: 'listen:entry', trigger: root, start: 'top bottom', end: 'top 20%', scrub: wide ? true : 0.5, invalidateOnRefresh: wide } })
         .add(effects.bandRise(sheet), 0)
         .fromTo(title, wide ? { y: () => innerHeight * 0.22 } : { x: () => innerWidth * 0.22 }, wide ? { y: 0 } : { x: 0 }, 0);
     }
@@ -1620,23 +1673,30 @@ queueMotion(() => {
       return clone;
     });
     const pairs = rows.map((row, index) => [row, clones[index]]);
-    gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { id: 'listen:join', trigger: hold, start: 'top bottom', end: 'top top', scrub: true, invalidateOnRefresh: true } })
+    gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { id: 'listen:join', trigger: hold, start: 'top bottom', end: 'top top', scrub: wide ? true : 0.5, invalidateOnRefresh: wide } })
       .fromTo(voice, { x: () => -innerWidth * (wide ? 0.08 : 0.07) }, { x: 0 }, 0)
       .fromTo(read, { x: () => innerWidth * (wide ? 0.08 : 0.07) }, { x: 0 }, 0);
     const setters = bars.map(bar => gsap.quickSetter(bar, 'scaleY'));
     const cross = gsap.timeline({ defaults: { ease: 'power1.inOut' }, scrollTrigger: {
-      id: 'listen', trigger: hold, start: 'top top', end: 'bottom bottom', scrub: true, invalidateOnRefresh: true,
+      id: 'listen',
+      trigger: hold,
+      start: 'top top',
+      end: 'bottom bottom',
+      scrub: wide ? true : 0.5,
+      fastScrollEnd: true,
+      invalidateOnRefresh: wide,
       onUpdate: self => {
         const progress = self.progress;
         const swell = Math.sin(Math.PI * progress);
         setters.forEach((set, index) => set(1 - swell * 0.7 * (1 - Math.abs(Math.sin(index * 0.45 + progress * 18)))));
       }
     } });
+    const mobileShift = Math.round(voice.offsetHeight);
     pairs.forEach((pair, index) => {
       const row = pair[0];
       const shift = wide
         ? () => -(row.offsetLeft - read.offsetWidth + row.offsetWidth + 32)
-        : () => voice.offsetHeight;
+        : mobileShift;
       cross.fromTo(pair, wide ? { x: shift } : { y: shift }, wide ? { x: 0, duration: 1 } : { y: 0, duration: 1 }, index * 0.8);
     });
     cross.to({}, { duration: 0.35 });
@@ -1745,25 +1805,34 @@ queueMotion(() => {
   const lines = root.querySelectorAll('.rooms__line');
   gsap.matchMedia().add({ wide: '(min-width: 48rem) and (prefers-reduced-motion: no-preference)', narrow: '(max-width: 47.99rem) and (prefers-reduced-motion: no-preference)' }, context => {
     const { wide } = context.conditions;
-    root.classList.add('is-track');
-    const travel = () => Math.max(0, track.scrollWidth - innerWidth);
-    const setTravel = () => gsap.set(root, { '--rooms-travel': `${travel()}px` });
-    setTravel();
-    ScrollTrigger.addEventListener('refreshInit', setTravel);
-    const lead = () => Math.min(0.9, (innerWidth * 0.6) / track.scrollWidth);
-    const main = gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { id: 'rooms', trigger: hold, start: 'top top', end: 'bottom bottom', scrub: true, invalidateOnRefresh: true } });
-    main.fromTo(track, { x: 0 }, { x: () => -travel(), duration: 1 }, 0)
-      .fromTo(lines, { strokeDasharray: 1, strokeDashoffset: () => 1 - lead() }, { strokeDashoffset: 0, duration: 1 }, 0);
-    places.forEach((place, index) => {
-      const image = place.querySelector('img');
-      const talk = place.querySelectorAll('.rooms__talk > *');
-      gsap.fromTo(image, { xPercent: 7 }, { xPercent: 0, ease: 'none', scrollTrigger: { id: `rooms:photo-${index}`, trigger: place, containerAnimation: main, start: 'left right', end: wide ? 'left 66%' : 'left 40%', scrub: true } });
-      gsap.fromTo(talk, { y: 36, opacity: 0 }, { y: 0, opacity: 1, ease: 'power2.out', stagger: 0.3, scrollTrigger: { id: `rooms:talk-${index}`, trigger: place, containerAnimation: main, start: wide ? 'left 100%' : 'left 100%', end: wide ? 'left 66%' : 'left 40%', scrub: true } });
-    });
-    return () => {
-      ScrollTrigger.removeEventListener('refreshInit', setTravel);
-      root.classList.remove('is-track');
-    };
+    if (wide) {
+      root.classList.add('is-track');
+      const travel = () => Math.max(0, track.scrollWidth - innerWidth);
+      const setTravel = () => gsap.set(root, { '--rooms-travel': `${travel()}px` });
+      setTravel();
+      ScrollTrigger.addEventListener('refreshInit', setTravel);
+      const lead = () => Math.min(0.9, (innerWidth * 0.6) / track.scrollWidth);
+      const main = gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { id: 'rooms', trigger: hold, start: 'top top', end: 'bottom bottom', scrub: true, invalidateOnRefresh: true } });
+      main.fromTo(track, { x: 0 }, { x: () => -travel(), duration: 1 }, 0)
+        .fromTo(lines, { strokeDasharray: 1, strokeDashoffset: () => 1 - lead() }, { strokeDashoffset: 0, duration: 1 }, 0);
+      places.forEach((place, index) => {
+        const image = place.querySelector('img');
+        const talk = place.querySelectorAll('.rooms__talk > *');
+        gsap.fromTo(image, { xPercent: 7 }, { xPercent: 0, ease: 'none', scrollTrigger: { id: `rooms:photo-${index}`, trigger: place, containerAnimation: main, start: 'left right', end: 'left 66%', scrub: true } });
+        gsap.fromTo(talk, { y: 36, opacity: 0 }, { y: 0, opacity: 1, ease: 'power2.out', stagger: 0.3, scrollTrigger: { id: `rooms:talk-${index}`, trigger: place, containerAnimation: main, start: 'left 100%', end: 'left 66%', scrub: true } });
+      });
+      return () => {
+        ScrollTrigger.removeEventListener('refreshInit', setTravel);
+        root.classList.remove('is-track');
+      };
+    } else {
+      // Mobile UX: natural vertical page scroll without pinning/hijacking.
+      // Cards are manually swipable horizontally via CSS scroll-snap.
+      places.forEach((place, index) => {
+        const talk = place.querySelectorAll('.rooms__talk > *');
+        gsap.fromTo(talk, { y: 20, opacity: 0 }, { y: 0, opacity: 1, ease: 'power2.out', stagger: 0.15, duration: 0.6, scrollTrigger: { id: `rooms:talk-m-${index}`, trigger: place, start: 'top 85%', once: true } });
+      });
+    }
   });
 }, { id: 'rooms' });
 </script>

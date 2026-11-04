@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 96" fill="none">
+  <!-- Mask to create transparent 45-degree cut through green J -->
+  <defs>
+    <mask id="jCutout">
+      <rect width="100" height="100" fill="white" />
+      <polygon points="12,48 34,26 43,35 21,57" fill="black" />
+    </mask>
+  </defs>
+
+  <!-- Geometric J Mark (Green with transparent cut) -->
+  <g transform="translate(10, 10)" mask="url(#jCutout)">
+    <!-- Top horizontal arm -->
+    <path d="M20 0H56V20H20V0Z" fill="#02AA69" />
+    <!-- Vertical right stem -->
+    <path d="M36 20H56V46H36V20Z" fill="#02AA69" />
+    <!-- Lower curved bowl of J -->
+    <path d="M56 46C56 61.5 43.5 74 28 74C17.2 74 8 68 3.5 59.2L14.8 53.6C17 58 21.8 61 28 61C36.3 61 43 54.3 43 46H56Z" fill="#02AA69" />
+  </g>
+
+  <!-- Wordmark in Solid Black for White/Light Backgrounds -->
+  <text x="82" y="50" fill="#070B11" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="42" letter-spacing="-0.02em">JNAB</text>
+  <!-- Emerald Green Accent Dot -->
+  <circle cx="206" cy="44" r="3.5" fill="#02AA69" />
+  <!-- Subtitle in Dark Slate -->
+  <text x="84" y="71" fill="#4B5563" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="12" letter-spacing="0.26em">INNOVATIONS</text>
+</svg>
