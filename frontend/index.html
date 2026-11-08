@@ -261,6 +261,7 @@
   #hero .hero__lower { display: grid; gap: 1.25rem; max-width: 24rem; }
   #hero .hero__proof { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; }
   #hero .hero__proof li { display: inline-flex; align-items: center; gap: 0.4375rem; }
+  #hero .hero__proof svg { width: 1rem; height: 1rem; flex: none; }
   #hero .hero__star { fill: var(--color-4); }
   #hero .hero__tick { fill: none; stroke: var(--color-7); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   #hero .hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.75rem; margin-top: 0.5rem; }
@@ -466,8 +467,50 @@
   #rooms .rooms__head { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 1.5rem 4rem; align-items: end; }
   #rooms .rooms__lead { max-width: 30rem; color: var(--color-9); }
   #rooms .rooms__hold { margin-top: clamp(2.5rem, 5vw, 4rem); padding-bottom: var(--space-2); }
-  #rooms .rooms__now { display: flex; align-items: center; gap: 0.5rem; width: fit-content; margin: 0 auto 1.5rem; padding: 0.4375rem 0.875rem; border-radius: var(--radius-3); background: var(--color-8); color: var(--color-9); }
+  #rooms .rooms__now { display: flex; align-items: center; gap: 0.5rem; width: fit-content; margin: 0; padding: 0.4375rem 0.875rem; border-radius: var(--radius-3); background: var(--color-8); color: var(--color-9); }
   #rooms .rooms__now i { width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--color-4); }
+  #rooms .rooms__controls { display: flex; align-items: center; justify-content: center; gap: 1rem; width: fit-content; margin: 0 auto 1.5rem; position: relative; z-index: 5; }
+  #rooms .rooms__arrows { display: inline-flex; align-items: center; gap: 0.5rem; }
+  #rooms .rooms__arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background: var(--color-8);
+    border: 0.0625rem solid color-mix(in srgb, var(--color-2) 20%, transparent);
+    color: var(--color-2);
+    cursor: pointer;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+  #rooms .rooms__arrow:hover {
+    background: var(--color-4);
+    color: var(--color-1);
+    border-color: var(--color-4);
+    transform: scale(1.08);
+  }
+  #rooms .rooms__arrow:active { transform: scale(0.94); }
+  #rooms .rooms__place { cursor: pointer; }
+  #rooms .rooms__enroll-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    margin-top: 0.375rem;
+    padding: 0.375rem 0.75rem;
+    border-radius: var(--radius-3);
+    background: var(--color-4);
+    color: var(--color-1);
+    font-size: 0.75rem;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, filter 0.2s ease;
+    box-shadow: 0 4px 10px color-mix(in srgb, var(--color-4) 30%, transparent);
+  }
+  #rooms .rooms__enroll-btn:hover { transform: translateY(-1px); filter: brightness(1.1); }
+  #rooms .rooms__enroll-btn:active { transform: translateY(0); }
+  #rooms .rooms__place:hover .rooms__enroll-btn { filter: brightness(1.15); }
   #rooms .rooms__track { position: relative; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1rem; max-width: 88rem; margin-inline: auto; padding-inline: var(--space-1); }
   #rooms .rooms__place { position: relative; overflow: hidden; aspect-ratio: 3 / 4.3; border-radius: var(--radius-2); background: var(--color-8); }
   #rooms .rooms__place img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
@@ -545,7 +588,7 @@
   #voices .voices__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 2.5rem 4rem; align-items: start; margin-top: clamp(3rem, 6vw, 5rem); }
   #voices .voices__expert { display: grid; gap: 1.75rem; }
   #voices .voices__photo { overflow: hidden; aspect-ratio: 4 / 4.6; border-radius: var(--radius-2); background: var(--color-3); }
-  #voices .voices__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 60% 30%; }
+  #voices .voices__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; }
   #voices .voices__quote { font-size: clamp(1.375rem, 2vw, 1.75rem); line-height: 1.3; }
   #voices .voices__who { display: flex; align-items: center; gap: 0.75rem; }
   #voices .voices__who span { color: var(--color-5); font-weight: 400; }
@@ -679,6 +722,39 @@
   #contact .contact__status.is-success { background: #ecfdf5; border: 0.0625rem solid #10b981; color: #065f46; }
   #contact .contact__status.is-error { background: #fef2f2; border: 0.0625rem solid #ef4444; color: #991b1b; }
   #contact .contact__status.is-loading { background: #f8fafc; border: 0.0625rem solid #cbd5e1; color: #334155; }
+  .contact__track-notice {
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    padding: 0.5rem 0.875rem;
+    border-radius: var(--radius-4);
+    background: color-mix(in srgb, var(--color-4) 15%, transparent);
+    border: 0.0625rem solid var(--color-4);
+    color: var(--color-2);
+    font-size: 0.8125rem;
+  }
+  .contact__track-badge {
+    background: var(--color-4);
+    color: var(--color-1);
+    padding: 0.1875rem 0.5rem;
+    border-radius: var(--radius-3);
+    font-weight: 700;
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .contact__track-clear {
+    margin-left: auto;
+    background: none;
+    border: none;
+    color: var(--color-9);
+    cursor: pointer;
+    font-size: 1.125rem;
+    line-height: 1;
+    padding: 0 0.25rem;
+  }
+  .contact__track-clear:hover { color: var(--color-2); }
   @media (max-width: 63.99rem) {
     #contact .contact__inner { grid-template-columns: 1fr; }
   }
@@ -841,9 +917,9 @@
       <div class="hero__lower">
         <p class="m-text-4 hero__lead">We craft intuitive interfaces, engineer resilient software, and cultivate world-class tech talent for ambitious global teams from Accra to the world.</p>
         <ul class="hero__proof m-text-6">
-          <li><svg viewBox="0 0 16 16" aria-hidden="true"><path class="hero__star" d="M8 1.2l2 4.3 4.7.5-3.5 3.2 1 4.6L8 11.4l-4.2 2.4 1-4.6L1.3 6l4.7-.5z"/></svg>15+ Verified Production Builds</li>
-          <li><svg viewBox="0 0 16 16" aria-hidden="true"><path class="hero__tick" d="M3 8.5l3 3 7-7"/></svg>Top 1% Vetted Engineers</li>
-          <li><svg viewBox="0 0 16 16" aria-hidden="true"><path class="hero__tick" d="M3 8.5l3 3 7-7"/></svg>99.98% System Reliability SLA</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path class="hero__star" d="M8 1.2l2 4.3 4.7.5-3.5 3.2 1 4.6L8 11.4l-4.2 2.4 1-4.6L1.3 6l4.7-.5z"/></svg>15+ Verified Production Builds</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path class="hero__tick" d="M3 8.5l3 3 7-7"/></svg>Top 1% Vetted Engineers</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path class="hero__tick" d="M3 8.5l3 3 7-7"/></svg>99.98% System Reliability SLA</li>
         </ul>
         <div class="hero__actions">
           <a class="m-btn" href="#contact"><span class="m-btn__label">Request a Quote</span><span class="m-btn__wave" aria-hidden="true"><i></i><i></i><i></i></span></a>
@@ -971,50 +1047,80 @@
   </div>
   <div class="rooms__hold">
     <div class="rooms__stage">
-      <p class="rooms__now m-text-6"><i aria-hidden="true"></i>JNAB Academy · 5 Specialized Tracks</p>
+      <div class="rooms__controls">
+        <p class="rooms__now m-text-6"><i aria-hidden="true"></i>JNAB Academy · 5 Specialized Tracks</p>
+        <div class="rooms__arrows" aria-label="Academy carousel navigation">
+          <button class="rooms__arrow rooms__arrow--prev" type="button" aria-label="Previous track" title="Previous Track">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="rooms__arrow rooms__arrow--next" type="button" aria-label="Next track" title="Next Track">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+      </div>
       <div class="rooms__track">
         <svg class="rooms__lines" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true">
           <path class="rooms__line rooms__line--a" pathLength="1" d="M0 60C40 10 80 10 120 50S200 95 240 55 320 5 360 45 440 95 480 55 560 5 600 45 680 95 720 55 800 5 840 45 920 95 1000 50"/>
           <path class="rooms__line rooms__line--b" pathLength="1" d="M0 40C40 90 80 90 120 50S200 5 240 45 320 95 360 55 440 5 480 45 560 95 600 55 680 5 720 45 800 95 840 55 920 5 1000 50"/>
         </svg>
-        <figure class="rooms__place">
+        <figure class="rooms__place" data-track-name="Product Design Track">
           <img srcset="https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&amp;fit=crop&amp;w=400&amp;q=80 400w, https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&amp;fit=crop&amp;w=640&amp;q=80 640w, https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&amp;fit=crop&amp;w=800&amp;q=80 800w, https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&amp;fit=crop&amp;w=1200&amp;q=80 1200w" sizes="(max-width: 767px) 90vw, 20vw" style="background:#1a1c23" src="https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&amp;fit=crop&amp;w=800&amp;q=80" width="800" height="1200" alt="Product designer architecting user flows and Figma design systems" loading="lazy" decoding="async">
           <figcaption class="rooms__label m-text-6">Product Design Track</figcaption>
           <div class="rooms__talk">
             <p class="m-caption"><span class="m-caption__wave" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="m-caption__text">User flows &amp; wireframes in Figma?</span></p>
             <p class="m-caption-2"><span class="m-caption__wave" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="m-caption__text">Validated - design system ready.</span></p>
+            <button class="rooms__enroll-btn" type="button" data-track-apply="Product Design Track">
+              <span>Apply for Track</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
           </div>
         </figure>
-        <figure class="rooms__place">
+        <figure class="rooms__place" data-track-name="Software Engineering Track">
           <img srcset="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&amp;fit=crop&amp;w=400&amp;q=80 400w, https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&amp;fit=crop&amp;w=640&amp;q=80 640w, https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&amp;fit=crop&amp;w=800&amp;q=80 800w, https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&amp;fit=crop&amp;w=1200&amp;q=80 1200w" sizes="(max-width: 767px) 90vw, 20vw" style="background:#0d1117" src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&amp;fit=crop&amp;w=800&amp;q=80" width="800" height="1200" alt="Software engineer writing clean full-stack code in dark mode IDE" loading="lazy" decoding="async">
           <figcaption class="rooms__label m-text-6">Software Engineering Track</figcaption>
           <div class="rooms__talk">
             <p class="m-caption"><span class="m-caption__wave" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="m-caption__text">All unit &amp; integration tests passing?</span></p>
             <p class="m-caption-2"><span class="m-caption__wave" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="m-caption__text">100% green - PR merged to staging.</span></p>
+            <button class="rooms__enroll-btn" type="button" data-track-apply="Software Engineering Track">
+              <span>Apply for Track</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
           </div>
         </figure>
-        <figure class="rooms__place">
+        <figure class="rooms__place" data-track-name="Mobile App Track">
           <img srcset="https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&amp;fit=crop&amp;w=400&amp;q=80 400w, https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&amp;fit=crop&amp;w=640&amp;q=80 640w, https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&amp;fit=crop&amp;w=800&amp;q=80 800w, https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&amp;fit=crop&amp;w=1200&amp;q=80 1200w" sizes="(max-width: 767px) 90vw, 20vw" style="background:#1e293b" src="https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&amp;fit=crop&amp;w=800&amp;q=80" width="800" height="1200" alt="Mobile application interface tested on smartphone with Flutter" loading="lazy" decoding="async">
           <figcaption class="rooms__label m-text-6">Mobile App Track</figcaption>
           <div class="rooms__talk">
             <p class="m-caption"><span class="m-caption__wave" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="m-caption__text">Native performance on iOS &amp; Android?</span></p>
             <p class="m-caption-2"><span class="m-caption__wave" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="m-caption__text">60 FPS butter-smooth on both!</span></p>
+            <button class="rooms__enroll-btn" type="button" data-track-apply="Mobile App Track">
+              <span>Apply for Track</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
           </div>
         </figure>
-        <figure class="rooms__place">
+        <figure class="rooms__place" data-track-name="Cloud &amp; DevOps Track">
           <img srcset="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&amp;fit=crop&amp;w=400&amp;q=80 400w, https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&amp;fit=crop&amp;w=640&amp;q=80 640w, https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&amp;fit=crop&amp;w=800&amp;q=80 800w, https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&amp;fit=crop&amp;w=1200&amp;q=80 1200w" sizes="(max-width: 767px) 90vw, 20vw" style="background:#0b132b" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&amp;fit=crop&amp;w=800&amp;q=80" width="800" height="1200" alt="Cloud infrastructure, Kubernetes clusters and server racks" loading="lazy" decoding="async">
           <figcaption class="rooms__label m-text-6">Cloud &amp; DevOps Track</figcaption>
           <div class="rooms__talk">
             <p class="m-caption"><span class="m-caption__wave" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="m-caption__text">Automated CI/CD pipeline deployed?</span></p>
             <p class="m-caption-2"><span class="m-caption__wave" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="m-caption__text">Containers live with zero downtime.</span></p>
+            <button class="rooms__enroll-btn" type="button" data-track-apply="Cloud &amp; DevOps Track">
+              <span>Apply for Track</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
           </div>
         </figure>
-        <figure class="rooms__place">
+        <figure class="rooms__place" data-track-name="Corporate Upskilling">
           <img srcset="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&amp;fit=crop&amp;w=400&amp;q=80 400w, https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&amp;fit=crop&amp;w=640&amp;q=80 640w, https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&amp;fit=crop&amp;w=800&amp;q=80 800w, https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&amp;fit=crop&amp;w=1200&amp;q=80 1200w" sizes="(max-width: 767px) 90vw, 20vw" style="background:#1e1e24" src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&amp;fit=crop&amp;w=800&amp;q=80" width="800" height="1200" alt="Engineers engaging in interactive tech mentorship and pair programming" loading="lazy" decoding="async">
           <figcaption class="rooms__label m-text-6">Corporate Upskilling</figcaption>
           <div class="rooms__talk">
             <p class="m-caption"><span class="m-caption__wave" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="m-caption__text">Ready for today’s architecture sprint?</span></p>
             <p class="m-caption-2"><span class="m-caption__wave" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="m-caption__text">Pair programming session is live!</span></p>
+            <button class="rooms__enroll-btn" type="button" data-track-apply="Corporate Upskilling">
+              <span>Apply for Track</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
           </div>
         </figure>
       </div>
@@ -1029,7 +1135,7 @@
     <h2 class="m-text-3 voices__title" id="voices-title" data-8b-motion="captionIn">Proven impact with leading startups &amp; scale-ups.</h2>
     <div class="voices__grid">
       <figure class="voices__expert">
-        <div class="voices__photo"><img srcset="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&amp;fit=crop&amp;w=400&amp;q=80 400w, https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&amp;fit=crop&amp;w=800&amp;q=80 800w, https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&amp;fit=crop&amp;w=1200&amp;q=80 1200w" sizes="(max-width: 767px) 95vw, 51vw" style="background:#1e293b" src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&amp;fit=crop&amp;w=800&amp;q=80" width="800" height="645" alt="Technology executive and CTO partner" loading="lazy" decoding="async"></div>
+        <div class="voices__photo"><img style="background:#1e293b" src="/juliana.jpg" width="800" height="1200" alt="Technology executive and CTO partner" loading="lazy" decoding="async"></div>
         <blockquote class="voices__quote m-text-4" data-8b-motion="readAlong"><p>“JNAB architected and scaled our core product infrastructure from day one. Their engineers operate with an owner mindset, delivering resilient code on aggressive timelines.”</p></blockquote>
         <figcaption class="voices__who m-text-6"><span class="voices__badge" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span><p>Chief Technology Officer<br><span>Fintech Scale-Up Partner</span></p></figcaption>
       </figure>
@@ -1543,6 +1649,91 @@
   });
 })();
 </script>
+
+<script data-8b-part="section-script:rooms-nav">
+(() => {
+  const root = document.getElementById('rooms');
+  if (!root) return;
+  const track = root.querySelector('.rooms__track');
+  const prevBtn = root.querySelector('.rooms__arrow--prev');
+  const nextBtn = root.querySelector('.rooms__arrow--next');
+
+  // Arrow navigation for carousel
+  if (track && prevBtn && nextBtn) {
+    const getScrollAmount = () => {
+      const card = track.querySelector('.rooms__place');
+      return card ? card.offsetWidth + 20 : 340;
+    };
+    prevBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      track.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+    });
+    nextBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      track.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+    });
+  }
+
+  // Handle selecting any Academy track -> pre-fill and scroll to contact form
+  const applyTrack = (trackName) => {
+    const serviceSelect = document.getElementById('contact-service');
+    const messageField = document.getElementById('contact-message');
+    const contactSection = document.getElementById('contact');
+    
+    if (serviceSelect) {
+      serviceSelect.value = 'academy';
+    }
+    if (messageField) {
+      messageField.value = `Hi JNAB Admissions Team,\n\nI would like to apply / enroll in the JNAB Academy: ${trackName}.\n\nPlease share the upcoming cohort schedule, admissions evaluation process, and curriculum details.\n\nMy technical background and goals:\n`;
+    }
+    
+    // Track notice badge above contact form
+    let notice = document.getElementById('contact-academy-notice');
+    if (!notice) {
+      notice = document.createElement('div');
+      notice.id = 'contact-academy-notice';
+      notice.className = 'contact__track-notice';
+      const formHead = document.querySelector('.contact__form-head');
+      if (formHead) formHead.appendChild(notice);
+    }
+    notice.innerHTML = `<span class="contact__track-badge">Academy Track Selected</span> <span>${trackName}</span> <button type="button" class="contact__track-clear" title="Clear track" id="clear-track-btn">&times;</button>`;
+    notice.style.display = 'flex';
+
+    document.getElementById('clear-track-btn')?.addEventListener('click', () => {
+      notice.style.display = 'none';
+      if (serviceSelect) serviceSelect.value = 'full_cycle';
+      if (messageField) messageField.value = '';
+    });
+
+    if (window.lenis) {
+      window.lenis.scrollTo('#contact', { offset: -40, duration: 1.1 });
+    } else {
+      contactSection?.scrollIntoView({ behavior: 'smooth' });
+    }
+    setTimeout(() => {
+      document.getElementById('contact-name')?.focus();
+    }, 700);
+  };
+
+  root.querySelectorAll('[data-track-apply]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const trackName = btn.getAttribute('data-track-apply');
+      applyTrack(trackName);
+    });
+  });
+
+  root.querySelectorAll('.rooms__place').forEach(place => {
+    place.addEventListener('click', (e) => {
+      if (e.target.closest('button')) return;
+      const trackName = place.getAttribute('data-track-name') || place.querySelector('.rooms__label')?.textContent?.trim();
+      if (trackName) applyTrack(trackName);
+    });
+  });
+})();
+</script>
+
 <script data-8b-part="page-init">
 gsap.registerPlugin(ScrollTrigger, SplitText);
 ScrollTrigger.config({ ignoreMobileResize: true });
