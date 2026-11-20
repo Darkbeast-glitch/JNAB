@@ -22,6 +22,7 @@ from .emails import (
     send_product_build_notification,
     send_hire_talent_notification,
     send_academy_notification,
+    send_academy_applicant_confirmation,
     send_contact_notification,
     send_career_application_notification,
 )
@@ -175,6 +176,7 @@ class AcademyApplicationCreateView(generics.CreateAPIView):
         serializer.is_valid(raise_exception=True)
         application = serializer.save()
         send_academy_notification(application, request=request)
+        send_academy_applicant_confirmation(application)
         return Response({
             "success": True,
             "message": "Your JNAB Academy application has been submitted. Check your email for next steps regarding the technical review.",
@@ -195,6 +197,8 @@ class ContactInquiryCreateView(generics.CreateAPIView):
         serializer.is_valid(raise_exception=True)
         contact = serializer.save()
         send_contact_notification(contact, request=request)
+        if "academy" in (contact.subject or "").lower() or "academy" in (contact.message or "").lower():
+            send_academy_applicant_confirmation(contact)
         return Response({
             "success": True,
             "message": "Thank you for reaching out to JNAB. Our team will get back to you promptly.",

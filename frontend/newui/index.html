@@ -713,7 +713,7 @@
   #contact .contact__ways { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
   #contact .contact__ways li { display: grid; gap: 0.375rem; align-content: start; }
   #contact .contact__ways .m-text-6 { color: var(--color-5); }
-  #contact .contact__form { display: grid; gap: 1.25rem; padding: clamp(1.5rem, 3.5vw, 2.75rem); border-radius: var(--radius-2); background: var(--color-2); }
+  #contact .contact__form { display: grid; gap: 1.25rem; padding: clamp(1.5rem, 3.5vw, 2.75rem); border-radius: var(--radius-2); background: var(--color-2); scroll-margin-top: 5.5rem; }
   #contact .contact__form-head { display: grid; gap: 0.5rem; margin-bottom: 0.25rem; }
   #contact .contact__row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
   #contact .contact__form .m-btn-2 { justify-self: start; margin-top: 0.5rem; }
@@ -725,36 +725,45 @@
   .contact__track-notice {
     display: none;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.625rem;
     margin-top: 0.75rem;
     padding: 0.5rem 0.875rem;
     border-radius: var(--radius-4);
-    background: color-mix(in srgb, var(--color-4) 15%, transparent);
-    border: 0.0625rem solid var(--color-4);
-    color: var(--color-2);
+    background: #e6f7ef;
+    border: 0.0625rem solid #02AA69;
+    color: #064e3b;
     font-size: 0.8125rem;
+    font-weight: 600;
   }
   .contact__track-badge {
-    background: var(--color-4);
-    color: var(--color-1);
-    padding: 0.1875rem 0.5rem;
+    background: #02AA69;
+    color: #ffffff;
+    padding: 0.2rem 0.5625rem;
     border-radius: var(--radius-3);
-    font-weight: 700;
+    font-weight: 800;
     font-size: 0.6875rem;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+  }
+  .contact__track-notice span, .contact__track-notice .contact__track-name {
+    color: #064e3b !important;
+    font-weight: 700;
+    font-size: 0.875rem;
   }
   .contact__track-clear {
     margin-left: auto;
     background: none;
     border: none;
-    color: var(--color-9);
+    color: #064e3b;
+    opacity: 0.65;
     cursor: pointer;
-    font-size: 1.125rem;
+    font-size: 1.25rem;
     line-height: 1;
     padding: 0 0.25rem;
+    transition: opacity 0.2s, color 0.2s;
   }
-  .contact__track-clear:hover { color: var(--color-2); }
+  .contact__track-clear:hover { opacity: 1; color: #042f24; }
   @media (max-width: 63.99rem) {
     #contact .contact__inner { grid-template-columns: 1fr; }
   }
@@ -1247,36 +1256,36 @@
         <li><p class="m-text-6">Headquarters</p><span class="m-text-5">Accra Innovation Quarter, Ghana</span></li>
       </ul>
     </div>
-    <form class="contact__form" id="contact-form" novalidate>
+    <form class="contact__form" id="contact-form" data-lenis-prevent novalidate>
       <div class="contact__form-head">
-        <h3 class="m-text-5">Request a Quote &amp; Project Inquiry</h3>
-        <p class="m-text-7" style="color: var(--color-5);">Tell us about your project or talent requirements. Our technical leads respond with architecture recommendations and accurate cost estimates within 24 hours.</p>
+        <h3 class="m-text-5" id="contact-form-title">Request a Quote &amp; Project Inquiry</h3>
+        <p class="m-text-7" id="contact-form-desc" style="color: var(--color-5);">Tell us about your project or talent requirements. Our technical leads respond with architecture recommendations and accurate cost estimates within 24 hours.</p>
       </div>
 
       <div class="contact__row">
         <div class="m-field">
-          <label class="m-field__label" for="contact-name">Full name <span style="color:var(--color-4)">*</span></label>
+          <label class="m-field__label" for="contact-name" id="contact-name-label">Full name <span style="color:var(--color-4)">*</span></label>
           <input class="m-field__input" id="contact-name" name="name" type="text" autocomplete="name" placeholder="e.g. Alex Morgan" required>
         </div>
         <div class="m-field">
-          <label class="m-field__label" for="contact-email">Work email <span style="color:var(--color-4)">*</span></label>
+          <label class="m-field__label" for="contact-email" id="contact-email-label">Work email <span style="color:var(--color-4)">*</span></label>
           <input class="m-field__input" id="contact-email" name="email" type="email" autocomplete="email" placeholder="alex@company.com" required>
         </div>
       </div>
 
       <div class="contact__row">
         <div class="m-field">
-          <label class="m-field__label" for="contact-phone">Phone / WhatsApp</label>
+          <label class="m-field__label" for="contact-phone" id="contact-phone-label">Phone / WhatsApp</label>
           <input class="m-field__input" id="contact-phone" name="phone" type="tel" autocomplete="tel" placeholder="+233 24 000 0000 or +1 (555) 000-0000">
         </div>
         <div class="m-field">
-          <label class="m-field__label" for="contact-company">Company or Organization</label>
+          <label class="m-field__label" for="contact-company" id="contact-company-label">Company or Organization</label>
           <input class="m-field__input" id="contact-company" name="company" type="text" autocomplete="organization" placeholder="e.g. Apex Ventures">
         </div>
       </div>
 
       <div class="m-field">
-        <label class="m-field__label" for="contact-service">Inquiry / Service Type <span style="color:var(--color-4)">*</span></label>
+        <label class="m-field__label" for="contact-service" id="contact-service-label">Inquiry / Service Type <span style="color:var(--color-4)">*</span></label>
         <select class="m-field__input" id="contact-service" name="service" required>
           <option value="full_cycle" selected>Full-Cycle Product Build (Web, Mobile &amp; Cloud)</option>
           <option value="talent">Hire Dedicated Senior Tech Pod / Embedded Engineers</option>
@@ -1287,7 +1296,8 @@
         </select>
       </div>
 
-      <div class="contact__row">
+      <!-- Project Budget & Timeline (Shown for Client Inquiries) -->
+      <div class="contact__row" id="contact-project-fields">
         <div class="m-field">
           <label class="m-field__label" for="contact-budget">Estimated Budget Range</label>
           <select class="m-field__input" id="contact-budget" name="budget_range">
@@ -1309,12 +1319,51 @@
         </div>
       </div>
 
+      <!-- Academy Program, Level & Work Samples (AmaliTech Apprenticeship Model - No Pricing!) -->
+      <div id="contact-academy-fields" style="display: none;">
+        <div class="contact__row">
+          <div class="m-field">
+            <label class="m-field__label" for="contact-academy-track">Academy Program / Track <span style="color:var(--color-4)">*</span></label>
+            <select class="m-field__input" id="contact-academy-track" name="academy_track">
+              <option value="full_stack" selected>Full-Stack Software Engineering (16 Weeks)</option>
+              <option value="product_design">Product Design &amp; UI/UX Fellowship (12 Weeks)</option>
+              <option value="mobile_app">Mobile App Track (Flutter &amp; Dart)</option>
+              <option value="corporate">Corporate &amp; Team Tech Upskilling (Custom)</option>
+            </select>
+          </div>
+          <div class="m-field">
+            <label class="m-field__label" for="contact-academy-mode">Cohort Pace &amp; Mode <span style="color:var(--color-4)">*</span></label>
+            <select class="m-field__input" id="contact-academy-mode" name="academy_mode">
+              <option value="bootcamp" selected>Full-Time Intensive Fellowship Cohort</option>
+              <option value="part_time">Part-Time / Evening &amp; Weekend Track</option>
+              <option value="scholarship">Tuition Subsidy / Scholarship Requested</option>
+              <option value="corporate">Employer / Company Sponsored</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="contact__row" style="margin-top: 1rem;">
+          <div class="m-field">
+            <label class="m-field__label" for="contact-academy-exp">Current Experience Level <span style="color:var(--color-4)">*</span></label>
+            <select class="m-field__input" id="contact-academy-exp" name="academy_exp">
+              <option value="intermediate" selected>Junior Builder (1–2 yrs coding / design)</option>
+              <option value="beginner">CS Student / Foundational Self-Taught</option>
+              <option value="advanced">Mid-Level Seeking Production Rigor</option>
+            </select>
+          </div>
+          <div class="m-field">
+            <label class="m-field__label" for="contact-academy-link">GitHub, Portfolio or LinkedIn <span style="color:var(--color-4)">*</span></label>
+            <input class="m-field__input" id="contact-academy-link" name="academy_link" type="url" placeholder="https://github.com/... or Figma / LinkedIn" required>
+          </div>
+        </div>
+      </div>
+
       <div class="m-field">
-        <label class="m-field__label" for="contact-message">Tell us about your project <span style="color:var(--color-4)">*</span></label>
+        <label class="m-field__label" for="contact-message" id="contact-message-label">Tell us about your project <span style="color:var(--color-4)">*</span></label>
         <textarea class="m-field__input" id="contact-message" name="message" rows="4" placeholder="Describe your technical scope, core deliverables, user volume, or specific talent needs..." required></textarea>
       </div>
 
-      <button class="m-btn-2" type="submit" id="contact-submit-btn"><span class="m-btn__label">Request Quote &amp; Consultation</span><span class="m-btn__wave" aria-hidden="true"><i></i><i></i><i></i></span></button>
+      <button class="m-btn-2" type="submit" id="contact-submit-btn"><span class="m-btn__label" id="contact-submit-label">Request Quote &amp; Consultation</span><span class="m-btn__wave" aria-hidden="true"><i></i><i></i><i></i></span></button>
       <div class="contact__status" id="contact-status" role="status" aria-live="polite"></div>
     </form>
   </div>
@@ -1471,8 +1520,9 @@
   const emailInput = form.querySelector('#contact-email');
   const messageInput = form.querySelector('#contact-message');
 
-  // Clear validation error state when user types in any field
-  form.querySelectorAll('.m-field__input').forEach(input => {
+  // Prevent scroll jumping when mobile keyboard opens or when inputs are focused
+  form.querySelectorAll('input, select, textarea').forEach(input => {
+    // Clear validation error state when user types in any field
     input.addEventListener('input', () => {
       input.classList.remove('is-error');
       input.setCustomValidity('');
@@ -1480,7 +1530,25 @@
         clearStatus();
       }
     });
+
+    // When tapping into a field on mobile, prevent Lenis from snapping or jumping away
+    input.addEventListener('focus', () => {
+      if (window.lenis) {
+        window.lenis.scrollTo(window.scrollY, { immediate: true });
+      }
+    });
   });
+
+  // Handle mobile visualViewport resize when virtual keyboard opens/closes
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', () => {
+      if (document.activeElement && form.contains(document.activeElement)) {
+        if (window.lenis) {
+          window.lenis.scrollTo(window.scrollY, { immediate: true });
+        }
+      }
+    });
+  }
 
   form.addEventListener('submit', async event => {
     event.preventDefault();
@@ -1499,12 +1567,27 @@
     const serviceSelect = form.querySelector('#contact-service');
     const serviceValue = serviceSelect?.value || 'full_cycle';
     const serviceText = serviceSelect?.options[serviceSelect.selectedIndex]?.text || 'Full-Cycle Product Build';
+    const isAcademy = (serviceValue === 'academy');
+
     const budgetSelect = form.querySelector('#contact-budget');
     const budgetValue = budgetSelect?.value || 'tier_2';
     const budgetText = budgetSelect?.options[budgetSelect.selectedIndex]?.text || '$15,000 – $30,000';
     const timelineSelect = form.querySelector('#contact-timeline');
     const timelineValue = timelineSelect?.value || 'standard';
     const timelineText = timelineSelect?.options[timelineSelect.selectedIndex]?.text || '1 – 3 Months (Standard MVP)';
+
+    const academyTrackSelect = form.querySelector('#contact-academy-track');
+    const academyTrackVal = academyTrackSelect?.value || 'full_stack';
+    const academyTrackText = academyTrackSelect?.options[academyTrackSelect.selectedIndex]?.text || 'Full-Stack Software Engineering (16 Weeks)';
+    const academyModeSelect = form.querySelector('#contact-academy-mode');
+    const academyModeVal = academyModeSelect?.value || 'bootcamp';
+    const academyModeText = academyModeSelect?.options[academyModeSelect.selectedIndex]?.text || 'Full-Time Intensive Fellowship Cohort';
+    const academyExpSelect = form.querySelector('#contact-academy-exp');
+    const academyExpVal = academyExpSelect?.value || 'intermediate';
+    const academyExpText = academyExpSelect?.options[academyExpSelect.selectedIndex]?.text || 'Junior Builder (1–2 yrs coding / design)';
+    const academyLinkInput = form.querySelector('#contact-academy-link');
+    const academyLinkVal = academyLinkInput?.value.trim() || '';
+
     const message = messageInput?.value.trim() || '';
 
     // Targeted field validation with focus, visual error state, and tooltip
@@ -1524,10 +1607,10 @@
       if (emailInput) {
         emailInput.classList.add('is-error');
         emailInput.focus();
-        emailInput.setCustomValidity('Please fill in your work email.');
+        emailInput.setCustomValidity(isAcademy ? 'Please fill in your email address.' : 'Please fill in your work email.');
         emailInput.reportValidity();
       }
-      setStatus('error', 'Please enter your work email.');
+      setStatus('error', isAcademy ? 'Please enter your email address.' : 'Please enter your work email.');
       return;
     }
 
@@ -1535,10 +1618,21 @@
       if (emailInput) {
         emailInput.classList.add('is-error');
         emailInput.focus();
-        emailInput.setCustomValidity('Please enter a valid work email address (e.g. name@company.com).');
+        emailInput.setCustomValidity('Please enter a valid email address (e.g. name@example.com).');
         emailInput.reportValidity();
       }
-      setStatus('error', 'Please enter a valid work email address.');
+      setStatus('error', 'Please enter a valid email address.');
+      return;
+    }
+
+    if (isAcademy && !academyLinkVal) {
+      if (academyLinkInput) {
+        academyLinkInput.classList.add('is-error');
+        academyLinkInput.focus();
+        academyLinkInput.setCustomValidity('Please provide a link to your GitHub, portfolio, or LinkedIn profile.');
+        academyLinkInput.reportValidity();
+      }
+      setStatus('error', 'Please provide a link to your GitHub, portfolio, or LinkedIn so our mentors can evaluate your work.');
       return;
     }
 
@@ -1546,15 +1640,15 @@
       if (messageInput) {
         messageInput.classList.add('is-error');
         messageInput.focus();
-        messageInput.setCustomValidity('Please tell us about your project in the brief.');
+        messageInput.setCustomValidity(isAcademy ? 'Please tell us about your goals and what you want to achieve.' : 'Please tell us about your project in the brief.');
         messageInput.reportValidity();
       }
-      setStatus('error', 'Please describe your project or talent requirements in the project brief.');
+      setStatus('error', isAcademy ? 'Please share your technical or design goals in the application statement.' : 'Please describe your project or talent requirements in the project brief.');
       return;
     }
 
     // Set loading UI
-    setStatus('loading', 'Submitting your inquiry to our architecture team...');
+    setStatus('loading', isAcademy ? 'Submitting your academy application to admissions...' : 'Submitting your inquiry to our architecture team...');
     if (submitBtn) {
       submitBtn.disabled = true;
       submitBtn.style.opacity = '0.7';
@@ -1565,9 +1659,23 @@
       name: name,
       email: email,
       phone: phone,
-      subject: `[Quote Request: ${serviceText}]${company ? ' · ' + company : ''}`,
-      message: `Company: ${company || 'Independent / Not specified'}\nInquiry Type: ${serviceText}\nEstimated Budget: ${budgetText}\nTarget Timeline: ${timelineText}\n\nProject Scope & Technical Brief:\n${message}`,
-      source: 'Website Request a Quote Form'
+      subject: isAcademy ? `[JNAB Academy Application: ${academyTrackText}] · ${name}` : `[Quote Request: ${serviceText}]${company ? ' · ' + company : ''}`,
+      message: isAcademy
+        ? `Applicant: ${name}\nEmail: ${email}\nPhone: ${phone}\nSchool/Background: ${company || 'Independent / Not specified'}\nProgram: ${academyTrackText}\nExperience Level: ${academyExpText}\nPortfolio/GitHub/LinkedIn: ${academyLinkVal}\nCohort Mode: ${academyModeText}\n\nMotivation & Learning Goals:\n${message}`
+        : `Company: ${company || 'Independent / Not specified'}\nInquiry Type: ${serviceText}\nEstimated Budget: ${budgetText}\nTarget Timeline: ${timelineText}\n\nProject Scope & Technical Brief:\n${message}`,
+      source: isAcademy ? 'Website Academy Application' : 'Website Request a Quote Form'
+    };
+
+    const academyPayload = {
+      full_name: name,
+      email: email,
+      phone: phone || '+233 00 000 0000',
+      track: (['product_design', 'full_stack', 'enterprise_upskilling'].includes(academyTrackVal) ? academyTrackVal : 'full_stack'),
+      experience_level: (['beginner', 'intermediate', 'advanced'].includes(academyExpVal) ? academyExpVal : 'intermediate'),
+      learning_mode: (['bootcamp', 'part_time', 'corporate'].includes(academyModeVal) ? academyModeVal : 'bootcamp'),
+      portfolio_or_github: academyLinkVal,
+      motivation_statement: `Selected Track: ${academyTrackText}\nCohort Pace/Mode: ${academyModeText}\nExperience Level: ${academyExpText}\nPortfolio/GitHub/LinkedIn: ${academyLinkVal}\n\nApplicant Statement & Goals:\n${message}`,
+      scholarship_requested: (academyModeVal === 'scholarship')
     };
 
     const productBuildPayload = {
@@ -1585,15 +1693,20 @@
     // Candidate host endpoints
     const hostCandidates = ['', 'https://jnab.pythonanywhere.com', 'http://localhost:8000', 'http://localhost:8001', 'http://127.0.0.1:8000', 'http://127.0.0.1:8001'];
     let succeeded = false;
-    let feedbackMsg = 'Thank you for reaching out to JNAB. Our solutions architecture team has received your quote request and will respond within 24 hours.';
+    let feedbackMsg = isAcademy
+      ? 'Thank you for applying to JNAB Academy! Our admissions committee has received your application and will contact you within 48 hours for your technical assessment.'
+      : 'Thank you for reaching out to JNAB. Our solutions architecture team has received your quote request and will respond within 24 hours.';
 
-    // If Product Build is chosen with a phone number, try product-build endpoint first
-    const primaryEndpoint = (serviceValue === 'full_cycle' && phone)
-      ? '/api/inquiries/product-build/'
-      : '/api/inquiries/contact/';
-    const primaryPayload = (serviceValue === 'full_cycle' && phone)
-      ? productBuildPayload
-      : contactPayload;
+    let primaryEndpoint = '/api/inquiries/contact/';
+    let primaryPayload = contactPayload;
+
+    if (isAcademy) {
+      primaryEndpoint = '/api/inquiries/academy/';
+      primaryPayload = academyPayload;
+    } else if (serviceValue === 'full_cycle' && phone) {
+      primaryEndpoint = '/api/inquiries/product-build/';
+      primaryPayload = productBuildPayload;
+    }
 
     for (const host of hostCandidates) {
       try {
@@ -1613,7 +1726,7 @@
       }
     }
 
-    // Fallback to universal contact inquiry endpoint if primary was product-build and didn't succeed
+    // Fallback to universal contact inquiry endpoint if primary was not contact and didn't succeed
     if (!succeeded && primaryEndpoint !== '/api/inquiries/contact/') {
       for (const host of hostCandidates) {
         try {
@@ -1640,12 +1753,27 @@
     }
 
     if (succeeded) {
-      setStatus('success', `<strong>Inquiry Received!</strong> ${feedbackMsg}`);
+      setStatus('success', `<strong>${isAcademy ? 'Application Received!' : 'Inquiry Received!'}</strong> ${feedbackMsg}`);
       form.reset();
+      if (isAcademy) {
+        window.setContactFormMode?.('project');
+      }
     } else {
       setStatus('error', 'We could not reach the API server directly. Please email us at <a href="mailto:hello@jnab.tech" style="text-decoration:underline;color:inherit;font-weight:700;">hello@jnab.tech</a> or call +233 (0) 25 751 7262.');
     }
   });
+
+  // Watch for dropdown changes on Service Type
+  const serviceSelectEl = form.querySelector('#contact-service');
+  if (serviceSelectEl) {
+    serviceSelectEl.addEventListener('change', (e) => {
+      if (e.target.value === 'academy') {
+        window.setContactFormMode?.('academy');
+      } else {
+        window.setContactFormMode?.('project');
+      }
+    });
+  }
 })();
 </script>
 
@@ -1656,6 +1784,80 @@
   const track = root.querySelector('.rooms__track');
   const prevBtn = root.querySelector('.rooms__arrow--prev');
   const nextBtn = root.querySelector('.rooms__arrow--next');
+
+  // Mode switcher for Contact Form (Quote/Project vs Academy Application)
+  window.setContactFormMode = function(mode, trackName = '') {
+    const formTitle = document.getElementById('contact-form-title');
+    const formDesc = document.getElementById('contact-form-desc');
+    const projectFields = document.getElementById('contact-project-fields');
+    const academyFields = document.getElementById('contact-academy-fields');
+    const emailLabel = document.getElementById('contact-email-label');
+    const emailInput = document.getElementById('contact-email');
+    const companyLabel = document.getElementById('contact-company-label');
+    const companyInput = document.getElementById('contact-company');
+    const messageLabel = document.getElementById('contact-message-label');
+    const messageField = document.getElementById('contact-message');
+    const submitLabel = document.getElementById('contact-submit-label');
+    const serviceSelect = document.getElementById('contact-service');
+    const academyTrackSelect = document.getElementById('contact-academy-track');
+    let notice = document.getElementById('contact-academy-notice');
+
+    if (mode === 'academy') {
+      if (formTitle) formTitle.textContent = 'Apply to JNAB Academy';
+      if (formDesc) formDesc.textContent = 'Take your seat in our next intensive fellowship cohort. Our admissions mentors review applications and schedule technical interviews within 48 hours.';
+      if (projectFields) projectFields.style.display = 'none';
+      if (academyFields) academyFields.style.display = 'grid';
+      if (emailLabel) emailLabel.innerHTML = 'Email address <span style="color:var(--color-4)">*</span>';
+      if (emailInput) emailInput.placeholder = 'you@example.com';
+      if (companyLabel) companyLabel.innerHTML = 'Current School, Company or Independent';
+      if (companyInput) companyInput.placeholder = 'e.g. Student, Self-taught, or Apex Tech';
+      if (messageLabel) messageLabel.innerHTML = 'Tell us about your background & learning goals <span style="color:var(--color-4)">*</span>';
+      if (messageField) {
+        messageField.placeholder = 'Share your current technical or design experience, what you aspire to build, and why you want to join JNAB Academy...';
+      }
+      if (submitLabel) submitLabel.textContent = 'Submit Academy Application';
+      if (serviceSelect && serviceSelect.value !== 'academy') serviceSelect.value = 'academy';
+
+      if (trackName) {
+        if (academyTrackSelect) {
+          const tn = trackName.toLowerCase();
+          if (tn.includes('design') || tn.includes('ui/ux')) academyTrackSelect.value = 'product_design';
+          else if (tn.includes('mobile')) academyTrackSelect.value = 'mobile_app';
+          else if (tn.includes('corporate') || tn.includes('upskilling') || tn.includes('team')) academyTrackSelect.value = 'corporate';
+          else academyTrackSelect.value = 'full_stack';
+        }
+
+        if (!notice) {
+          notice = document.createElement('div');
+          notice.id = 'contact-academy-notice';
+          notice.className = 'contact__track-notice';
+          const formHead = document.querySelector('.contact__form-head');
+          if (formHead) formHead.appendChild(notice);
+        }
+        notice.innerHTML = `<span class="contact__track-badge">Academy Track Selected</span> <span class="contact__track-name">${trackName}</span> <button type="button" class="contact__track-clear" title="Clear track" id="clear-track-btn" aria-label="Clear track">&times;</button>`;
+        notice.style.display = 'flex';
+        document.getElementById('clear-track-btn')?.addEventListener('click', () => {
+          window.setContactFormMode('project');
+        });
+      }
+    } else {
+      if (formTitle) formTitle.textContent = 'Request a Quote & Project Inquiry';
+      if (formDesc) formDesc.textContent = 'Tell us about your project or talent requirements. Our technical leads respond with architecture recommendations and accurate cost estimates within 24 hours.';
+      if (projectFields) projectFields.style.display = 'grid';
+      if (academyFields) academyFields.style.display = 'none';
+      if (emailLabel) emailLabel.innerHTML = 'Work email <span style="color:var(--color-4)">*</span>';
+      if (emailInput) emailInput.placeholder = 'alex@company.com';
+      if (companyLabel) companyLabel.innerHTML = 'Company or Organization';
+      if (companyInput) companyInput.placeholder = 'e.g. Apex Ventures';
+      if (messageLabel) messageLabel.innerHTML = 'Tell us about your project <span style="color:var(--color-4)">*</span>';
+      if (messageField) {
+        messageField.placeholder = 'Describe your technical scope, core deliverables, user volume, or specific talent needs...';
+      }
+      if (submitLabel) submitLabel.textContent = 'Request Quote & Consultation';
+      if (serviceSelect && serviceSelect.value === 'academy') serviceSelect.value = 'full_cycle';
+      if (notice) notice.style.display = 'none';
+    }
+  };
 
   // Arrow navigation for carousel
   if (track && prevBtn && nextBtn) {
@@ -1673,45 +1875,37 @@
     });
   }
 
-  // Handle selecting any Academy track -> pre-fill and scroll to contact form
+  // Handle selecting any Academy track -> switch to Academy mode, pre-fill and scroll directly to contact form
   const applyTrack = (trackName) => {
-    const serviceSelect = document.getElementById('contact-service');
+    window.setContactFormMode?.('academy', trackName);
+
     const messageField = document.getElementById('contact-message');
-    const contactSection = document.getElementById('contact');
+    const contactForm = document.getElementById('contact-form') || document.getElementById('contact');
     
-    if (serviceSelect) {
-      serviceSelect.value = 'academy';
-    }
     if (messageField) {
       messageField.value = `Hi JNAB Admissions Team,\n\nI would like to apply / enroll in the JNAB Academy: ${trackName}.\n\nPlease share the upcoming cohort schedule, admissions evaluation process, and curriculum details.\n\nMy technical background and goals:\n`;
     }
-    
-    // Track notice badge above contact form
-    let notice = document.getElementById('contact-academy-notice');
-    if (!notice) {
-      notice = document.createElement('div');
-      notice.id = 'contact-academy-notice';
-      notice.className = 'contact__track-notice';
-      const formHead = document.querySelector('.contact__form-head');
-      if (formHead) formHead.appendChild(notice);
-    }
-    notice.innerHTML = `<span class="contact__track-badge">Academy Track Selected</span> <span>${trackName}</span> <button type="button" class="contact__track-clear" title="Clear track" id="clear-track-btn">&times;</button>`;
-    notice.style.display = 'flex';
 
-    document.getElementById('clear-track-btn')?.addEventListener('click', () => {
-      notice.style.display = 'none';
-      if (serviceSelect) serviceSelect.value = 'full_cycle';
-      if (messageField) messageField.value = '';
-    });
+    if (contactForm) {
+      const navBar = document.querySelector('#nav .nav__bar') || document.querySelector('.nav__bar');
+      const navOffset = navBar ? Math.ceil(navBar.getBoundingClientRect().height) + 16 : 76;
 
-    if (window.lenis) {
-      window.lenis.scrollTo('#contact', { offset: -40, duration: 1.1 });
-    } else {
-      contactSection?.scrollIntoView({ behavior: 'smooth' });
+      if (window.lenis) {
+        window.lenis.scrollTo(contactForm, { 
+          offset: -navOffset, 
+          duration: 0.9,
+          lock: false,
+          onComplete: () => {
+            if (window.lenis) {
+              window.lenis.scrollTo(window.scrollY, { immediate: true });
+            }
+          }
+        });
+      } else {
+        const top = contactForm.getBoundingClientRect().top + window.pageYOffset - navOffset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
     }
-    setTimeout(() => {
-      document.getElementById('contact-name')?.focus();
-    }, 700);
   };
 
   root.querySelectorAll('[data-track-apply]').forEach(btn => {
