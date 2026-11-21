@@ -1543,7 +1543,7 @@
   const emailInput = form.querySelector('#contact-email');
   const messageInput = form.querySelector('#contact-message');
 
-  // Prevent scroll jumping when mobile keyboard opens or when inputs are focused
+  // Mobile keyboard & focus handling: pause Lenis so iOS Safari's native keyboard scroll doesn't fight Lenis
   form.querySelectorAll('input, select, textarea').forEach(input => {
     // Clear validation error state when user types in any field
     input.addEventListener('input', () => {
@@ -1554,21 +1554,36 @@
       }
     });
 
-    // When tapping into a field on mobile, prevent Lenis from snapping or jumping away
+    // When tapping into any field on iPhone/mobile:
+    // 1. Temporarily pause Lenis so iOS Safari handles the keyboard opening natively without snapping to footer
+    // 2. Smoothly ensure the focused input stays visible in the center of the viewport above keyboard
     input.addEventListener('focus', () => {
       if (window.lenis) {
-        window.lenis.scrollTo(window.scrollY, { immediate: true });
+        window.lenis.stop();
       }
+      setTimeout(() => {
+        input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 300);
+    });
+
+    // When focus leaves the input, resume Lenis if user isn't on another field in the form
+    input.addEventListener('blur', () => {
+      setTimeout(() => {
+        if (!form.contains(document.activeElement)) {
+          if (window.lenis) {
+            window.lenis.start();
+          }
+        }
+      }, 200);
     });
   });
 
   // Handle mobile visualViewport resize when virtual keyboard opens/closes
   if (window.visualViewport) {
     window.visualViewport.addEventListener('resize', () => {
-      if (document.activeElement && form.contains(document.activeElement)) {
-        if (window.lenis) {
-          window.lenis.scrollTo(window.scrollY, { immediate: true });
-        }
+      const activeEl = document.activeElement;
+      if (activeEl && form.contains(activeEl)) {
+        activeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     });
   }
@@ -1917,12 +1932,7 @@
         window.lenis.scrollTo(contactForm, { 
           offset: -navOffset, 
           duration: 0.9,
-          lock: false,
-          onComplete: () => {
-            if (window.lenis) {
-              window.lenis.scrollTo(window.scrollY, { immediate: true });
-            }
-          }
+          lock: false
         });
       } else {
         const top = contactForm.getBoundingClientRect().top + window.pageYOffset - navOffset;
