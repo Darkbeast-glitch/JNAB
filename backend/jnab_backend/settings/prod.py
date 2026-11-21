@@ -69,6 +69,12 @@ CORS_ALLOW_CREDENTIALS = True
 _default_cors_origins = [
     "https://www.jnab.tech",
     "https://jnab.tech",
+    "http://localhost:5173",
+    "http://localhost:3000",
+    "http://localhost",
+    "http://127.0.0.1:5173",
+    "http://127.0.0.1:8000",
+    "http://127.0.0.1:8001",
 ]
 
 _env_cors_origins = [
@@ -81,6 +87,10 @@ CORS_ALLOWED_ORIGINS = list(set(_default_cors_origins + _env_cors_origins))
 
 CORS_ALLOWED_ORIGIN_REGEXES = [
     r"^https:\/\/.*\.vercel\.app$",
+    r"^http:\/\/localhost(:[0-9]+)?$",
+    r"^http:\/\/127\.0\.0\.1(:[0-9]+)?$",
+    r"^http:\/\/192\.168\.[0-9]+\.[0-9]+(:[0-9]+)?$",
+    r"^http:\/\/10\.[0-9]+\.[0-9]+\.[0-9]+(:[0-9]+)?$",
 ]
 
 
