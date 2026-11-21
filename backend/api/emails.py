@@ -26,6 +26,8 @@ def get_admin_recipients():
 def _build_html_email(title: str, subtitle: str, fields: list[tuple[str, str]], admin_url: str = None) -> str:
     """
     Builds a high-end, responsive HTML email template branded with JNAB Innovations styling.
+    Engineered with bulletproof contrast and universal cross-client email compatibility
+    (Gmail, Apple Mail, Outlook, iOS Mail).
     """
     field_rows = []
     for label, val in fields:
@@ -34,10 +36,10 @@ def _build_html_email(title: str, subtitle: str, fields: list[tuple[str, str]], 
         safe_val = escape(str(val)).replace("\n", "<br/>")
         field_rows.append(f"""
         <tr>
-            <td style="padding: 10px 14px; font-weight: 600; color: #94A3B8; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; width: 32%; border-bottom: 1px solid #1E293B; vertical-align: top;">
+            <td style="padding: 12px 16px; font-weight: 600; color: #64748B; font-size: 12px; text-transform: uppercase; letter-spacing: 0.6px; width: 34%; background-color: #F8FAFC; border-bottom: 1px solid #E2E8F0; vertical-align: top;">
                 {escape(label)}
             </td>
-            <td style="padding: 10px 14px; color: #F1F5F9; font-size: 14px; font-weight: 500; border-bottom: 1px solid #1E293B; vertical-align: top;">
+            <td style="padding: 12px 16px; color: #0F172A; font-size: 14px; font-weight: 500; background-color: #FFFFFF; border-bottom: 1px solid #E2E8F0; vertical-align: top; line-height: 1.5;">
                 {safe_val}
             </td>
         </tr>
@@ -46,46 +48,63 @@ def _build_html_email(title: str, subtitle: str, fields: list[tuple[str, str]], 
     admin_button_html = ""
     if admin_url:
         admin_button_html = f"""
-        <div style="text-align: center; margin-top: 28px; margin-bottom: 10px;">
-            <a href="{admin_url}" style="background-color: #02AA69; color: #FFFFFF; font-weight: 700; font-size: 14px; padding: 12px 28px; border-radius: 9999px; text-decoration: none; display: inline-block; box-shadow: 0 4px 14px rgba(2, 170, 105, 0.4);">
-                Open in Django Admin &rarr;
-            </a>
-        </div>
+        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 26px; margin-bottom: 8px;">
+            <tr>
+                <td align="center">
+                    <a href="{admin_url}" style="background-color: #02AA69; color: #FFFFFF !important; font-weight: 700; font-size: 14px; padding: 13px 30px; border-radius: 8px; text-decoration: none !important; display: inline-block; letter-spacing: 0.2px;">
+                        Open in Django Admin &rarr;
+                    </a>
+                </td>
+            </tr>
+        </table>
         """
 
     return f"""
     <!DOCTYPE html>
-    <html>
+    <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="color-scheme" content="light">
+        <meta name="supported-color-schemes" content="light">
         <title>{escape(title)}</title>
     </head>
-    <body style="margin: 0; padding: 0; background-color: #070B11; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #F1F5F9;">
-        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color: #070B11; padding: 40px 12px;">
+    <body style="margin: 0; padding: 0; background-color: #F1F5F9; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #0F172A; -webkit-font-smoothing: antialiased;">
+        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color: #F1F5F9; padding: 36px 12px;">
             <tr>
                 <td align="center">
-                    <table role="presentation" width="100%" style="max-width: 620px; background-color: #0C121D; border: 1px solid #1E293B; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.6);">
+                    <table role="presentation" width="100%" style="max-width: 620px; background-color: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06);">
                         
-                        <!-- Header Banner -->
+                        <!-- Top Accent Line -->
                         <tr>
-                            <td style="background: linear-gradient(135deg, #02AA69 0%, #0F3A2E 100%); padding: 26px 30px; text-align: left;">
-                                <div style="display: inline-block; background-color: rgba(0,0,0,0.25); color: #E6FFFA; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.2px; padding: 4px 10px; border-radius: 9999px; margin-bottom: 8px;">
-                                    JNAB Innovations · Instant Lead Alert
-                                </div>
-                                <h1 style="margin: 0; font-size: 22px; font-weight: 800; color: #FFFFFF; letter-spacing: -0.3px;">
-                                    {escape(title)}
-                                </h1>
-                                <p style="margin: 6px 0 0; font-size: 13px; color: #D1FAE5;">
-                                    {escape(subtitle)}
-                                </p>
+                            <td style="background-color: #02AA69; height: 5px; font-size: 0; line-height: 0;">&nbsp;</td>
+                        </tr>
+
+                        <!-- Brand Header Bar -->
+                        <tr>
+                            <td style="background-color: #0B132B; padding: 28px 30px; text-align: left;">
+                                <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td>
+                                            <div style="display: inline-block; background-color: #064E3B; color: #A7F3D0 !important; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.2px; padding: 5px 12px; border-radius: 6px; margin-bottom: 12px; border: 1px solid #059669;">
+                                                JNAB Innovations · Instant Lead Alert
+                                            </div>
+                                            <h1 style="margin: 0; font-size: 22px; font-weight: 800; color: #FFFFFF !important; letter-spacing: -0.3px; line-height: 1.3;">
+                                                {escape(title)}
+                                            </h1>
+                                            <p style="margin: 6px 0 0; font-size: 13px; color: #94A3B8 !important; line-height: 1.4;">
+                                                {escape(subtitle)}
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>
                             </td>
                         </tr>
 
                         <!-- Body Content -->
                         <tr>
-                            <td style="padding: 28px 26px;">
-                                <table role="presentation" width="100%" style="border-collapse: collapse; background-color: #080D15; border-radius: 10px; overflow: hidden; border: 1px solid #1E293B;">
+                            <td style="padding: 28px 24px;">
+                                <table role="presentation" width="100%" style="border-collapse: collapse; border-radius: 8px; overflow: hidden; border: 1px solid #E2E8F0;">
                                     {"".join(field_rows)}
                                 </table>
 
@@ -95,12 +114,12 @@ def _build_html_email(title: str, subtitle: str, fields: list[tuple[str, str]], 
 
                         <!-- Footer -->
                         <tr>
-                            <td style="background-color: #06090E; padding: 18px 26px; border-top: 1px solid #1E293B; text-align: center;">
+                            <td style="background-color: #F8FAFC; padding: 20px 24px; border-top: 1px solid #E2E8F0; text-align: center;">
                                 <p style="margin: 0; font-size: 12px; color: #64748B;">
-                                    JNAB Tech Solutions · Accra, Ghana · <a href="https://www.jnab.tech" style="color: #02AA69; text-decoration: none;">www.jnab.tech</a>
+                                    <strong>JNAB Tech Solutions</strong> · Accra, Ghana · <a href="https://www.jnab.tech" style="color: #02AA69; text-decoration: none; font-weight: 600;">www.jnab.tech</a>
                                 </p>
-                                <p style="margin: 4px 0 0; font-size: 11px; color: #475569;">
-                                    Powered by Resend Transactional Email & Django Anymail
+                                <p style="margin: 6px 0 0; font-size: 11px; color: #94A3B8;">
+                                    Automated Lead Notification · Powered by Resend &amp; Django Anymail
                                 </p>
                             </td>
                         </tr>
@@ -284,29 +303,36 @@ def send_academy_applicant_confirmation(application):
 
     html_content = f"""
     <!DOCTYPE html>
-    <html>
+    <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="color-scheme" content="light">
+        <meta name="supported-color-schemes" content="light">
         <title>JNAB Academy Application Received</title>
     </head>
-    <body style="margin: 0; padding: 0; background-color: #070B11; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #F1F5F9;">
-        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color: #070B11; padding: 40px 12px;">
+    <body style="margin: 0; padding: 0; background-color: #F1F5F9; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #0F172A; -webkit-font-smoothing: antialiased;">
+        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color: #F1F5F9; padding: 36px 12px;">
             <tr>
                 <td align="center">
-                    <table role="presentation" width="100%" style="max-width: 620px; background-color: #0C121D; border: 1px solid #1E293B; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.6);">
+                    <table role="presentation" width="100%" style="max-width: 620px; background-color: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06);">
                         
-                        <!-- Header Banner -->
+                        <!-- Top Accent Line -->
                         <tr>
-                            <td style="background: linear-gradient(135deg, #02AA69 0%, #0F3A2E 100%); padding: 32px 30px; text-align: left;">
-                                <div style="display: inline-block; background-color: rgba(0,0,0,0.25); color: #E6FFFA; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.2px; padding: 4px 10px; border-radius: 9999px; margin-bottom: 10px;">
+                            <td style="background-color: #02AA69; height: 5px; font-size: 0; line-height: 0;">&nbsp;</td>
+                        </tr>
+
+                        <!-- Brand Header Banner -->
+                        <tr>
+                            <td style="background-color: #0B132B; padding: 32px 30px; text-align: left;">
+                                <div style="display: inline-block; background-color: #064E3B; color: #A7F3D0 !important; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.2px; padding: 5px 12px; border-radius: 6px; margin-bottom: 12px; border: 1px solid #059669;">
                                     JNAB Academy · Admissions
                                 </div>
-                                <h1 style="margin: 0; font-size: 24px; font-weight: 800; color: #FFFFFF; letter-spacing: -0.3px;">
+                                <h1 style="margin: 0; font-size: 24px; font-weight: 800; color: #FFFFFF !important; letter-spacing: -0.3px; line-height: 1.3;">
                                     Application Received, {escape(first_name)}!
                                 </h1>
-                                <p style="margin: 8px 0 0; font-size: 14px; color: #D1FAE5; line-height: 1.5;">
-                                    Thank you for applying to the <strong>{escape(track_name)}</strong> fellowship track.
+                                <p style="margin: 8px 0 0; font-size: 14px; color: #94A3B8 !important; line-height: 1.5;">
+                                    Thank you for applying to the <strong style="color: #34D399 !important;">{escape(track_name)}</strong> fellowship track.
                                 </p>
                             </td>
                         </tr>
@@ -314,51 +340,55 @@ def send_academy_applicant_confirmation(application):
                         <!-- Body Content -->
                         <tr>
                             <td style="padding: 32px 28px; line-height: 1.6;">
-                                <p style="margin: 0 0 16px; font-size: 15px; color: #E2E8F0;">
+                                <p style="margin: 0 0 16px; font-size: 15px; color: #334155;">
                                     Our admissions committee has received your application and technical profile.
                                 </p>
-                                <p style="margin: 0 0 20px; font-size: 14px; color: #94A3B8; background-color: #080D15; border-left: 3px solid #02AA69; padding: 10px 14px; border-radius: 4px;">
-                                    <strong>The JNAB Model:</strong> Like leading global apprenticeship accelerators, JNAB Academy trains builders through real client-grade software sprints — preparing top fellows for direct deployment into high-growth international tech squads.
-                                </p>
+                                
+                                <div style="margin: 0 0 24px; background-color: #F8FAFC; border: 1px solid #E2E8F0; border-left: 4px solid #02AA69; padding: 14px 18px; border-radius: 6px;">
+                                    <strong style="color: #0F172A; font-size: 14px; display: block; margin-bottom: 4px;">The JNAB Accelerator Model:</strong>
+                                    <p style="margin: 0; font-size: 13px; color: #475569; line-height: 1.5;">
+                                        Like leading global apprenticeship hubs, JNAB Academy trains builders through real client-grade software sprints — preparing fellows for direct deployment into high-growth international tech squads.
+                                    </p>
+                                </div>
 
-                                <h3 style="margin: 24px 0 12px; font-size: 15px; font-weight: 700; color: #02AA69; text-transform: uppercase; letter-spacing: 0.5px;">
-                                    What Happens Next:
-                                </h3>
+                                <div style="margin: 26px 0 14px; font-size: 12px; font-weight: 800; color: #64748B; text-transform: uppercase; letter-spacing: 0.8px;">
+                                    What Happens Next in Admissions
+                                </div>
 
                                 <table role="presentation" width="100%" style="border-collapse: collapse; margin-bottom: 24px;">
                                     <tr>
-                                        <td style="padding: 12px 14px; vertical-align: top; width: 36px;">
-                                            <div style="width: 28px; height: 28px; border-radius: 50%; background-color: #02AA69; color: #FFFFFF; font-weight: 700; font-size: 13px; text-align: center; line-height: 28px;">1</div>
+                                        <td style="padding: 14px 14px 14px 0; vertical-align: top; width: 40px; border-bottom: 1px solid #F1F5F9;">
+                                            <div style="width: 32px; height: 32px; border-radius: 50%; background-color: #02AA69; color: #FFFFFF !important; font-weight: 800; font-size: 14px; text-align: center; line-height: 32px;">1</div>
                                         </td>
-                                        <td style="padding: 12px 6px; vertical-align: top;">
-                                            <strong style="color: #FFFFFF; font-size: 14px;">Code &amp; Portfolio Review (24–48 Hours)</strong>
-                                            <p style="margin: 4px 0 0; color: #94A3B8; font-size: 13px;">Our technical leads evaluate your submitted GitHub, portfolio, and experience level to check foundational readiness.</p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding: 12px 14px; vertical-align: top; width: 36px;">
-                                            <div style="width: 28px; height: 28px; border-radius: 50%; background-color: rgba(2, 170, 105, 0.2); color: #02AA69; border: 1px solid #02AA69; font-weight: 700; font-size: 13px; text-align: center; line-height: 26px;">2</div>
-                                        </td>
-                                        <td style="padding: 12px 6px; vertical-align: top;">
-                                            <strong style="color: #FFFFFF; font-size: 14px;">Hands-On Sprint Challenge</strong>
-                                            <p style="margin: 4px 0 0; color: #94A3B8; font-size: 13px;">If shortlisted, you will receive an invitation link to complete a practical coding or design challenge modeled after real production tasks.</p>
+                                        <td style="padding: 14px 0; vertical-align: top; border-bottom: 1px solid #F1F5F9;">
+                                            <strong style="color: #0F172A; font-size: 14px; display: block;">Code &amp; Portfolio Review (24–48 Hours)</strong>
+                                            <p style="margin: 4px 0 0; color: #64748B; font-size: 13px; line-height: 1.5;">Our engineering mentors evaluate your submitted GitHub, portfolio, and experience level to check foundational readiness.</p>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="padding: 12px 14px; vertical-align: top; width: 36px;">
-                                            <div style="width: 28px; height: 28px; border-radius: 50%; background-color: rgba(2, 170, 105, 0.2); color: #02AA69; border: 1px solid #02AA69; font-weight: 700; font-size: 13px; text-align: center; line-height: 26px;">3</div>
+                                        <td style="padding: 14px 14px 14px 0; vertical-align: top; width: 40px; border-bottom: 1px solid #F1F5F9;">
+                                            <div style="width: 32px; height: 32px; border-radius: 50%; background-color: #02AA69; color: #FFFFFF !important; font-weight: 800; font-size: 14px; text-align: center; line-height: 32px;">2</div>
                                         </td>
-                                        <td style="padding: 12px 6px; vertical-align: top;">
-                                            <strong style="color: #FFFFFF; font-size: 14px;">Admissions &amp; Squad Alignment Interview</strong>
-                                            <p style="margin: 4px 0 0; color: #94A3B8; font-size: 13px;">A 30-minute virtual session with a lead architect to assess your problem-solving process, cohort commitment, and project placement readiness.</p>
+                                        <td style="padding: 14px 0; vertical-align: top; border-bottom: 1px solid #F1F5F9;">
+                                            <strong style="color: #0F172A; font-size: 14px; display: block;">Hands-On Sprint Challenge</strong>
+                                            <p style="margin: 4px 0 0; color: #64748B; font-size: 13px; line-height: 1.5;">If shortlisted, you will receive an invitation link to complete a practical coding or design challenge modeled after real production tasks.</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 14px 14px 14px 0; vertical-align: top; width: 40px;">
+                                            <div style="width: 32px; height: 32px; border-radius: 50%; background-color: #02AA69; color: #FFFFFF !important; font-weight: 800; font-size: 14px; text-align: center; line-height: 32px;">3</div>
+                                        </td>
+                                        <td style="padding: 14px 0; vertical-align: top;">
+                                            <strong style="color: #0F172A; font-size: 14px; display: block;">Admissions &amp; Squad Alignment Interview</strong>
+                                            <p style="margin: 4px 0 0; color: #64748B; font-size: 13px; line-height: 1.5;">A 30-minute virtual session with a lead architect to assess your problem-solving process, cohort commitment, and project placement readiness.</p>
                                         </td>
                                     </tr>
                                 </table>
 
-                                <div style="background-color: #080D15; border: 1px solid #1E293B; border-radius: 12px; padding: 18px 20px; margin-top: 10px;">
-                                    <h4 style="margin: 0 0 6px; font-size: 13px; font-weight: 700; color: #FFFFFF;">Have questions or updates to your application?</h4>
-                                    <p style="margin: 0; font-size: 12px; color: #94A3B8; line-height: 1.5;">
-                                        Simply reply directly to this email or reach our admissions coordinator at <a href="mailto:hello@jnab.tech" style="color: #02AA69; text-decoration: underline;">hello@jnab.tech</a>.
+                                <div style="background-color: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px; padding: 18px 20px; margin-top: 10px;">
+                                    <h4 style="margin: 0 0 6px; font-size: 14px; font-weight: 700; color: #0F172A;">Have questions or updates to your application?</h4>
+                                    <p style="margin: 0; font-size: 13px; color: #64748B; line-height: 1.5;">
+                                        Simply reply directly to this email or reach our admissions coordinator at <a href="mailto:hello@jnab.tech" style="color: #02AA69; text-decoration: none; font-weight: 600;">hello@jnab.tech</a>.
                                     </p>
                                 </div>
                             </td>
@@ -366,12 +396,12 @@ def send_academy_applicant_confirmation(application):
 
                         <!-- Footer -->
                         <tr>
-                            <td style="background-color: #06090E; padding: 20px 28px; border-top: 1px solid #1E293B; text-align: center;">
+                            <td style="background-color: #F8FAFC; padding: 22px 28px; border-top: 1px solid #E2E8F0; text-align: center;">
                                 <p style="margin: 0; font-size: 12px; color: #64748B;">
-                                    JNAB Academy · JNAB Tech Solutions · Accra, Ghana
+                                    <strong>JNAB Academy</strong> · JNAB Tech Solutions · Accra, Ghana
                                 </p>
-                                <p style="margin: 4px 0 0; font-size: 11px; color: #475569;">
-                                    Empowering the next generation of African engineering leaders · <a href="https://www.jnab.tech" style="color: #02AA69; text-decoration: none;">www.jnab.tech</a>
+                                <p style="margin: 6px 0 0; font-size: 11px; color: #94A3B8;">
+                                    Empowering the next generation of African engineering leaders · <a href="https://www.jnab.tech" style="color: #02AA69; text-decoration: none; font-weight: 600;">www.jnab.tech</a>
                                 </p>
                             </td>
                         </tr>
