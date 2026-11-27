@@ -240,7 +240,7 @@
   #hero { position: relative; isolation: isolate; overflow-x: clip; display: flex; flex-direction: column; min-height: max(100svh, 40rem); background: var(--color-6); color: var(--color-2); }
   #hero::after { content: ""; position: absolute; z-index: -1; top: 100%; left: 0; right: 0; height: 100vh; background: var(--color-6); }
   #hero .hero__media { position: absolute; z-index: 0; top: 0; bottom: -4rem; left: 16%; right: 0; overflow: hidden; mask-image: linear-gradient(90deg, transparent, var(--color-1) 30%); }
-  #hero .hero__media img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; }
+  #hero .hero__media img { width: 100%; height: 100%; object-fit: cover; object-position: 71% 35%; }
   #hero .hero__shade { position: absolute; z-index: 0; inset: 0 0 -4rem; background: linear-gradient(180deg, color-mix(in srgb, var(--color-6) 50%, transparent), transparent 24%), linear-gradient(90deg, color-mix(in srgb, var(--color-6) 78%, transparent), color-mix(in srgb, var(--color-6) 42%, transparent) 34%, transparent 56%); pointer-events: none; }
   #hero .hero__talk { position: absolute; z-index: 1; inset: 0; overflow: clip; pointer-events: none; }
   #hero .hero__draw { position: absolute; inset: 0; }
@@ -298,8 +298,8 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: 70% 16%;
-      opacity: 0.65;
+      object-position: 71% 35%;
+      opacity: 0.7;
     }
     #hero .hero__shade {
       background: 
@@ -927,7 +927,7 @@
 <!-- hero: first screen: headline over a full-bleed photo, lead, proof line, button; caption chips ride curved lines across the photo (animation: scene:hero) -->
 <section class="hero on-dark" id="hero" data-8b-section="hero" aria-labelledby="hero-title">
   <div class="hero__media">
-    <img src="/juliana.jpg" srcset="/juliana.jpg 1600w, /juliana.jpg 800w" sizes="(max-width: 767px) 167vw, 90vw" style="background:#070B11 50% 20% / cover no-repeat" width="1600" height="1200" alt="Juliana — Next-Gen African Talent at JNAB Innovations" fetchpriority="high" decoding="async">
+    <img src="/juli_new.JPEG" srcset="/juli_new_1200.jpg 1200w, /juli_new_2400.jpg 2400w, /juli_new.JPEG 6240w" sizes="(max-width: 767px) 167vw, 90vw" style="background:#070B11 71% 35% / cover no-repeat" width="1600" height="1200" alt="Juliana — Next-Gen African Talent at JNAB Innovations" fetchpriority="high" decoding="async">
   </div>
   <div class="hero__shade" aria-hidden="true"></div>
   <div class="hero__talk" aria-hidden="true">
@@ -2049,7 +2049,7 @@ queueMotion(() => {
     const { wide } = context.conditions;
     if (!adjacent('hero', 'listen')) return;
     gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { id: 'hero:exit', trigger: hero, start: 'bottom bottom', end: 'bottom 20%', scrub: true, invalidateOnRefresh: true } })
-      .to(media, { scale: 1.1, transformOrigin: wide ? '100% 30%' : '62% 30%' }, 0)
+      .to(media, { scale: 1.1, transformOrigin: wide ? '72% 35%' : '71% 35%' }, 0)
       .to(copy, { y: () => -innerHeight * (wide ? 0.26 : 0.16) }, 0)
       .to(talk, { y: () => -innerHeight * (wide ? 0.14 : 0.1) }, 0);
   });
